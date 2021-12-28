@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="40" failures="0" name="br.com.contmatic.empresa.empresa.DepartamentoTest" time="0.26" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="16.0.2+7-67"/>
+    <property name="sun.boot.library.path" value="C:\Users\macha\Downloads\sts-4.12.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_16.0.2.v20210721-1149\jre\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Contmatic\workspaceProvaEmpresa"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="BR"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Contmatic\workspaceProvaEmpresa"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="16.0.2+7-67"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\macha\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="C:\Contmatic\workspaceSpring\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf10870087342533776770.tmp"/>
+    <property name="jansi.force" value="true"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\macha\Downloads\sts-4.12.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_16.0.2.v20210721-1149\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/macha/Downloads/sts-4.12.0.RELEASE//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_16.0.2.v20210721-1149/jre/bin/server;C:/Users/macha/Downloads/sts-4.12.0.RELEASE//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_16.0.2.v20210721-1149/jre/bin;C:\Program Files\Zulu\zulu-8\bin\;C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-16.0.2\bin;C:\gradle-7.2\bin;C:\ProgramData\chocolatey\bin;C:\apache-maven-3.8.3\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Program Files (x86)\zulu8.58.0.13-ca-fx-jdk8.0.312-win_i686\bin;C:\Users\macha\AppData\Local\Microsoft\WindowsApps;C:\Users\macha\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\macha\AppData\Local\GitHubDesktop\bin;C:\Users\macha\AppData\Local\Yarn\bin;C:\Users\macha\AppData\Roaming\npm;C:\Program Files (x86)\zulu8.58.0.13-ca-fx-jdk8.0.312-win_i686\bin;C:\apache-maven-3.8.3\bin;;C:\Users\macha\Downloads\sts-4.12.0.RELEASE;;."/>
+    <property name="jansi.passthrough" value="true"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="60.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\macha"/>
+    <property name="user.timezone" value="America/Sao_Paulo"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="16"/>
+    <property name="user.name" value="macha"/>
+    <property name="java.class.path" value="C:\Users\macha\Downloads\sts-4.12.0.RELEASE\plugins\org.eclipse.m2e.maven.runtime_1.18.0.20210618-2246\jars\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="16"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B install -Dstyle.color=always"/>
+    <property name="java.home" value="C:\Users\macha\Downloads\sts-4.12.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_16.0.2.v20210721-1149\jre"/>
+    <property name="user.language" value="pt"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="16.0.2"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Contmatic\workspaceProvaEmpresa\EMBEDDED"/>
+    <property name="style.color" value="always"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2021-07-20"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_retornar_a_lista_de_funcionarios" time="0.183"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_retornar_igualdade_ao_comparar_departamento_com_outra_classe" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_menos_de_5_caracteres_no_nome" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_settar_departamento_com_cod_departamento_aceitando_letras_e_numeros" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_nome_invalido_a_empresa_existente" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_retornar_igualdade_ao_comparar_o_departamento_com_o_mesmo" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_nome_vazio" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_retornar_igualdade_ao_comparar_departamentos_diferentes" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_settar_nome_valido_a_empresa_existente" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_cod_departamento_nulo" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_cod_departamento_diferente_de_5_caracteres" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_criar_departamento_com_cod_departamento_valido" time="0.003"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_settar_cod_departamento_valido_a_departamento_existente" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_retornar_se_tostring_possui_todos_os_atributos" time="0.017"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_cod_departamento_diferente_de_5_caracteres" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_cod_departamento_possuindo_caracteres_especiais" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_mais_de_60_caracteres_no_nome" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_nome_nulo" time="0.003"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_criar_departamento_com_cod_departamento_aceitando_letras_e_numeros" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_cod_departamento_vazio" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_referenciar_empresa_a_qual_o_departamento_pertence" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_numeros_no_nome" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_cod_departamento_invalido_a_departamento_existente" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_criar_departamento_com_nome_valido" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_retornar_igualdade_ao_comparar_departamento_com_um_valor_null" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_nome_vazio" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_cod_departamento_nulo" time="0.002"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_cod_departamento_vazio" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_cod_departamento_possuindo_caracteres_especiais" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_menos_de_5_caracteres_no_nome" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_nome_nulo" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_referenciar_empresa_nula" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_deve_retornar_a_empresa_qual_departamento_pertence" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_numeros_no_nome" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_cod_departamento_possuindo_espacos" time="0.003"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_um_valor_nulo_como_lista_de_funcionarios" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_retornar_igualdade_ao_comparar_o_hashcode_de_departamentos_diferentes" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_uma_nova_lista_de_funcionarios_vazia" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_settar_departamento_com_mais_de_60_caracteres_no_nome" time="0.001"/>
+  <testcase classname="br.com.contmatic.empresa.empresa.DepartamentoTest" name="test_nao_deve_criar_departamento_com_cod_departamento_possuindo_espacos" time="0.001"/>
+</testsuite>
