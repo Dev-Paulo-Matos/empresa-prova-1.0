@@ -189,8 +189,8 @@ public class EmpresaTest {
 		empresaBefore.setRazaoSocial("Empr");
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_empresa_com_razao_social_contendo_numeros() {
+	@Test
+	public void test_deve_settar_empresa_com_razao_social_contendo_numeros() {
 		empresaBefore.setRazaoSocial("AMIGOS 5 do Bem");
 	}
 	//
@@ -214,8 +214,8 @@ public class EmpresaTest {
 		new Empresa(CNPJ_VALIDO,"Empr");
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_empresa_com_razao_social_contendo_numeros() {
+	@Test
+	public void test_deve_criar_empresa_com_razao_social_contendo_numeros() {
 		new Empresa(CNPJ_VALIDO,"AMIGOS 5 do Bem");
 	}
 	

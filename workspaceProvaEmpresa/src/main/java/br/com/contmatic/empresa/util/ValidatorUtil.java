@@ -76,11 +76,11 @@ public final class ValidatorUtil {
 		
 	    Pattern pattern = compile(regex, CASE_INSENSITIVE);
 	    Matcher matcher = pattern.matcher(campo);
-	    if (matcher.matches()) {
-	        return;
+	    boolean matches = matcher.matches();
+	    if (!matches) {
+	        throw new IllegalStateException(mensagem);
 	    }
         
-        throw new IllegalStateException(mensagem);
         
         
 	}
