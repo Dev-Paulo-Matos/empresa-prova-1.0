@@ -5,9 +5,12 @@ import static br.com.contmatic.empresa.constants.Constants.NUMERO_ENDERECO_TAMAN
 import static br.com.contmatic.empresa.constants.Constants.NUMERO_ENDERECO_TAMANHO_MINIMO;
 import static br.com.contmatic.empresa.constants.Constants.RUA_TAMANHO_MAXIMO;
 import static br.com.contmatic.empresa.constants.Constants.RUA_TAMANHO_MINIMO;
+import static br.com.contmatic.empresa.constants.Constants.TIPO_LOGRADOURO_MAX;
+import static br.com.contmatic.empresa.constants.Constants.TIPO_LOGRADOURO_MIN;
 import static br.com.contmatic.empresa.constants.Mensagens.CEP_CONTEM_O_NUMERO_DE_DIGITOS_INVALIDO;
 import static br.com.contmatic.empresa.constants.Mensagens.NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES;
 import static br.com.contmatic.empresa.constants.Mensagens.NUMERO_DA_CASA_CONTEM_A_QUANTIDADE_DE_DIGITOS_INVALIDA;
+import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasEAcentos;
 import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasENumerosEEspacosEAcentos;
 import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresNumeros;
 import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
@@ -95,8 +98,8 @@ public class Endereco {
 
 	public void setTipoLogradouro(String tipoLogradouro) {
 		validarNulo(tipoLogradouro);
-		validarCaracteresLetrasENumerosEEspacosEAcentos(tipoLogradouro);
-		validarTamanhoString(tipoLogradouro, RUA_TAMANHO_MINIMO, RUA_TAMANHO_MAXIMO, NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES);
+		validarCaracteresLetrasEAcentos(tipoLogradouro);
+		validarTamanhoString(tipoLogradouro, TIPO_LOGRADOURO_MIN, TIPO_LOGRADOURO_MAX, NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES);
 		this.tipoLogradouro = tipoLogradouro;
 	}
 
@@ -122,5 +125,7 @@ public class Endereco {
 		return "Endereco [cidade=" + cidade + ", cep=" + cep + ", numero=" + numero + ", bairro=" + bairro
 				+ ", logradouro=" + logradouro + ", tipoLogradouro=" + tipoLogradouro + "]";
 	}
+
+	
 	
 }

@@ -6,8 +6,10 @@ import static br.com.contmatic.empresa.constants.Constants.CONDICAO_1;
 import static br.com.contmatic.empresa.constants.Constants.ITERACAO;
 import static br.com.contmatic.empresa.constants.Constants.ITERACAO_12;
 import static br.com.contmatic.empresa.constants.Constants.MODULACAO_CALCULAR;
+import static br.com.contmatic.empresa.constants.Constants.PESO_1;
 import static br.com.contmatic.empresa.constants.Constants.PESO_10;
 import static br.com.contmatic.empresa.constants.Constants.PESO_11;
+import static br.com.contmatic.empresa.constants.Constants.PESO_2;
 import static br.com.contmatic.empresa.constants.Constants.PRIMEIRO_CARACTER;
 import static br.com.contmatic.empresa.constants.Constants.PRIMEIRO_DIGITO_VERIFICADOR_CNPJ;
 import static br.com.contmatic.empresa.constants.Constants.SEGUNDO_DIGITO_VERIFICADOR_CNPJ;
@@ -71,7 +73,7 @@ public final class CnpjUtil {
 		char digito1 = gerarDigito(cnpjSemDigitos);
 		
 		char digito2 = gerarDigito(cnpj + digito1);
-		//TODO criar testes para as condicoes de primeiro e segundo digito invalido
+
 		if(digito1 != cnpj.charAt(PRIMEIRO_DIGITO_VERIFICADOR_CNPJ) || digito2 != cnpj.charAt(SEGUNDO_DIGITO_VERIFICADOR_CNPJ)) {
 			throw new IllegalStateException(CNPJ_INVALIDO);
 		}
@@ -114,7 +116,7 @@ public final class CnpjUtil {
 		
 		int num;
 		
-		int peso = 2;
+		int peso = PESO_2;
 		
 		for (i=iteracao; i>=0; i--) {
 			
@@ -122,11 +124,11 @@ public final class CnpjUtil {
 		    
 		    sm = sm + (num * peso);
 		    
-		    peso = peso + 1;
+		    peso = peso + PESO_1;
 		    
 		    if (peso == PESO_10)
 		    	
-		       peso = 2;
+		       peso = PESO_2;
 		}
 		return sm;
 	}

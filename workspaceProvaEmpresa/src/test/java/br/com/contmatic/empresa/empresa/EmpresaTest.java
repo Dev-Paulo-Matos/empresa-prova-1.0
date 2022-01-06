@@ -17,6 +17,8 @@ import br.com.contmatic.empresa.endereco.Endereco;
 
 public class EmpresaTest {
 	
+	private static final String RAZAO2 = "AMIGOS 5 do Bem";
+
 	private static final String COD_DEPARTAMENTO = "RC214";
 
 	private static final String RECURSOS_HUMANO = "Recursos Humano";
@@ -29,9 +31,11 @@ public class EmpresaTest {
 	
 	private static final String NUMERO = "476";
 	
-	private static Empresa empresaBefore;
+	private static final String FANTASIA = "AMIGOS DO BEMM 1";
 	
-	private static Contato contatoBefore;
+	private Empresa empresaBefore;
+	
+	private Contato contatoBefore;
 	
 	private static List<Departamento> departamentos;
 	
@@ -76,7 +80,7 @@ public class EmpresaTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_novo_cnpj_invalido_a_empresa_existente() {
-		empresaBefore.setCnpj("58106202000101");
+		empresaBefore.setCnpj("58106202000110");
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -95,9 +99,44 @@ public class EmpresaTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_nome_fantasia_vazio() {
+		empresaBefore.setNomeFantasia("");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_nao_deve_setta_nome_fantasia_nulo() {
+		empresaBefore.setNomeFantasia(null);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_setta_nome_fantasia_com_menos_de_5_caracteres() {
+		empresaBefore.setNomeFantasia("ABCD");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_nome_fantasia_com_mais_de_60_caracteres() {
+		empresaBefore.setNomeFantasia("MAIS DE 60 CARACTERES MAIS DE 60 CARACTERES MAIS DE 60 CARACTERES");
+	}
+	
+	@Test
+	public void test_deve_settar_nome_fantasia_correto() {
+		empresaBefore.setNomeFantasia(FANTASIA);
+		
+		assertSame(FANTASIA, empresaBefore.getNomeFantasia());
+	}
+	
+	@Test
+	public void test_deve_settar_nome_fantasia_com_numeros() {
+		empresaBefore.setNomeFantasia(FANTASIA);
+		
+		assertSame(FANTASIA, empresaBefore.getNomeFantasia());
+	}
+	
+	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_empresa_com_cnpj_sequencial() {
 		new Empresa("11111111111111",RAZAO_SOCIAL);
 	}
+	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_empresa_com_cnpj_possundo_caracteres_invalidos() {
 		new Empresa("9420345300a019",RAZAO_SOCIAL);
@@ -191,7 +230,8 @@ public class EmpresaTest {
 	
 	@Test
 	public void test_deve_settar_empresa_com_razao_social_contendo_numeros() {
-		empresaBefore.setRazaoSocial("AMIGOS 5 do Bem");
+		empresaBefore.setRazaoSocial(RAZAO2);
+		assertEquals(RAZAO2,empresaBefore.getRazaoSocial());
 	}
 	//
 	@Test(expected = IllegalArgumentException.class)
@@ -216,7 +256,8 @@ public class EmpresaTest {
 	
 	@Test
 	public void test_deve_criar_empresa_com_razao_social_contendo_numeros() {
-		new Empresa(CNPJ_VALIDO,"AMIGOS 5 do Bem");
+		Empresa empresa = new Empresa(CNPJ_VALIDO,RAZAO2);
+		assertEquals(RAZAO2,empresa.getRazaoSocial());
 	}
 	
 	@Test
@@ -265,6 +306,25 @@ public class EmpresaTest {
 		assertSame(departamentos,empresaBefore.getDepartamentos());
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_lista_de_departamentos_com_mais_de_20_departamentos() {
+		for(int i = 0; i < 22; i++) {
+			departamentos.add(new Departamento(RECURSOS_HUMANO,COD_DEPARTAMENTO));
+		}
+		empresaBefore.setDepartamentos(departamentos);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_lista_de_departamentos_com_apenas_um_departamento() {
+		departamentos.add(departamento1);
+		empresaBefore.setDepartamentos(departamentos);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_adicionar_lista_de_departamentos_sem_endereco() {
+		empresaBefore.setDepartamentos(departamentos);
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_adicionar_lista_de_departamento_nula() {
 		empresaBefore.setDepartamentos(null);
@@ -287,6 +347,14 @@ public class EmpresaTest {
 		empresaBefore.setEnderecos(enderecos);
 		
 		assertSame(enderecos,empresaBefore.getEnderecos());
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_lista_de_enderecos_com_mais_de_20_enderecos() {
+		for(int i = 0; i < 22; i++) {
+			enderecos.add(new Endereco(CEP,NUMERO));
+		}
+		empresaBefore.setEnderecos(enderecos);
 	}
 	
 	@Test
@@ -313,7 +381,7 @@ public class EmpresaTest {
 	
 	@Test
 	public void test_deve_retornar_igualdade_ao_comparar_empresa_com_a_mesma_empresa() {
-		assertEquals(empresaBefore,empresaBefore);
+		assertEquals(empresaBefore,this.empresaBefore);
 	}
 	
 	@Test
@@ -335,7 +403,9 @@ public class EmpresaTest {
 	public void test_deve_retornar_hashcode_igual_com_empresas_iguais() {
 		assertEquals(empresaBefore.hashCode(),new Empresa(CNPJ_VALIDO,RAZAO_SOCIAL).hashCode());
 	}
-
+	
+	
+	
 	@Test
 	public void test_deve_retornar_que_tostring_deve_possuir_todos_os_atributos() {
 		assertTrue(empresaBefore.toString().contains(CNPJ_VALIDO));
@@ -353,6 +423,18 @@ public class EmpresaTest {
 		empresaBefore.setDepartamentos(departamentos);
 		
 		assertTrue(empresaBefore.toString().contains(departamentos.toString()));
+		
+		empresaBefore.setNomeFantasia(FANTASIA);
+		
+		assertTrue(empresaBefore.toString().contains(FANTASIA));
+		
+		enderecos.add(endereco1);
+		
+		enderecos.add(endereco2);
+		
+		empresaBefore.setEnderecos(enderecos);
+		
+		assertTrue(empresaBefore.toString().contains(enderecos.toString()));
 
 	}
 	

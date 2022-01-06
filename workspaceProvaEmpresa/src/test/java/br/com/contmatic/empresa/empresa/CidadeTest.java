@@ -18,15 +18,12 @@ public class CidadeTest {
 	
 	private static final String NOME = "Carapícuiba";
 
-	
 	private Cidade cidadeBefore;
 	
 	@Before
 	public void deve_criar_antes_de_todos_os_teste() {
 		cidadeBefore = new Cidade(COD_IBGE);
 	}
-	
-	// C COD
 	
 	@Test
 	public void test_deve_criar_cidade_com_cod_ibge_valido() {
@@ -54,7 +51,7 @@ public class CidadeTest {
 	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_letras() {
 		new Cidade("Asasa");
 	}
-		
+	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_espacos() {
 		new Cidade("123 1");
@@ -149,6 +146,7 @@ public class CidadeTest {
 	public void test_nao_deve_settar_nome_contendo_menos_de_3_caracteres() {
 		cidadeBefore.setNome("AR");
 	}
+	
 	@Test
 	public void test_deve_settar_uf_valido() {
 		cidadeBefore.setUf(UF);
@@ -189,13 +187,13 @@ public class CidadeTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_csettaruf_contendo_caracteres_especiais() {
+	public void test_nao_deve_settar_uf_contendo_caracteres_especiais() {
 		cidadeBefore.setUf("!@");
 	}
 	
 	@Test
 	public void test_deve_retornar_igualdade_ao_comparar_a_cidade_com_a_mesma() {
-		assertEquals(cidadeBefore,cidadeBefore);
+		assertEquals(this.cidadeBefore,cidadeBefore);
 	}
 	
 	@Test

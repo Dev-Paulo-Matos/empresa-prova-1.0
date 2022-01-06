@@ -3,8 +3,8 @@ package br.com.contmatic.empresa.empresa;
 
 
 import static java.lang.Integer.parseInt;
+import static org.joda.time.DateTime.now;
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -24,7 +24,9 @@ public class FuncionarioTest {
 
 	private static final String CARGO = "Gerente do RH";
 	
-	private static final DateTime DATA_NASCIMENTO = new DateTime(2003,06,07,0,0);
+	private static final DateTime DATA_NASCIMENTO = new DateTime(2004,01,01,0,0);
+	
+	private static final int DATA_ANO = now().getYear() - 18;
 	
 	private static final String CPF = "41236207874";
 	
@@ -53,6 +55,50 @@ public class FuncionarioTest {
 		departamentoBefore = new Departamento(NOME_DEPARTAMENTO,COD_DEPARTAMENTO);
 		
 		enderecoBefore = new Endereco(CEP,NUMERO);
+	}
+	
+	@Test
+	public void test_deve_criar_funcionario_apenas_com_cpf() {
+		assertSame("73441531060",new Funcionario("73441531060").getCpf());
+		
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_segundo_digito_invalido() {
+		new Funcionario("41236207875");
+		
+	}
+	
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_primeiro_digito_invalido() {
+		new Funcionario("41236207844");
+		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_nulo() {
+		new Funcionario(null);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_digitos_sequencial() {
+		new Funcionario("11111111111");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_digitos_a_menos() {
+		new Funcionario("321232123");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_digitos_a_mais() {
+		new Funcionario("31231232132312");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_vazio() {
+		new Funcionario("");
 	}
 	
 	@Test
@@ -219,7 +265,7 @@ public class FuncionarioTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testQ_nao_deve_criar_funcionario_com_data_de_nascimento_vazia() {
-		new Funcionario(NOME,CPF,new DateTime(2004,06,8,0,0),CARGO);
+		new Funcionario(NOME,CPF,new DateTime(),CARGO);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -229,19 +275,19 @@ public class FuncionarioTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testS_nao_deve_criar_funcionario_com_data_de_nascimento_menor_que_18() {
-		new Funcionario(NOME,CPF,new DateTime(2004,06,7,0,0),CARGO);
+		new Funcionario(NOME,CPF,new DateTime(DATA_ANO,06,7,0,0),CARGO);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testT_nao_deve_criar_funcionario_com_data_de_nascimento_menor_que_18_por_conta_de_meses() {
-		new Funcionario(NOME,CPF,new DateTime(2003,parseInt(String.valueOf(DateTime.now().getMonthOfYear())),parseInt(String.valueOf(DateTime.now().getDayOfMonth())) + 1,0,0),CARGO);
+		new Funcionario(NOME,CPF,new DateTime(DATA_ANO + 1,parseInt(String.valueOf(DateTime.now().getMonthOfYear())),parseInt(String.valueOf(DateTime.now().getDayOfMonth())) + 1,0,0),CARGO);
 	}
 	
 	//
 	
 	@Test(expected = IllegalStateException.class)
 	public void testQ_nao_deve_settar_funcionario_com_data_de_nascimento_vazia() {
-		funcionarioBefore.setDataNascimento(new DateTime(2004,06,8,0,0));
+		funcionarioBefore.setDataNascimento(new DateTime(DATA_ANO,06,8,0,0));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -251,17 +297,17 @@ public class FuncionarioTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testS_nao_deve_settar_funcionario_com_data_de_nascimento_menor_que_18() {
-		funcionarioBefore.setDataNascimento(new DateTime(2004,06,7,0,0));
+		funcionarioBefore.setDataNascimento(new DateTime(DATA_ANO,06,7,0,0));
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testT_nao_deve_settar_funcionario_com_data_de_nascimento_menor_que_18_por_conta_de_meses() {
-		funcionarioBefore.setDataNascimento(new DateTime(2003,parseInt(String.valueOf(DateTime.now().getMonthOfYear())),parseInt(String.valueOf(DateTime.now().getDayOfMonth())) + 1,0,0));
+		funcionarioBefore.setDataNascimento(new DateTime(DATA_ANO,parseInt(String.valueOf(DateTime.now().getMonthOfYear())),parseInt(String.valueOf(DateTime.now().getDayOfMonth())) + 2,0,0));
 	}
 	
 	@Test
 	public void testU_deve_criar_funcionario_com_data_de_nascimento_maior_que_18_por_conta_de_meses() {
-		DateTime DATA_NASCIMENTO_2 = new DateTime(2003,11,1,0,0);
+		DateTime DATA_NASCIMENTO_2 = new DateTime(2004,1,2,0,0);
 		assertEquals(DATA_NASCIMENTO_2,new Funcionario(NOME,CPF,DATA_NASCIMENTO_2,CARGO).getDataNascimento());
 	}
 	
@@ -274,7 +320,7 @@ public class FuncionarioTest {
 	
 	@Test
 	public void test_deve_settar_idade_valida_ao_funcionario() {
-		DateTime DATA_NASCIMENTO_2 = new DateTime(2003,12,1,0,0);
+		DateTime DATA_NASCIMENTO_2 = new DateTime(2004,1,1,0,0);
 		
 		funcionarioBefore.setDataNascimento(DATA_NASCIMENTO_2);
 		
@@ -430,7 +476,7 @@ public class FuncionarioTest {
 	
 	@Test
 	public void testAI_deve_retornar_igualdade_ao_comparar_funcionario_com_o_mesmo_funcionario() {
-		assertEquals(funcionarioBefore,funcionarioBefore);
+		assertEquals(funcionarioBefore,this.funcionarioBefore);
 	}
 	
 	@Test
@@ -457,6 +503,5 @@ public class FuncionarioTest {
 		
 		assertTrue(funcionarioBefore.toString().contains(contatoBefore.toString()));
 	}
-	
 	
 }

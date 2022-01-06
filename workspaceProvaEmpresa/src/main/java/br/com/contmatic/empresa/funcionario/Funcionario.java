@@ -24,11 +24,11 @@ public class Funcionario {
 	private String nomeCompleto;
 
 	private String cpf;
-	//TODO nascimento
+	
 	private DateTime dataNascimento;
-	//TODO cargo
+
 	private String cargo;
-	//TODO CARGO
+
 	private Contato contato;
 	
 	private Departamento departamento;
@@ -59,7 +59,7 @@ public class Funcionario {
 	
 	public String getCpf() {
 		return cpf;
-	}
+	 }
 	
 	public void setCpf(String cpf) {
 		validarCpf(cpf);
@@ -134,7 +134,10 @@ public class Funcionario {
 	@Override
 	public String toString() {
 		return "Funcionario [nomeCompleto=" + nomeCompleto + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
-				+ ", cargoFuncionario=" + cargo + ", contato=" + contato + "]";
+				+ ", cargo=" + cargo + ", contato=" + contato + ", departamento=" + departamento + ", endereco="
+				+ endereco + "]";
 	}
+
+	
 	
 }

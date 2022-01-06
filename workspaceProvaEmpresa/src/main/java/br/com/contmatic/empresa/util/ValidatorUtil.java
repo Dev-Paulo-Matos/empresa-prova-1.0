@@ -5,6 +5,7 @@ import static br.com.contmatic.empresa.constants.Constants.REGEX_ACEITA_LETRAS_C
 import static br.com.contmatic.empresa.constants.Constants.REGEX_ACEITA_LETRAS_E_ESPACOS_E_ACENTOS;
 import static br.com.contmatic.empresa.constants.Constants.REGEX_ACEITA_LETRAS_E_ESPACOS_E_NUMEROS_E_ACENTOS;
 import static br.com.contmatic.empresa.constants.Constants.REGEX_ACEITA_LETRAS_E_NUMEROS_E_ACENTOS;
+import static br.com.contmatic.empresa.constants.Constants.REGEX_ACEITA_NUMEROS;
 import static br.com.contmatic.empresa.constants.Mensagens.NULO;
 import static br.com.contmatic.empresa.constants.Mensagens.REGEX_NULA;
 import static br.com.contmatic.empresa.constants.Mensagens.STRING_5_A_60;
@@ -18,8 +19,6 @@ import static java.util.regex.Pattern.compile;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import br.com.contmatic.empresa.constants.Constants;
 
 public final class ValidatorUtil {
 
@@ -47,7 +46,7 @@ public final class ValidatorUtil {
 	}
 	
 	public static void validarCaracteresNumeros(String texto) {	
-		validarPorRegex(texto,Constants.REGEX_ACEITA_NUMEROS,STRING_INVALIDA_PODE_CONTER_APENAS_NUMEROS);
+		validarPorRegex(texto,REGEX_ACEITA_NUMEROS,STRING_INVALIDA_PODE_CONTER_APENAS_NUMEROS);
 	}
 	
 	public static void validarCaracteresLetrasENumerosEEspacosEAcentos(String texto) {
@@ -84,7 +83,7 @@ public final class ValidatorUtil {
         
         
 	}
-	//TODO validar os tamanhos nos testes
+	
 	public static void validarTamanhoList(List<?> list, int min, int max, String mensagem) {
 		if(list.size() < min || list.size() > max) {
 			throw new IllegalStateException(mensagem);

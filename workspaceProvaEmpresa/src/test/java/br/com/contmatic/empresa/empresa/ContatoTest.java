@@ -12,41 +12,49 @@ import br.com.contmatic.empresa.contato.Contato;
 
 public class ContatoTest {
 	
+	private static final String EMAIL = "email@gmail.com";
+	
+	private static final String CELULAR = "5511963481012";
+	
 	private Contato contatoBefore;
 	
 	@Before
 	public void criar_antes_de_todos_os_testes() {
-		contatoBefore = new Contato("5511963481012","email@gmail.com");
+		contatoBefore = new Contato(CELULAR,EMAIL);
 	}
 	
 	@Test
 	public void testA_deve_criar_o_contato_com_celular_e_email_valido() {
-		new Contato("5511963481012","email@gmail.com");
+		Contato contato = new Contato(CELULAR,EMAIL);
+		
+		assertEquals(CELULAR,contato.getCelular());
+		
+		assertEquals(EMAIL,contato.getEmail());
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testB_nao_deve_criar_contato_com_celular_com_digitos_invalido() {
-		new Contato("551196348101","email@gmail.com");
+		new Contato("551196348101",EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testC_nao_deve_criar_contato_com_ddi_sem_ser_do_brasil() {
-		new Contato("5311963481012","email@gmail.com");
+		new Contato("5311963481012",EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testD_nao_deve_criar_contato_com_celular_vazio() {
-		new Contato("","email@gmail.com");
+		new Contato("",EMAIL);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testE_nao_deve_criar_contato_com_celular_nulo() {
-		new Contato(null,"email@gmail.com");
+		new Contato(null,EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testF_nao_deve_criar_contato_com_letras_no_celular() {
-		new Contato("55119a63481012","email@gmail.com");
+		new Contato("55119a63481012",EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -74,6 +82,7 @@ public class ContatoTest {
 	@Test(expected = IllegalStateException.class)
 	public void testF_nao_deve_settar_contato_com_letras_no_celular() {
 		String celular = "55119a63481012";
+		
 		contatoBefore.setCelular(celular);
 	}
 	
@@ -88,17 +97,17 @@ public class ContatoTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testG_nao_deve_criar_contato_com_email_invalido() {
-		new Contato("5511963481012","email@gmailcom");
+		new Contato(CELULAR,"email@gmailcom");
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testH_nao_deve_criar_contato_com_email_vazio() {
-		new Contato("5511963481012","");
+		new Contato(CELULAR,"");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testeI_nao_deve_criar_contato_com_email_nulo() {
-		new Contato("5511963481012",null);
+		new Contato(CELULAR,null);
 	}
 	
 	
@@ -130,7 +139,7 @@ public class ContatoTest {
 	
 	@Test
 	public void testJ_deve_retornar_o_email() {
-		String email = "email@gmail.com";
+		String email = EMAIL;
 		
 		Contato c1 = new Contato("5511323232323",email);
 		
@@ -141,26 +150,26 @@ public class ContatoTest {
 	public void testK_deve_retornar_o_telefone() {
 		String celular = "5512321321313";
 		
-		Contato c1  = new Contato(celular,"email@gmail.com");
+		Contato c1  = new Contato(celular,EMAIL);
 		
 		assertEquals(c1.getCelular(),celular);
 	}
 	
 	@Test
 	public void testL_deve_retornar_hashcode_diferente_para_contatos_diferentes() {
-		Contato c1  = new Contato("5512321321313","email@gmail.com");
+		Contato c1  = new Contato("5512321321313",EMAIL);
 		
 		assertNotEquals(c1.hashCode(), contatoBefore.hashCode());
 	}
 	
 	@Test
 	public void testM_deve_retornar_igualdade_ao_comparar_o_mesmo_objeto() {
-		assertEquals(contatoBefore,contatoBefore);
+		assertEquals(contatoBefore,this.contatoBefore);
 	}
 	
 	@Test
 	public void testN_deve_retornar_igualdade_ao_comparar_objetos_com_os_mesmos_atributos() {
-		Contato c1 = new Contato("5511963481012","email@gmail.com");
+		Contato c1 = new Contato(CELULAR,EMAIL);
 		assertEquals(contatoBefore,c1);
 	}
 	
@@ -177,9 +186,9 @@ public class ContatoTest {
 	
 	@Test
 	public void testQ_deve_verificar_se_contato_possui_todos_os_atributos_corretamente() {
-		String celular = "5511963481012";
+		String celular = CELULAR;
 		
-		String email = "email@gmail.com";
+		String email = EMAIL;
 		
 		Contato c1 = new Contato(celular,email);
 		

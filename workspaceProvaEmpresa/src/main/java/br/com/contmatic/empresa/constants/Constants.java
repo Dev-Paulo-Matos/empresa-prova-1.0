@@ -82,6 +82,10 @@ public final class Constants {
 	
 	public static final int RUA_TAMANHO_MAXIMO = 60;
 	
+	public static final int TIPO_LOGRADOURO_MIN = 3;
+	
+	public static final int TIPO_LOGRADOURO_MAX = 20;
+	
 	// CPF
 	
 	public static final int ITERACAO2 = 10;
@@ -106,6 +110,8 @@ public final class Constants {
 	
 	// CNPJ
 	
+	public static final int PESO_1 = 1;
+	
 	public static final int PESO_11 = 11;
 
 	public static final int CONDICAO_1 = 1;
@@ -129,6 +135,8 @@ public final class Constants {
 	public static final int PRIMEIRO_DIGITO_VERIFICADOR_CNPJ = 12;
 	
 	public static final int SEGUNDO_DIGITO_VERIFICADOR_CNPJ = 13;
+	
+	public static final int PESO_2 = 2;
 	
 	// LISTA TAMANHO
 	

@@ -55,5 +55,7 @@ public class Contato {
 	public String toString() {
 		return "Contato [celular=" + celular + ", email=" + email + "]";
 	}
+
+	
 	
 }

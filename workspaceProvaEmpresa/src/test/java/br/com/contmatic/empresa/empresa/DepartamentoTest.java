@@ -261,7 +261,7 @@ public class DepartamentoTest {
 	
 	@Test
 	public void test_deve_retornar_igualdade_ao_comparar_o_departamento_com_o_mesmo() {
-		assertEquals(departamentoBefore,departamentoBefore);
+		assertEquals(this.departamentoBefore,departamentoBefore);
 	}
 	
 	@Test

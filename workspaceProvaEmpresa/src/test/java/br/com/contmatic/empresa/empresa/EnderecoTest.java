@@ -21,6 +21,10 @@ public class EnderecoTest {
 	
 	private static final String COD_IBGE = "13212";
 	
+	private static final String TIPO_LOGRADOURO = "RUA";
+	
+	private static final String BAIRRO = "Jardim das Belezas 2";
+	
 	private Cidade cidadeBefore;
 	
 	private Endereco enderecoBefore;
@@ -67,7 +71,6 @@ public class EnderecoTest {
 		new Endereco("ase1231",NUMERO);
 	}
 	
-	//
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_endereco_com_digitos_invalidos_no_cep() {
@@ -98,7 +101,39 @@ public class EnderecoTest {
 	public void test_nao_deve_settar_endereco_com_cep_contendo_letras() {
 		enderecoBefore.setCep("ase1231");
 	}
-
+	
+	@Test
+	public void test_deve_settar_tipo_logradouro() {
+		enderecoBefore.setTipoLogradouro(TIPO_LOGRADOURO);
+		
+		assertSame(TIPO_LOGRADOURO,enderecoBefore.getTipoLogradouro());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_nao_deve_settar_tipo_logradouro_nulo() {
+		enderecoBefore.setTipoLogradouro(null);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_tipo_logradouro_vazio() {
+		enderecoBefore.setTipoLogradouro("");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_tipo_logradouro_com_menos_de_3_caracteres() {
+		enderecoBefore.setTipoLogradouro("AB");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_tipo_logradouro_com_mais_de_20_caracteres() {
+		enderecoBefore.setTipoLogradouro("String com Mais de vinte caracteres");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_numeros_no_tipo_logradouro() {
+		enderecoBefore.setTipoLogradouro("12313");
+	}
+	
 	@Test
 	public void test_deve_settar_um_novo_cep_valido_a_um_endereco_ja_criado() {
 		assertSame(CEP,enderecoBefore.getCep());
@@ -146,8 +181,6 @@ public class EnderecoTest {
 	public void test_nao_deve_criar_endereco_com_numero_contendo_caracteres_invalidos() {
 		new Endereco(CEP,"!@#!");
 	}
-	
-	//
 	
 	@Test
 	public void test_deve_settar_endereco_com_numero_valido() {
@@ -204,6 +237,8 @@ public class EnderecoTest {
 	@Test
 	public void test_deve_settar_cidade_valida_a_endereco() {
 		enderecoBefore.setCidade(cidadeBefore);
+		assertTrue(enderecoBefore.toString().contains(cidadeBefore.toString()));
+		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -268,8 +303,36 @@ public class EnderecoTest {
 	}
 	
 	@Test
+	public void test_deve_criar_bairro_e_retornar() {
+		enderecoBefore.setBairro(BAIRRO);
+		
+		assertSame(BAIRRO, enderecoBefore.getBairro());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_nao_deve_settar_bairro_com_valor_nullo() {
+		enderecoBefore.setBairro(null);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_bairro_com_valor_vazio() {
+		enderecoBefore.setBairro("");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_bairro_com_quantidade_de_caracteres_a_menos() {
+		enderecoBefore.setBairro("Ru");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_bairro_com_quantidade_de_caracteres_a_mais() {
+		enderecoBefore.setBairro("Logradouro GRANDE Logradouro GRANDE Logradouro GRANDE Logradouro GRANDE RUA GRANDE RUA GRANDE RUA GRANDE RUA");
+	}
+	
+	
+	@Test
 	public void test_deve_retornar_igualdade_ao_compara_o_endereco_com_o_proprio_endereco() {
-		assertEquals(enderecoBefore,enderecoBefore);
+		assertEquals(this.enderecoBefore,enderecoBefore);
 	}
 	
 	@Test

@@ -31,7 +31,7 @@ public class Empresa{
 	private List<Departamento> departamentos;
 	
 	private List<Endereco> enderecos;
-	// nome fantasia, validacao de caracteres, lista testes
+
 	private String nomeFantasia;
 	
 	public Empresa(String cnpj, String razaoSocial) {
@@ -75,7 +75,7 @@ public class Empresa{
 
 	public void setNomeFantasia(String nomeFantasia) {
 		validarNulo(nomeFantasia);
-		validarTamanhoString(nomeFantasia, RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO, RAZAO_SOCIAL_NOME_TAMANHO_MINIMO);
+		validarTamanhoString(nomeFantasia,RAZAO_SOCIAL_NOME_TAMANHO_MINIMO,RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO);
 		validarCaracteresLetrasENumerosEEspacosEAcentos(nomeFantasia);
 		this.nomeFantasia = nomeFantasia;
 	}
@@ -119,7 +119,10 @@ public class Empresa{
 	@Override
 	public String toString() {
 		return "Empresa [cnpj=" + cnpj + ", razaoSocial=" + razaoSocial + ", contato=" + contato + ", departamentos="
-				+ departamentos + "]";
+				+ departamentos + ", enderecos=" + enderecos + ", nomeFantasia=" + nomeFantasia + "]";
 	}
+
+	
+
 	
 }

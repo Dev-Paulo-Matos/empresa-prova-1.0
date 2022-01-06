@@ -6,17 +6,19 @@ import static br.com.contmatic.empresa.constants.Constants.CPF_SEM_DIGITOS;
 import static br.com.contmatic.empresa.constants.Constants.ITERACAO1;
 import static br.com.contmatic.empresa.constants.Constants.ITERACAO2;
 import static br.com.contmatic.empresa.constants.Constants.PESO2;
+import static br.com.contmatic.empresa.constants.Constants.PESO_1;
 import static br.com.contmatic.empresa.constants.Constants.PESO_10;
 import static br.com.contmatic.empresa.constants.Constants.PRIMEIRO_CARACTER;
 import static br.com.contmatic.empresa.constants.Constants.PRIMEIRO_DIGITO_VERIFICADOR;
+import static br.com.contmatic.empresa.constants.Constants.REGEX_ACEITA_NUMEROS;
 import static br.com.contmatic.empresa.constants.Constants.SEGUNDO_DIGITO_VERIFICADOR;
 import static br.com.contmatic.empresa.constants.Constants.TAMANHO_CPF;
 import static br.com.contmatic.empresa.constants.Mensagens.CPF_INVALIDO;
 import static br.com.contmatic.empresa.constants.Mensagens.CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL;
 import static br.com.contmatic.empresa.constants.Mensagens.CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.empresa.util.ValidatorUtil.validarPorRegex;
 import static br.com.contmatic.empresa.util.ValidatorUtil.validarSeESequencial;
-import static java.lang.Character.isDigit;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
@@ -39,16 +41,7 @@ public final class CpfUtil {
 	}
 	
 	private static void verificarCpfTemSoNumeros(String cpf) {
-		for (int i = 0; i < cpf.length(); i++) {
-			
-			char c = cpf.charAt(i);
-			
-			if (!(isDigit(c))) {
-				throw new IllegalStateException(CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
-			}
-			
-		}
-		
+		validarPorRegex(cpf, REGEX_ACEITA_NUMEROS, CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
 		
 	}
 
@@ -64,7 +57,7 @@ public final class CpfUtil {
 		String digito1 = gerarDigito(cpfSemDigitos);
 		
 		String digito2 = gerarDigito(cpfSemDigitos + digito1);
-		//TODO testar as 4 condicoes de primeiro e segundo digito invalido
+
 		if(!(digito1.equals(valueOf(cpf.charAt(PRIMEIRO_DIGITO_VERIFICADOR))) && digito2.equals(valueOf(cpf.charAt(SEGUNDO_DIGITO_VERIFICADOR))))) {
 			throw new IllegalStateException(CPF_INVALIDO);
 		}
@@ -86,7 +79,7 @@ public final class CpfUtil {
 	private static char digitoFinal(int sm) {
 		char digito;
 		
-		int r = 11 - (sm % 11);
+		int r = CONDICAO_11 - (sm % CONDICAO_11);
 		
          if ((r == CONDICAO_10) || (r == CONDICAO_11))
               digito = '0';
@@ -106,7 +99,7 @@ public final class CpfUtil {
 			 
 		     sm = sm + (num * peso);
 		     
-		     peso = peso - 1;
+		     peso = peso - PESO_1;
 		 }
 		return sm;
 	}
