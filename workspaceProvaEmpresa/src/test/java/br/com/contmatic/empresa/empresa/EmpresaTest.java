@@ -404,8 +404,6 @@ public class EmpresaTest {
 		assertEquals(empresaBefore.hashCode(),new Empresa(CNPJ_VALIDO,RAZAO_SOCIAL).hashCode());
 	}
 	
-	
-	
 	@Test
 	public void test_deve_retornar_que_tostring_deve_possuir_todos_os_atributos() {
 		assertTrue(empresaBefore.toString().contains(CNPJ_VALIDO));

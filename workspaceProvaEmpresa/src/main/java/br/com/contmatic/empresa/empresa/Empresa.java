@@ -17,11 +17,12 @@ import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
 import java.util.List;
 import java.util.Objects;
 
+import br.com.contmatic.empresa.auditoria.Auditoria;
 import br.com.contmatic.empresa.contato.Contato;
 import br.com.contmatic.empresa.endereco.Endereco;
 
-public class Empresa{
-
+public class Empresa extends Auditoria {
+	
 	private String cnpj;
 	
 	private String razaoSocial;
@@ -38,7 +39,7 @@ public class Empresa{
 		setCnpj(cnpj);
 		setRazaoSocial(razaoSocial);
 	}
-
+	
 	public String getCnpj() {
 		return cnpj;
 	}

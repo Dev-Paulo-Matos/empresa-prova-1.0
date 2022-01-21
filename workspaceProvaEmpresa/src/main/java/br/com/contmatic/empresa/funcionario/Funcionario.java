@@ -14,12 +14,13 @@ import java.util.Objects;
 
 import org.joda.time.DateTime;
 
+import br.com.contmatic.empresa.auditoria.Auditoria;
 import br.com.contmatic.empresa.contato.Contato;
 import br.com.contmatic.empresa.empresa.Departamento;
 import br.com.contmatic.empresa.endereco.Endereco;
 
 
-public class Funcionario {
+public class Funcionario extends Auditoria {
 
 	private String nomeCompleto;
 

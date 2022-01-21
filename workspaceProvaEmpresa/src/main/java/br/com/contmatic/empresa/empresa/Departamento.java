@@ -16,9 +16,10 @@ import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
 import java.util.List;
 import java.util.Objects;
 
+import br.com.contmatic.empresa.auditoria.Auditoria;
 import br.com.contmatic.empresa.funcionario.Funcionario;
 
-public class Departamento {
+public class Departamento extends Auditoria {
 
 	private String nome;
 	
