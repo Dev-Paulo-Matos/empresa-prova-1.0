@@ -3,3 +3,4 @@
 *.metadata/
 *.sonarlint/
 workspaceProvaEmpresa/target/empresa-maven-0.0.1-SNAPSHOT.jar
+*.class
