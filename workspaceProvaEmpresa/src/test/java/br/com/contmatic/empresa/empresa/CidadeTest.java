@@ -83,7 +83,7 @@ public class CidadeTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_settar_cidade_com_cod_ibge_null() {
 		cidadeBefore.setCodigoIbge(null);
-	}
+	} 
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_cidade_com_cod_ibge_vazio() {
