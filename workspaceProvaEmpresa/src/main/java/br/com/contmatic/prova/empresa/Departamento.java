@@ -1,23 +1,22 @@
-package br.com.contmatic.empresa.empresa;
+package br.com.contmatic.prova.empresa;
 
-import static br.com.contmatic.empresa.constants.Constants.DEPARTAMENTO_COD_TAMANHO_FIXO;
-import static br.com.contmatic.empresa.constants.Constants.DEPARTAMENTO_NOME_TAMANHO_MAXIMO;
-import static br.com.contmatic.empresa.constants.Constants.DEPARTAMENTO_NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.empresa.constants.Constants.TAMANHO_MAX_LISTA_FUNCIONARIO;
-import static br.com.contmatic.empresa.constants.Constants.TAMANHO_MIN_LISTA_FUNCIONARIO;
-import static br.com.contmatic.empresa.constants.Mensagens.COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES;
-import static br.com.contmatic.empresa.constants.Mensagens.LISTA_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIOS;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasENumerosEAcentos;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoList;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_COD_TAMANHO_FIXO;
+import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NOME_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.TAMANHO_MAX_LISTA_FUNCIONARIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.TAMANHO_MIN_LISTA_FUNCIONARIO;
+import static br.com.contmatic.prova.constants.DepartamentoConstants.COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES;
+import static br.com.contmatic.prova.constants.DepartamentoConstants.LISTA_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIOS;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoList;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 
 import java.util.List;
 import java.util.Objects;
 
-import br.com.contmatic.empresa.auditoria.Auditoria;
-import br.com.contmatic.empresa.funcionario.Funcionario;
+import br.com.contmatic.prova.auditoria.Auditoria;
 
 public class Departamento extends Auditoria {
 

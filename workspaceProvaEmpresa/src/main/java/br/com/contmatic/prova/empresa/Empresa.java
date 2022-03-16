@@ -1,25 +1,25 @@
-package br.com.contmatic.empresa.empresa;
+package br.com.contmatic.prova.empresa;
 
-import static br.com.contmatic.empresa.constants.Constants.RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO;
-import static br.com.contmatic.empresa.constants.Constants.RAZAO_SOCIAL_NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.empresa.constants.Constants.TAMANHO_MAX_ENDERECO;
-import static br.com.contmatic.empresa.constants.Constants.TAMANHO_MAX_LISTA_DEPARTAMENTO;
-import static br.com.contmatic.empresa.constants.Constants.TAMANHO_MIN_ENDERECO;
-import static br.com.contmatic.empresa.constants.Constants.TAMANHO_MIN_LISTA_DEPARTAMENTO;
-import static br.com.contmatic.empresa.constants.Mensagens.LISTA_DEVE_POSSUIR_DE_1_A_20_ENDERECOS;
-import static br.com.contmatic.empresa.constants.Mensagens.LISTA_DEVE_POSSUIR_DE_2_A_20_DEPARTAMENTOS;
-import static br.com.contmatic.empresa.util.CnpjUtil.validarCnpj;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasENumerosEEspacosEAcentos;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoList;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.constants.EmpresaConstants.RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constants.EmpresaConstants.RAZAO_SOCIAL_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.UtilsConstants.TAMANHO_MAX_ENDERECO;
+import static br.com.contmatic.prova.constants.UtilsConstants.TAMANHO_MAX_LISTA_DEPARTAMENTO;
+import static br.com.contmatic.prova.constants.UtilsConstants.TAMANHO_MIN_ENDERECO;
+import static br.com.contmatic.prova.constants.UtilsConstants.TAMANHO_MIN_LISTA_DEPARTAMENTO;
+import static br.com.contmatic.prova.constants.UtilsConstants.LISTA_DEVE_POSSUIR_DE_1_A_20_ENDERECOS;
+import static br.com.contmatic.prova.constants.UtilsConstants.LISTA_DEVE_POSSUIR_DE_2_A_20_DEPARTAMENTOS;
+import static br.com.contmatic.prova.util.CnpjUtil.validarCnpj;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoList;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 
 import java.util.List;
 import java.util.Objects;
 
-import br.com.contmatic.empresa.auditoria.Auditoria;
-import br.com.contmatic.empresa.contato.Contato;
-import br.com.contmatic.empresa.endereco.Endereco;
+import br.com.contmatic.prova.auditoria.Auditoria;
+import br.com.contmatic.prova.contato.Contato;
+import br.com.contmatic.prova.endereco.Endereco;
 
 public class Empresa extends Auditoria {
 	

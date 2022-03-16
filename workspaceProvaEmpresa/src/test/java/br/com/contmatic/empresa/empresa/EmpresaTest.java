@@ -11,8 +11,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.contmatic.empresa.contato.Contato;
-import br.com.contmatic.empresa.endereco.Endereco;
+import br.com.contmatic.prova.contato.Contato;
+import br.com.contmatic.prova.empresa.Departamento;
+import br.com.contmatic.prova.empresa.Empresa;
+import br.com.contmatic.prova.endereco.Endereco;
 
 
 public class EmpresaTest {

@@ -8,8 +8,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.contmatic.empresa.endereco.Cidade;
-import br.com.contmatic.empresa.endereco.Endereco;
+import br.com.contmatic.prova.endereco.Cidade;
+import br.com.contmatic.prova.endereco.Endereco;
 
 public class EnderecoTest {
 	

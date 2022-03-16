@@ -1,23 +1,22 @@
-package br.com.contmatic.empresa.funcionario;
+package br.com.contmatic.prova.empresa;
 
-import static br.com.contmatic.empresa.constants.Constants.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
-import static br.com.contmatic.empresa.constants.Constants.FUNCIONARIO_NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.empresa.constants.Mensagens.CONTATO_NULO;
-import static br.com.contmatic.empresa.constants.Mensagens.DATA_NULA;
-import static br.com.contmatic.empresa.util.CpfUtil.validarCpf;
-import static br.com.contmatic.empresa.util.DataUtil.validarDataNascimento;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.FUNCIONARIO_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.ContatoConstants.CONTATO_NULO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.DATA_NULA;
+import static br.com.contmatic.prova.util.CpfUtil.validarCpf;
+import static br.com.contmatic.prova.util.DataUtil.validarDataNascimento;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 
 import java.util.Objects;
 
 import org.joda.time.DateTime;
 
-import br.com.contmatic.empresa.auditoria.Auditoria;
-import br.com.contmatic.empresa.contato.Contato;
-import br.com.contmatic.empresa.empresa.Departamento;
-import br.com.contmatic.empresa.endereco.Endereco;
+import br.com.contmatic.prova.auditoria.Auditoria;
+import br.com.contmatic.prova.contato.Contato;
+import br.com.contmatic.prova.endereco.Endereco;
 
 
 public class Funcionario extends Auditoria {

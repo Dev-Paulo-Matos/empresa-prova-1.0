@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.contmatic.empresa.contato.Contato;
+import br.com.contmatic.prova.contato.Contato;
 
 public class ContatoTest {
 	

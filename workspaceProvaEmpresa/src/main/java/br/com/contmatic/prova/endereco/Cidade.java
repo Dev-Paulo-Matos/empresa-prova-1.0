@@ -1,17 +1,17 @@
-package br.com.contmatic.empresa.endereco;
+package br.com.contmatic.prova.endereco;
 
-import static br.com.contmatic.empresa.constants.Constants.CODIGO_IBGE_TAMNHO_FIXO;
-import static br.com.contmatic.empresa.constants.Constants.NOME_CIDADE_TAMANHO_MAXIMO;
-import static br.com.contmatic.empresa.constants.Constants.NOME_CIDADE_TAMANHO_MINIMO;
-import static br.com.contmatic.empresa.constants.Constants.UF_CIDADE_TAMANHO_FIXO;
-import static br.com.contmatic.empresa.constants.Mensagens.CODIGO_IBGE_DEVE_POSSUIR_5_CARACTERES;
-import static br.com.contmatic.empresa.constants.Mensagens.NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES;
-import static br.com.contmatic.empresa.constants.Mensagens.UF_CONTEM_O_NUMERO_DE_DIGITOS_INVALIDO;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasEAcentos;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarCaracteresNumeros;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.constants.CidadeConstants.CODIGO_IBGE_TAMNHO_FIXO;
+import static br.com.contmatic.prova.constants.CidadeConstants.NOME_CIDADE_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constants.CidadeConstants.NOME_CIDADE_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.CidadeConstants.UF_CIDADE_TAMANHO_FIXO;
+import static br.com.contmatic.prova.constants.CidadeConstants.CODIGO_IBGE_DEVE_POSSUIR_5_CARACTERES;
+import static br.com.contmatic.prova.constants.CidadeConstants.NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES;
+import static br.com.contmatic.prova.constants.CidadeConstants.UF_CONTEM_O_NUMERO_DE_DIGITOS_INVALIDO;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresNumeros;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 
 import java.util.Objects;
 

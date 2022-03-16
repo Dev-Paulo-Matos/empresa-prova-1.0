@@ -1,4 +1,4 @@
-package br.com.contmatic.empresa.auditoria;
+package br.com.contmatic.prova.auditoria;
 
 import org.joda.time.DateTime;
 
