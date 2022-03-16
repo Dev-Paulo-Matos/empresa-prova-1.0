@@ -1,18 +1,18 @@
-package br.com.contmatic.empresa.util;
+package br.com.contmatic.prova.util;
 
-import static br.com.contmatic.empresa.constants.Constants.CONDICAO_EMAIL_TAMANHO;
-import static br.com.contmatic.empresa.constants.Constants.DDI_BRASIL;
-import static br.com.contmatic.empresa.constants.Constants.PRIMEIRO_CARACTER;
-import static br.com.contmatic.empresa.constants.Constants.QUANTIDADE_DE_DIGITOS_CELULAR;
-import static br.com.contmatic.empresa.constants.Constants.REGEX_EMAIL;
-import static br.com.contmatic.empresa.constants.Mensagens.CELULAR_COM_QUANTIDADE_DE_DIGITOS_INVALIDO;
-import static br.com.contmatic.empresa.constants.Mensagens.CELULAR_INVALIDO_NAO_PODE_CARACTERES_INVALIDOS;
-import static br.com.contmatic.empresa.constants.Mensagens.CELULAR_NAO_POSSUI_DDI_DO_BRASIL;
-import static br.com.contmatic.empresa.constants.Mensagens.CONTATO_EMAIL_INVALIDO;
-import static br.com.contmatic.empresa.constants.Mensagens.EMAIL_NAO_PODE_SER_NULO;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarPorRegex;
-import static br.com.contmatic.empresa.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.constants.ContatoConstants.CONDICAO_EMAIL_TAMANHO;
+import static br.com.contmatic.prova.constants.ContatoConstants.DDI_BRASIL;
+import static br.com.contmatic.prova.constants.ContatoConstants.PRIMEIRO_CARACTER;
+import static br.com.contmatic.prova.constants.ContatoConstants.QUANTIDADE_DE_DIGITOS_CELULAR;
+import static br.com.contmatic.prova.constants.RegexConstants.REGEX_EMAIL;
+import static br.com.contmatic.prova.constants.ContatoConstants.CELULAR_COM_QUANTIDADE_DE_DIGITOS_INVALIDO;
+import static br.com.contmatic.prova.constants.ContatoConstants.CELULAR_INVALIDO_NAO_PODE_CARACTERES_INVALIDOS;
+import static br.com.contmatic.prova.constants.ContatoConstants.CELULAR_NAO_POSSUI_DDI_DO_BRASIL;
+import static br.com.contmatic.prova.constants.ContatoConstants.CONTATO_EMAIL_INVALIDO;
+import static br.com.contmatic.prova.constants.ContatoConstants.EMAIL_NAO_PODE_SER_NULO;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarPorRegex;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 
 public final class ContatoValidatorUtil {
 	

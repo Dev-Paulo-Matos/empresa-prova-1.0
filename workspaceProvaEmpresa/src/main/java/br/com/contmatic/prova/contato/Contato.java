@@ -1,7 +1,8 @@
-package br.com.contmatic.empresa.contato;
+package br.com.contmatic.prova.contato;
 
-import static br.com.contmatic.empresa.util.ContatoValidatorUtil.validarCelular;
-import static br.com.contmatic.empresa.util.ContatoValidatorUtil.validarEmail;
+import static br.com.contmatic.prova.util.ContatoValidatorUtil.validarCelular;
+import static br.com.contmatic.prova.util.ContatoValidatorUtil.validarEmail;
+
 import java.util.Objects;
 
 public class Contato {

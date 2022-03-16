@@ -12,7 +12,9 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.contmatic.empresa.funcionario.Funcionario;
+import br.com.contmatic.prova.empresa.Departamento;
+import br.com.contmatic.prova.empresa.Empresa;
+import br.com.contmatic.prova.empresa.Funcionario;
 
 public class DepartamentoTest {
 	
