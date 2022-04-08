@@ -1,9 +1,17 @@
 package br.com.contmatic.prova.empresa;
 
+import static br.com.contmatic.prova.constants.ContatoConstants.CONTATO_NULO;
+import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.EnderecoConstants.ENDERECO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.CARGO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.DATA_NULA;
 import static br.com.contmatic.prova.constants.FuncionarioConstants.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.FuncionarioConstants.FUNCIONARIO_NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.constants.ContatoConstants.CONTATO_NULO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.DATA_NULA;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.NOME_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstants.NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.util.CpfUtil.validarCpf;
 import static br.com.contmatic.prova.util.DataUtil.validarDataNascimento;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
@@ -35,8 +43,10 @@ public class Funcionario extends Auditoria {
 	
 	private Endereco endereco;
 	
-	public Funcionario(String cpf) {
+	public Funcionario(String nomeCompleto,String cpf,DateTime dataNascimento) {
+		setNomeCompleto(nomeCompleto);
 		setCpf(cpf);
+		setDataNascimento(dataNascimento);
 	}
 	
 	public Funcionario(String nome, String cpf, DateTime dataNascimento, String cargo) {
@@ -51,9 +61,9 @@ public class Funcionario extends Auditoria {
 	}
 	
 	public void setNomeCompleto(String nomeCompleto) {
-		validarNulo(nomeCompleto);
-		validarTamanhoString(nomeCompleto, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO);
-		validarCaracteresLetrasEspacosEAcentos(nomeCompleto);
+		validarNulo(nomeCompleto, NOME_NAO_PODE_ESTAR_VAZIO);
+		validarTamanhoString(nomeCompleto, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO, NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES);
+		validarCaracteresLetrasEspacosEAcentos(nomeCompleto, NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nomeCompleto = nomeCompleto;
 	}
 	
@@ -71,7 +81,7 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setDataNascimento(DateTime dataNascimento) {
-		validarNulo(dataNascimento,DATA_NULA);
+		validarNulo(dataNascimento, DATA_NULA);
 		validarDataNascimento(dataNascimento);
 		this.dataNascimento = dataNascimento;
 	}
@@ -80,11 +90,11 @@ public class Funcionario extends Auditoria {
 		return cargo;
 	}
 
-	public void setCargo(String cargoFuncionario) {
-		validarNulo(cargoFuncionario);
-		validarTamanhoString(cargoFuncionario, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO);
-		validarCaracteresLetrasEspacosEAcentos(cargoFuncionario);
-		this.cargo = cargoFuncionario;
+	public void setCargo(String cargo) {
+		validarNulo(cargo, CARGO_NAO_PODE_ESTAR_VAZIO);
+		validarTamanhoString(cargo, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO, CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES);
+		validarCaracteresLetrasEspacosEAcentos(cargo, CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
+		this.cargo = cargo;
 	}
 	
 	public Contato getContato() {
@@ -92,7 +102,7 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setContato(Contato contato) {
-		validarNulo(contato,CONTATO_NULO);
+		validarNulo(contato, CONTATO_NULO);
 		this.contato = contato;
 	}
 
@@ -101,7 +111,7 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setDepartamento(Departamento departamento) {
-		validarNulo(departamento);
+		validarNulo(departamento,DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO);
 		this.departamento = departamento;
 	}
 	
@@ -110,7 +120,7 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setEndereco(Endereco endereco) {
-		validarNulo(endereco);
+		validarNulo(endereco, ENDERECO_NAO_PODE_ESTAR_VAZIO);
 		this.endereco = endereco;
 	}
 
@@ -133,11 +143,23 @@ public class Funcionario extends Auditoria {
 
 	@Override
 	public String toString() {
-		return "Funcionario [nomeCompleto=" + nomeCompleto + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
-				+ ", cargo=" + cargo + ", contato=" + contato + ", departamento=" + departamento + ", endereco="
-				+ endereco + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Funcionario [nomeCompleto=");
+		builder.append(nomeCompleto);
+		builder.append(", cpf=");
+		builder.append(cpf);
+		builder.append(", dataNascimento=");
+		builder.append(dataNascimento);
+		builder.append(", cargo=");
+		builder.append(cargo);
+		builder.append(", contato=");
+		builder.append(contato);
+		builder.append(", departamento=");
+		builder.append(departamento);
+		builder.append(", endereco=");
+		builder.append(endereco);
+		builder.append("]");
+		return builder.toString();
 	}
-
-	
 	
 }

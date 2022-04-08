@@ -26,4 +26,18 @@ public final class DataUtil {
 
 		return idade >= IDADE_MINIMA;
 	}
+
+	public static void validarDataPassada(DateTime dataCriacao,String mensagem) {
+		if(dataCriacao.plusMinutes(1).isBefore(DateTime.now())) {
+			throw new IllegalStateException(mensagem);
+		}
+	}
+	
+	public static void validarDataFutura(DateTime dataCriacao,String mensagem) {
+		if(dataCriacao.isAfter(DateTime.now().plusMinutes(1))) {
+			throw new IllegalStateException(mensagem);
+		}
+	}
+	
+
 }

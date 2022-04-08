@@ -8,12 +8,10 @@ import java.util.Objects;
 public class Contato {
 	
 	private String celular;
-	
 	private String email;
 
 	public Contato(String celular,String email) {
 		setCelular(celular);
-		
 		setEmail(email);
 	}
 	
@@ -54,9 +52,13 @@ public class Contato {
 
 	@Override
 	public String toString() {
-		return "Contato [celular=" + celular + ", email=" + email + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Contato [celular=");
+		builder.append(celular);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append("]");
+		return builder.toString();
 	}
-
-	
 	
 }

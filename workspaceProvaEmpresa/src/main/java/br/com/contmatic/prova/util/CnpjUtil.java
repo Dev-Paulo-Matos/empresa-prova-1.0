@@ -30,7 +30,7 @@ public final class CnpjUtil {
 	}
 
 	public static void validarCnpj(String cnpj) {
-		validarNulo(cnpj);
+		validarNulo(cnpj,"CNPJ não pode estar vazio!");
 		verificarSeCnpjTemSoNumero(cnpj);
 		cnpjQuantidadeDeDigitos(cnpj);
 		cnpjNumeroSequencial(cnpj);

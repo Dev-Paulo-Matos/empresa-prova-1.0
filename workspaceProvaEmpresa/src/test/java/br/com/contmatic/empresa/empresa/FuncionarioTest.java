@@ -37,7 +37,7 @@ public class FuncionarioTest {
 
 	private static final String CEP = "06315270";
 	
-	private static final String NUMERO = "476";
+	private static final Integer NUMERO = 476;
 	
 	private Funcionario funcionarioBefore;
 	
@@ -59,47 +59,43 @@ public class FuncionarioTest {
 	}
 	
 	@Test
-	public void test_deve_criar_funcionario_apenas_com_cpf() {
-		assertSame("73441531060",new Funcionario("73441531060").getCpf());
-		
+	public void test_deve_criar_funcionario_com_cpf_nome_e_data_nascimento() {
+		assertEquals(funcionarioBefore,new Funcionario(NOME,CPF, DATA_NASCIMENTO));
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_funcionario_com_segundo_digito_invalido() {
-		new Funcionario("41236207875");
-		
+		new Funcionario(NOME,"72441531060", DATA_NASCIMENTO);
 	}
-	
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_funcionario_com_primeiro_digito_invalido() {
-		new Funcionario("41236207844");
-		
+		new Funcionario(NOME,"41236207844",DATA_NASCIMENTO);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_criar_funcionario_com_cpf_nulo() {
-		new Funcionario(null);
+		new Funcionario(NOME,null,DATA_NASCIMENTO);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_funcionario_com_cpf_contendo_digitos_sequencial() {
-		new Funcionario("11111111111");
+		new Funcionario("Paulo Machado","11111111111",DATA_NASCIMENTO);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_funcionario_com_cpf_contendo_digitos_a_menos() {
-		new Funcionario("321232123");
+		new Funcionario("Paulo Machado","321232123",DATA_NASCIMENTO);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_funcionario_com_cpf_contendo_digitos_a_mais() {
-		new Funcionario("31231232132312");
+		new Funcionario("Paulo Machado","31231232132312",DATA_NASCIMENTO);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_funcionario_com_cpf_vazio() {
-		new Funcionario("");
+		new Funcionario("Paulo Machado","",DATA_NASCIMENTO);
 	}
 	
 	@Test

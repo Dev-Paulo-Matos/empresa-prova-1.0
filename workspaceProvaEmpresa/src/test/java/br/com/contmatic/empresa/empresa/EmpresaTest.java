@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class EmpresaTest {
 	
 	private static final String CEP = "06315270";
 	
-	private static final String NUMERO = "476";
+	private static final Integer NUMERO = 476;
 	
 	private static final String FANTASIA = "AMIGOS DO BEMM 1";
 	
@@ -438,4 +439,28 @@ public class EmpresaTest {
 
 	}
 	
+	@Test
+	public void test_data_certa() {
+		empresaBefore.setDataCriacao(DateTime.now());
+	}
+	
+	@Test
+	public void test_data_Futura() {
+		empresaBefore.setDataCriacao(DateTime.now().plusMinutes(2));
+	}
+	
+	@Test
+	public void test_data_Passado() {
+		empresaBefore.setDataCriacao(DateTime.now().plusMinutes(-2));
+	}
+	
+	@Test
+	public void test_ipconfig_certo() {
+		empresaBefore.setIpUsuarioCriacao("191.183.55.188");
+	}
+	
+	@Test
+	public void test_ipconfig_errado() {
+		empresaBefore.setIpUsuarioCriacao("255.183.55.2");
+	}
 }

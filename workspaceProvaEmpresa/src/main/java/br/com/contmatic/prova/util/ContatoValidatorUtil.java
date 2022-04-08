@@ -21,7 +21,7 @@ public final class ContatoValidatorUtil {
 	}
 	
 	public static void validarCelular(String celular) {
-		validarNulo(celular);
+		validarNulo(celular,"Celular não pode estar vazio!");
 		
 		validarDigitosNumerico(celular);
 		

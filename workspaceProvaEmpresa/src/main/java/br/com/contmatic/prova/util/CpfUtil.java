@@ -28,7 +28,7 @@ public final class CpfUtil {
 	private CpfUtil() {}
 	
 	public static void validarCpf(String cpf) {
-		validarNulo(cpf);
+		validarNulo(cpf,"CPF não pode estar vazio!");
 		
 		verificarCpfTemSoNumeros(cpf);
 		
