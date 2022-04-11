@@ -17,9 +17,9 @@ public class EnderecoTest {
 
 	private static final String CEP = "06315270";
 
-	private static final String NUMERO = "476";
+	private static final Integer NUMERO = 476;
 	
-	private static final String COD_IBGE = "13212";
+	private static final Integer COD_IBGE = 13212;
 	
 	private static final String TIPO_LOGRADOURO = "RUA";
 	
@@ -57,6 +57,18 @@ public class EnderecoTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_endereco_com_cep_contendo_espacos() {
+		new Endereco("                  ",NUMERO);
+	}
+	
+	@Test
+	public void test_deve_criar_endereco_com_cep_contendo_espacos_no_comeco_e_fim() {
+		String cep2 = "         06315270         ";
+		assertEquals(cep2, new Endereco(cep2,NUMERO).getCep());
+		
+	}
+	
+	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_criar_cep_com_digito_sequencial() {
 		new Endereco("11111111",NUMERO);
 	}
@@ -85,6 +97,18 @@ public class EnderecoTest {
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_endereco_com_cep_vazio() {
 		enderecoBefore.setCep("");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_endereco_com_cep_contendo_espacos() {
+		enderecoBefore.setCep("          ");
+	}
+	
+	@Test
+	public void test_deve_settar_endereco_com_cep_contendo_espacos_no_comeco_e_fim() {
+		String cep2 = "    06315270      ";
+		enderecoBefore.setCep(cep2);
+		assertEquals(cep2, enderecoBefore.getCep());
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -155,74 +179,49 @@ public class EnderecoTest {
 		assertSame(NUMERO,enderecoBefore.getNumero());
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_endereco_contendo_letras_no_numero() {
-		new Endereco(CEP,"A123");
-	}
+
 	
 	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_endereco_com_mais_de_5_numeros() {
-		String numero2 = "123456";
+	public void test_nao_deve_criar_endereco_com_mais_de_4_numeros() {
+		Integer numero2 = 12345;
 		new Endereco(CEP,numero2);
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_endereco_com_numero_vazio() {
-		String numero2 = "";
-		new Endereco(CEP,numero2);
-	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_criar_endereco_com_numero_nulo() {
 		new Endereco(CEP,null);
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_endereco_com_numero_contendo_caracteres_invalidos() {
-		new Endereco(CEP,"!@#!");
-	}
 	
 	@Test
 	public void test_deve_settar_endereco_com_numero_valido() {
-		String numero2 = "312";
+		Integer numero2 = 312;
 		enderecoBefore.setNumero(numero2);
 		assertSame(numero2,enderecoBefore.getNumero());
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_endereco_contendo_letras_no_numero() {
-		enderecoBefore.setNumero("A123");
-	}
+
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_endereco_com_mais_de_5_numeros() {
-		String numero2 = "123456";
+		Integer numero2 = 123456;
 		
 		enderecoBefore.setNumero(numero2);
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_endereco_com_numero_vazio() {
-		String numero2 = "";
-		
-		enderecoBefore.setNumero(numero2);
-	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_settar_endereco_com_numero_nulo() {
 		enderecoBefore.setNumero(null);
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_endereco_com_numero_contendo_caracteres_invalidos() {
-		enderecoBefore.setNumero("!@#!");
-	}
 	
 	@Test
 	public void test_deve_criar_endereco_e_settar_um_novo_numero() {
 		Endereco endereco1 = new Endereco(CEP,NUMERO);
 		
-		String numero2 = "321";
+		Integer numero2 = 321;
 		
 		endereco1.setNumero(numero2);
 		
@@ -286,6 +285,18 @@ public class EnderecoTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_rua_com_valor_contendo_espacos() {
+		enderecoBefore.setLogradouro("            ");
+	}
+	
+	@Test
+	public void test_deve_settar_rua_com_valor_contendo_espacos_no_comeco_e_fim() {
+		String logradouro2 = "     Rua Antonio Roberto       ";
+		enderecoBefore.setLogradouro(logradouro2);
+		assertEquals(logradouro2,enderecoBefore.getLogradouro());
+	}
+	
+	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_rua_com_quantidade_de_caracteres_a_menos() {
 		enderecoBefore.setLogradouro("Ru");
 	}
@@ -342,7 +353,7 @@ public class EnderecoTest {
 	
 	@Test
 	public void test_nao_deve_retornar_igualdade_no_hashcode_ao_comparar_objetos_com_atributos_diferentes() {
-		assertNotEquals(enderecoBefore.hashCode(),new Endereco("06715270","123").hashCode());
+		assertNotEquals(enderecoBefore.hashCode(),new Endereco("06715270",123).hashCode());
 	}
 	@Test
 	public void test_nao_deve_retornar_igualdade_ao_comparar_endereco_a_um_valor_nulo() {
@@ -361,7 +372,7 @@ public class EnderecoTest {
 	
 	@Test
 	public void test_nao_deve_retornar_igualdade_a_comparar_enderecos_com_numeros_diferentes() {
-		assertNotEquals(enderecoBefore,new Endereco(CEP,"123"));
+		assertNotEquals(enderecoBefore,new Endereco(CEP,123));
 	}
 	
 	@Test
@@ -377,7 +388,7 @@ public class EnderecoTest {
 		
 		assertTrue(enderecoBefore.toString().contains(CEP));
 		
-		assertTrue(enderecoBefore.toString().contains(NUMERO));
+		assertTrue(enderecoBefore.toString().contains(NUMERO.toString()));
 		
 		assertTrue(enderecoBefore.toString().contains(LOGRADOURO));
 		

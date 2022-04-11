@@ -1,36 +1,40 @@
 package br.com.contmatic.prova.util;
 
-import static br.com.contmatic.prova.constants.CnpjConstants.CNPJ_SEM_DIGITOS_VERIFICADORES;
-import static br.com.contmatic.prova.constants.CnpjConstants.CONDICAO_0;
-import static br.com.contmatic.prova.constants.CnpjConstants.CONDICAO_1;
-import static br.com.contmatic.prova.constants.CnpjConstants.ITERACAO;
-import static br.com.contmatic.prova.constants.CnpjConstants.ITERACAO_12;
-import static br.com.contmatic.prova.constants.CnpjConstants.MODULACAO_CALCULAR;
-import static br.com.contmatic.prova.constants.CnpjConstants.PESO_1;
-import static br.com.contmatic.prova.constants.CnpjConstants.PESO_10;
-import static br.com.contmatic.prova.constants.CnpjConstants.PESO_11;
-import static br.com.contmatic.prova.constants.CnpjConstants.PESO_2;
-import static br.com.contmatic.prova.constants.CnpjConstants.PRIMEIRO_CARACTER;
-import static br.com.contmatic.prova.constants.CnpjConstants.PRIMEIRO_DIGITO_VERIFICADOR_CNPJ;
-import static br.com.contmatic.prova.constants.CnpjConstants.SEGUNDO_DIGITO_VERIFICADOR_CNPJ;
-import static br.com.contmatic.prova.constants.CnpjConstants.TAMANHO_CNPJ;
-import static br.com.contmatic.prova.constants.CnpjConstants.CNPJ_INVALIDO;
-import static br.com.contmatic.prova.constants.CnpjConstants.CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL;
-import static br.com.contmatic.prova.constants.CnpjConstants.CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.CnpjConstants.CNPJ_POSSUI_QUANTIDADE_INVALIDA_DE_DIGITOS;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_SEM_DIGITOS_VERIFICADORES;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CONDICAO_0;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CONDICAO_1;
+import static br.com.contmatic.prova.constants.CnpjConstantes.ITERACAO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.ITERACAO_12;
+import static br.com.contmatic.prova.constants.CnpjConstantes.MODULACAO_CALCULAR;
+import static br.com.contmatic.prova.constants.CnpjConstantes.PESO_1;
+import static br.com.contmatic.prova.constants.CnpjConstantes.PESO_10;
+import static br.com.contmatic.prova.constants.CnpjConstantes.PESO_11;
+import static br.com.contmatic.prova.constants.CnpjConstantes.PESO_2;
+import static br.com.contmatic.prova.constants.CnpjConstantes.PRIMEIRO_CARACTER;
+import static br.com.contmatic.prova.constants.CnpjConstantes.PRIMEIRO_DIGITO_VERIFICADOR_CNPJ;
+import static br.com.contmatic.prova.constants.CnpjConstantes.SEGUNDO_DIGITO_VERIFICADOR_CNPJ;
+import static br.com.contmatic.prova.constants.CnpjConstantes.TAMANHO_CNPJ;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_POSSUI_QUANTIDADE_INVALIDA_DE_DIGITOS;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 import static java.lang.Character.isDigit;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
 public final class CnpjUtil {
-	
+
 	private CnpjUtil() { 
 		
 	}
 
 	public static void validarCnpj(String cnpj) {
-		validarNulo(cnpj,"CNPJ não pode estar vazio!");
+		validarNulo(cnpj, CNPJ_NAO_PODE_ESTAR_NULO);
+		validarVazio(cnpj, CNPJ_NAO_PODE_ESTAR_VAZIO);
 		verificarSeCnpjTemSoNumero(cnpj);
 		cnpjQuantidadeDeDigitos(cnpj);
 		cnpjNumeroSequencial(cnpj);
@@ -38,8 +42,10 @@ public final class CnpjUtil {
 	}
 	
 	private static void verificarSeCnpjTemSoNumero(String cnpj) {
-		for (int i = 0; i < cnpj.length(); i++) {	
-			if (!(isDigit(cnpj.charAt(i)))) {
+		String cnpjLimpo = cnpj.trim();
+		
+		for (int i = 0; i < cnpjLimpo.length(); i++) {	
+			if (!(isDigit(cnpjLimpo.charAt(i)))) {
 				throw new IllegalStateException(CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
 			}
 		}
@@ -53,17 +59,20 @@ public final class CnpjUtil {
 	}
 	
 	private static void cnpjQuantidadeDeDigitos(String cnpjSoNumero) {
-		if (cnpjSoNumero.length() != TAMANHO_CNPJ) {
+		if (cnpjSoNumero.trim().length() != TAMANHO_CNPJ) {
 			throw new IllegalStateException(CNPJ_POSSUI_QUANTIDADE_INVALIDA_DE_DIGITOS);
 		}
 		
 	}
 	
 	private static void validarDigitosVerificadores(String cnpj) {
-		String cnpjSemDigitos = cnpj.substring(PRIMEIRO_CARACTER,CNPJ_SEM_DIGITOS_VERIFICADORES);
+		
+		String cnpjLimpo = cnpj.trim();
+		
+		String cnpjSemDigitos = cnpjLimpo.substring(PRIMEIRO_CARACTER,CNPJ_SEM_DIGITOS_VERIFICADORES);
 		char digito1 = gerarDigito(cnpjSemDigitos);
-		char digito2 = gerarDigito(cnpj + digito1);
-		if(digito1 != cnpj.charAt(PRIMEIRO_DIGITO_VERIFICADOR_CNPJ) || digito2 != cnpj.charAt(SEGUNDO_DIGITO_VERIFICADOR_CNPJ)) {
+		char digito2 = gerarDigito(cnpjLimpo + digito1);
+		if(digito1 != cnpjLimpo.charAt(PRIMEIRO_DIGITO_VERIFICADOR_CNPJ) || digito2 != cnpjLimpo.charAt(SEGUNDO_DIGITO_VERIFICADOR_CNPJ)) {
 			throw new IllegalStateException(CNPJ_INVALIDO);
 		}
 	}

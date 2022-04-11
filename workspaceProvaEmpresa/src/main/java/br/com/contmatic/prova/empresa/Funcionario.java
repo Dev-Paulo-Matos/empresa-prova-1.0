@@ -1,22 +1,25 @@
 package br.com.contmatic.prova.empresa;
 
-import static br.com.contmatic.prova.constants.ContatoConstants.CONTATO_NULO;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.EnderecoConstants.ENDERECO_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.CARGO_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.DATA_NULA;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.FUNCIONARIO_NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.NOME_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES;
+import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_NULO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.ENDERECO_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_NULA;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.FUNCIONARIO_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.util.CpfUtil.validarCpf;
 import static br.com.contmatic.prova.util.DataUtil.validarDataNascimento;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
 import java.util.Objects;
 
@@ -29,9 +32,9 @@ import br.com.contmatic.prova.endereco.Endereco;
 
 public class Funcionario extends Auditoria {
 
-	private String nomeCompleto;
-
 	private String cpf;
+
+	private String nomeCompleto;
 	
 	private DateTime dataNascimento;
 
@@ -43,17 +46,8 @@ public class Funcionario extends Auditoria {
 	
 	private Endereco endereco;
 	
-	public Funcionario(String nomeCompleto,String cpf,DateTime dataNascimento) {
-		setNomeCompleto(nomeCompleto);
+	public Funcionario(String cpf) {
 		setCpf(cpf);
-		setDataNascimento(dataNascimento);
-	}
-	
-	public Funcionario(String nome, String cpf, DateTime dataNascimento, String cargo) {
-		setNomeCompleto(nome);
-		setCpf(cpf);
-		setDataNascimento(dataNascimento);
-		setCargo(cargo);
 	}
 	
 	public String getNomeCompleto() {
@@ -61,7 +55,8 @@ public class Funcionario extends Auditoria {
 	}
 	
 	public void setNomeCompleto(String nomeCompleto) {
-		validarNulo(nomeCompleto, NOME_NAO_PODE_ESTAR_VAZIO);
+		validarNulo(nomeCompleto, NOME_NAO_PODE_ESTAR_NULO);
+		validarVazio(nomeCompleto, NOME_NAO_PODE_ESTAR_VAZIO);
 		validarTamanhoString(nomeCompleto, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO, NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES);
 		validarCaracteresLetrasEspacosEAcentos(nomeCompleto, NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nomeCompleto = nomeCompleto;
@@ -91,7 +86,8 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setCargo(String cargo) {
-		validarNulo(cargo, CARGO_NAO_PODE_ESTAR_VAZIO);
+		validarNulo(cargo, CARGO_NAO_PODE_ESTAR_NULO);
+		validarVazio(cargo, CARGO_NAO_PODE_ESTAR_VAZIO);
 		validarTamanhoString(cargo, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO, CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES);
 		validarCaracteresLetrasEspacosEAcentos(cargo, CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.cargo = cargo;
@@ -111,7 +107,7 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setDepartamento(Departamento departamento) {
-		validarNulo(departamento,DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO);
+		validarNulo(departamento, DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO);
 		this.departamento = departamento;
 	}
 	
@@ -120,7 +116,7 @@ public class Funcionario extends Auditoria {
 	}
 
 	public void setEndereco(Endereco endereco) {
-		validarNulo(endereco, ENDERECO_NAO_PODE_ESTAR_VAZIO);
+		validarNulo(endereco, ENDERECO_NAO_PODE_ESTAR_NULO);
 		this.endereco = endereco;
 	}
 

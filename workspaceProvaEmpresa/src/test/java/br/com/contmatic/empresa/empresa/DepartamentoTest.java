@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +23,9 @@ public class DepartamentoTest {
 	
 	private static final String RAZAO_SOCIAL = "Ong Amigos do Planeta";
 	
-	private static final String CNPJ_VALIDO = "53169215000105";
+	private static final String CNPJ = "53169215000105";
+	
+	private static final String CPF = "41236207874";
 	
 	private Funcionario funcionario1;
 	
@@ -40,15 +41,15 @@ public class DepartamentoTest {
 	
 	@Before
 	public void deve_criar_antes_de_todos_os_testes() {
-		funcionario1 = new Funcionario("Paulo Machado","41236207874",new DateTime(2003,06,7,0,0),"Gerente");
+		funcionario1 = new Funcionario(CPF);
 		
-		funcionario2 = new Funcionario("Paulo Machado","41236207874",new DateTime(2003,06,7,0,0),"Gerente");
+		funcionario2 = new Funcionario(CPF);
 
-		funcionario3 = new Funcionario("Paulo Machado","41236207874",new DateTime(2003,06,7,0,0),"Gerente");
+		funcionario3 = new Funcionario(CPF);
 
 		departamentoBefore = new Departamento(NOME,COD_DEPARTAMENTO);
 		
-		empresaBefore = new Empresa(CNPJ_VALIDO,RAZAO_SOCIAL);
+		empresaBefore = new Empresa(CNPJ,RAZAO_SOCIAL);
 		
 		funcionarios = new ArrayList<>();
 	}

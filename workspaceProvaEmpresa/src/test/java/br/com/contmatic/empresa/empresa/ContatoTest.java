@@ -34,32 +34,60 @@ public class ContatoTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testB_nao_deve_criar_contato_com_celular_com_digitos_invalido() {
-		new Contato("551196348101",EMAIL);
+		new Contato("551196348101", EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testC_nao_deve_criar_contato_com_ddi_sem_ser_do_brasil() {
-		new Contato("5311963481012",EMAIL);
+		new Contato("5311963481012", EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testD_nao_deve_criar_contato_com_celular_vazio() {
-		new Contato("",EMAIL);
+		new Contato("", EMAIL);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testE_nao_deve_criar_contato_com_celular_nulo() {
-		new Contato(null,EMAIL);
+		new Contato(null, EMAIL);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testF_nao_deve_criar_contato_com_letras_no_celular() {
-		new Contato("55119a63481012",EMAIL);
+		new Contato("55119a63481012", EMAIL);
 	}
+	
+	@Test
+	public void testF_deve_criar_contato_com_espacos_no_comeco_e_no_fim() {
+		String celular2 = "        5511963481012                            ";
+		
+		assertEquals(celular2,new Contato(celular2, EMAIL).getCelular());
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void testF_nao_deve_criar_contato_com_espacos() {
+		new Contato("                                    ", EMAIL);
+	}
+	
 	
 	@Test(expected = IllegalStateException.class)
 	public void testB_nao_deve_settar_contato_com_celular_com_digitos_invalidos() {
 		contatoBefore.setCelular("551196348101");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void testF_nao_deve_settar_contato_com_espacos() {
+		contatoBefore.setCelular("                                    ");
+	}
+	
+	@Test
+	public void testF_deve_settar_contato_com_espacos_no_comeco_e_no_fim() {
+		String celular2 = "        5511963481012                            ";
+		
+		contatoBefore.setCelular(celular2);
+		
+		assertEquals(celular2,contatoBefore.getCelular());
+		
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -97,7 +125,7 @@ public class ContatoTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testG_nao_deve_criar_contato_com_email_invalido() {
-		new Contato(CELULAR,"email@gmailcom");
+		new Contato(CELULAR, "email@gmailcom");
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -107,7 +135,7 @@ public class ContatoTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testeI_nao_deve_criar_contato_com_email_nulo() {
-		new Contato(CELULAR,null);
+		new Contato(CELULAR, null);
 	}
 	
 	
@@ -123,6 +151,11 @@ public class ContatoTest {
 		contatoBefore.setEmail("");
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void testH_nao_deve_settar_contato_com_email_menor_que_3() {
+		contatoBefore.setEmail("ae");
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testeI_nao_deve_settar_contato_com_email_nulo() {
 		contatoBefore.setEmail(null);
@@ -134,54 +167,54 @@ public class ContatoTest {
 		
 		contatoBefore.setEmail(email);
 		
-		assertSame(email,contatoBefore.getEmail());
+		assertSame(email, contatoBefore.getEmail());
 	}
 	
 	@Test
 	public void testJ_deve_retornar_o_email() {
 		String email = EMAIL;
 		
-		Contato c1 = new Contato("5511323232323",email);
+		Contato c1 = new Contato("5511323232323", email);
 		
-		assertEquals(c1.getEmail(),email);
+		assertEquals(c1.getEmail(), email);
 	}
 	
 	@Test
 	public void testK_deve_retornar_o_telefone() {
 		String celular = "5512321321313";
 		
-		Contato c1  = new Contato(celular,EMAIL);
+		Contato c1  = new Contato(celular, EMAIL);
 		
-		assertEquals(c1.getCelular(),celular);
+		assertEquals(c1.getCelular(), celular);
 	}
 	
 	@Test
 	public void testL_deve_retornar_hashcode_diferente_para_contatos_diferentes() {
-		Contato c1  = new Contato("5512321321313",EMAIL);
+		Contato c1  = new Contato("5512321321313", EMAIL);
 		
 		assertNotEquals(c1.hashCode(), contatoBefore.hashCode());
 	}
 	
 	@Test
 	public void testM_deve_retornar_igualdade_ao_comparar_o_mesmo_objeto() {
-		assertEquals(contatoBefore,this.contatoBefore);
+		assertEquals(contatoBefore, this.contatoBefore);
 	}
 	
 	@Test
 	public void testN_deve_retornar_igualdade_ao_comparar_objetos_com_os_mesmos_atributos() {
-		Contato c1 = new Contato(CELULAR,EMAIL);
-		assertEquals(contatoBefore,c1);
+		Contato c1 = new Contato(CELULAR, EMAIL);
+		assertEquals(contatoBefore, c1);
 	}
 	
 	@Test
 	public void testO_deve_retornar_falso_ao_comparar_contato_com_objetos_de_classes_diferentes() {
 		Object ob1 = new Object();
-		assertNotEquals(contatoBefore,ob1);
+		assertNotEquals(contatoBefore, ob1);
 	}
 	
 	@Test
 	public void testP_deve_retorna_falso_ao_comparar_contato_com_objetos_nulos() {
-		assertNotEquals(contatoBefore,null);
+		assertNotEquals(contatoBefore, null);
 	}
 	
 	@Test
@@ -190,7 +223,7 @@ public class ContatoTest {
 		
 		String email = EMAIL;
 		
-		Contato c1 = new Contato(celular,email);
+		Contato c1 = new Contato(celular, email);
 		
 		assertTrue(c1.toString().contains(email));
 		

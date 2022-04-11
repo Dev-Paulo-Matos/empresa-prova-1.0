@@ -9,12 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.contmatic.prova.endereco.Cidade;
+import br.com.contmatic.prova.endereco.Uf;
 
 public class CidadeTest {
 	
-	private static final String UF = "SP";
-	
-	private static final String COD_IBGE = "13212";
+	private static final Uf UF = new Uf(12);
+
+	private static final Integer COD_IBGE = 13212;
 	
 	private static final String NOME = "Carapícuiba";
 
@@ -29,12 +30,7 @@ public class CidadeTest {
 	public void test_deve_criar_cidade_com_cod_ibge_valido() {
 		Cidade c1 = new Cidade(COD_IBGE);
 		
-		assertEquals(COD_IBGE, c1.getCodigoIbge());
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_cidade_com_cod_ibge_vazio() {
-		new Cidade("");
+		assertEquals(COD_IBGE.toString(), c1.getCodigoIbge().toString());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -42,42 +38,13 @@ public class CidadeTest {
 		new Cidade(null);
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_caracteres_especiais() {
-		new Cidade("#!@!!");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_letras() {
-		new Cidade("Asasa");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_espacos() {
-		new Cidade("123 1");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_mais_digitos_que_o_permitido() {
-		new Cidade("123121");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_cidade_com_cod_ibge_contendo_menos_digitos_que_o_permitido() {
-		new Cidade("1233");
-	}
-	
-	
-	
-	// SETT
-	
 	@Test
 	public void test_deve_settar_cidade_com_cod_ibge_valido() {
-		String codigoIbge = "12345";
+		Integer codigoIbge = 12345;
 		
 		cidadeBefore.setCodigoIbge(codigoIbge);
 		
-		assertEquals(codigoIbge, cidadeBefore.getCodigoIbge());
+		assertEquals(codigoIbge.toString(), cidadeBefore.getCodigoIbge().toString());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -85,41 +52,24 @@ public class CidadeTest {
 		cidadeBefore.setCodigoIbge(null);
 	} 
 	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_cidade_com_cod_ibge_vazio() {
-		cidadeBefore.setCodigoIbge("");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_cidade_com_cod_ibge_contendo_caracteres_especiais() {
-		cidadeBefore.setCodigoIbge("#!@!!");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_cidade_com_cod_ibge_contendo_letras() {
-		cidadeBefore.setCodigoIbge("Asasa");
-	}
-		
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_cidade_com_cod_ibge_contendo_espacos() {
-		cidadeBefore.setCodigoIbge("123 1");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_cidade_com_cod_ibge_contendo_mais_digitos_que_o_permitido() {
-		cidadeBefore.setCodigoIbge("123121");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_cidade_com_cod_ibge_contendo_menos_digitos_que_o_permitido() {
-		cidadeBefore.setCodigoIbge("1233");
-	}
-	
 	@Test
 	public void test_deve_settar_valido_nome_a_cidade() {
 		cidadeBefore.setNome(NOME);
 		
 		assertSame(NOME,cidadeBefore.getNome());
+	}
+	
+	@Test
+	public void test_deve_settar_uf_valido() {
+		final Uf uf = UF;
+		cidadeBefore.setUf(uf);
+		assertEquals(uf,cidadeBefore.getUf());
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_uf_invalido() {
+		cidadeBefore.setUf(new Uf(1234512));
+
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -147,48 +97,21 @@ public class CidadeTest {
 		cidadeBefore.setNome("AR");
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_nome_vazio() {
+		cidadeBefore.setNome("           ");
+	}
+	
 	@Test
-	public void test_deve_settar_uf_valido() {
-		cidadeBefore.setUf(UF);
-		
-		assertSame(UF,cidadeBefore.getUf());
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_uf_com_quantidade_de_caracteres_a_mais() {
-		cidadeBefore.setUf("PAA");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_uf_com_quantidade_de_caracteres_a_menos() {
-		cidadeBefore.setUf("A");
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_uf_com_digitos() {
-		cidadeBefore.setUf("12");
+	public void test_deve_deve_settar_nome_com_espacos_no_comeco_e_no_fim() {
+		String nome2 = "                   Paulo Machado Fraga Matos                        ";
+		cidadeBefore.setNome(nome2);
+		assertEquals(nome2,cidadeBefore.getNome());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_settar_uf_nulo() {
 		cidadeBefore.setUf(null);
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_uf_vazio() {
-		cidadeBefore.setUf("");
-	}
-	
-	@Test
-	public void test_deve_retornar_uf() {
-		cidadeBefore.setUf(UF);
-		
-		assertSame(UF,cidadeBefore.getUf());
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_uf_contendo_caracteres_especiais() {
-		cidadeBefore.setUf("!@");
 	}
 	
 	@Test
@@ -218,7 +141,7 @@ public class CidadeTest {
 	
 	@Test
 	public void test_nao_deve_retornar_igualdade_ao_comparar_hash_code_de_objetos_com_atributos_diferentes() {
-		assertNotEquals(cidadeBefore.hashCode(), new Cidade("12312").hashCode());
+		assertNotEquals(cidadeBefore.hashCode(), new Cidade(12314).hashCode());
 	}
 	
 	@Test
@@ -227,11 +150,12 @@ public class CidadeTest {
 		
 		cidadeBefore.setUf(UF);
 		
-		assertTrue(cidadeBefore.toString().contains(COD_IBGE));
+		assertTrue(cidadeBefore.toString().contains(COD_IBGE.toString()));
+		
+		assertTrue(cidadeBefore.toString().contains(UF.toString()));
 		
 		assertTrue(cidadeBefore.toString().contains(NOME));
 		
-		assertTrue(cidadeBefore.toString().contains(UF));
 
 	}
 }

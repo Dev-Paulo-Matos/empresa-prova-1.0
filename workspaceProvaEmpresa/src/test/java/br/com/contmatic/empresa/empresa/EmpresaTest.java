@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -70,6 +69,58 @@ public class EmpresaTest {
 	}
 	
 	@Test
+	public void test_deve_criar_empresa_apenas_com_cnpj() {
+		final Empresa e1 = new Empresa(CNPJ_VALIDO);
+		
+		assertSame(CNPJ_VALIDO,e1.getCnpj());
+	}
+	
+	
+	@Test
+	public void test_deve_settar_novo_cnpj_a_empresa_existente() {
+		String CNPJ = "58106202000100";
+		empresaBefore.setCnpj(CNPJ);
+		assertSame(CNPJ,empresaBefore.getCnpj());
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_cnpj_invalido_a_empresa_existente() {
+		empresaBefore.setCnpj("58106202000110");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void testC_nao_deve_criar_empresa_com_cnpj_invalido() {
+		new Empresa("53169215000102");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_empresa_com_cnpj_com_menos_de_11_caracter() {
+		new Empresa("9420345300019");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_empresa_com_cnpj_com_mais_de_11_caracter() {
+		new Empresa("942034530001691");
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_empresa_com_cnpj_vazio() {
+		new Empresa("",RAZAO_SOCIAL);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_empresa_com_cnpj_contendo_espaco() {
+		new Empresa("                 ",RAZAO_SOCIAL);
+	}
+	
+	@Test
+	public void test_deve_criar_empresa_com_cnpj_contendo_espaco_no_comeco_e_no_fim() {
+		
+		String cnpj = "        58106202000100         ";
+		assertEquals(cnpj, new Empresa(cnpj,RAZAO_SOCIAL).getCnpj());
+	}
+	
+	@Test
 	public void test_deve_criar_empresa_com_cnpj_valido() {
 		assertSame(empresaBefore.getCnpj(),new Empresa(CNPJ_VALIDO,RAZAO_SOCIAL).getCnpj());
 	}
@@ -121,6 +172,18 @@ public class EmpresaTest {
 		empresaBefore.setNomeFantasia("MAIS DE 60 CARACTERES MAIS DE 60 CARACTERES MAIS DE 60 CARACTERES");
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_nome_fantasia_com_espacos() {
+		empresaBefore.setNomeFantasia("                          ");
+	}
+	
+	@Test
+	public void test_deve_settar_nome_fantasia_com_espacos_no_comeco_e_fim() {
+		String nomeFantasia = "                    Paulo Machado Fraga matos                   ";
+		empresaBefore.setNomeFantasia(nomeFantasia);
+		assertEquals(nomeFantasia,empresaBefore.getRazaoSocial());
+	}
+	
 	@Test
 	public void test_deve_settar_nome_fantasia_correto() {
 		empresaBefore.setNomeFantasia(FANTASIA);
@@ -150,10 +213,6 @@ public class EmpresaTest {
 		new Empresa(null,RAZAO_SOCIAL);
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_empresa_com_cnpj_vazio() {
-		new Empresa("",RAZAO_SOCIAL);
-	}
 	//
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_empresa_com_cnpj_invalido() {
@@ -222,6 +281,18 @@ public class EmpresaTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_empresa_com_razao_social_vazia_contendo_espacos() {
+		empresaBefore.setRazaoSocial("                       ");
+	}
+	
+	@Test
+	public void test_deve_settar_empresa_com_razao_social_contendo_espacos_comeco_e_fim() {
+		String razaoSocial = "         Paulo Machado              ";
+		empresaBefore.setRazaoSocial(razaoSocial);
+		assertEquals(razaoSocial, empresaBefore.getRazaoSocial());
+	}
+	
+	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_empresa_com_razao_social_possuindo_mais_de_60_caracteres() {
 		empresaBefore.setRazaoSocial("RAZAO SOCIAL INVALIDO RAZAO SOCIAL INVALIDO RAZAO SOCIAL INVALIDO");
 	}
@@ -257,22 +328,33 @@ public class EmpresaTest {
 		new Empresa(CNPJ_VALIDO,"Empr");
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_empresa_com_razao_social_vazia_contendo_espacos() {
+		new Empresa(CNPJ_VALIDO,"                       ");
+	}
+	
+	@Test
+	public void test_deve_criar_empresa_com_razao_social_contendo_espacos_comeco_e_fim() {
+		String razaoSocial = "         Paulo Machado                             ";
+		assertEquals(razaoSocial, new Empresa(CNPJ_VALIDO,razaoSocial).getRazaoSocial());
+	}
+	
 	@Test
 	public void test_deve_criar_empresa_com_razao_social_contendo_numeros() {
 		Empresa empresa = new Empresa(CNPJ_VALIDO,RAZAO2);
-		assertEquals(RAZAO2,empresa.getRazaoSocial());
+		assertEquals(RAZAO2, empresa.getRazaoSocial());
 	}
 	
 	@Test
 	public void test_deve_retornar_a_razao_social_valida() {
-		assertSame(RAZAO_SOCIAL,empresaBefore.getRazaoSocial());
+		assertSame(RAZAO_SOCIAL, empresaBefore.getRazaoSocial());
 	}
 	
 	@Test
 	public void test_deve_adicionar_um_contato_a_empresa() {
 		empresaBefore.setContato(contatoBefore);
 		
-		assertSame(contatoBefore,empresaBefore.getContato());
+		assertSame(contatoBefore, empresaBefore.getContato());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -284,7 +366,7 @@ public class EmpresaTest {
 	public void test_deve_retornar_contato() {
 		empresaBefore.setContato(contatoBefore);
 		
-		assertSame(contatoBefore,empresaBefore.getContato());
+		assertSame(contatoBefore, empresaBefore.getContato());
 	}
 	
 	@Test
@@ -438,29 +520,5 @@ public class EmpresaTest {
 		assertTrue(empresaBefore.toString().contains(enderecos.toString()));
 
 	}
-	
-	@Test
-	public void test_data_certa() {
-		empresaBefore.setDataCriacao(DateTime.now());
-	}
-	
-	@Test
-	public void test_data_Futura() {
-		empresaBefore.setDataCriacao(DateTime.now().plusMinutes(2));
-	}
-	
-	@Test
-	public void test_data_Passado() {
-		empresaBefore.setDataCriacao(DateTime.now().plusMinutes(-2));
-	}
-	
-	@Test
-	public void test_ipconfig_certo() {
-		empresaBefore.setIpUsuarioCriacao("191.183.55.188");
-	}
-	
-	@Test
-	public void test_ipconfig_errado() {
-		empresaBefore.setIpUsuarioCriacao("255.183.55.2");
-	}
+
 }

@@ -1,24 +1,25 @@
 package br.com.contmatic.prova.util;
 
-import static br.com.contmatic.prova.constants.CpfConstants.CONDICAO_10;
-import static br.com.contmatic.prova.constants.CpfConstants.CONDICAO_11;
-import static br.com.contmatic.prova.constants.CpfConstants.CPF_SEM_DIGITOS;
-import static br.com.contmatic.prova.constants.CpfConstants.ITERACAO1;
-import static br.com.contmatic.prova.constants.CpfConstants.ITERACAO2;
-import static br.com.contmatic.prova.constants.CpfConstants.PESO2;
-import static br.com.contmatic.prova.constants.CpfConstants.PESO_1;
-import static br.com.contmatic.prova.constants.CpfConstants.PESO_10;
-import static br.com.contmatic.prova.constants.CpfConstants.PRIMEIRO_CARACTER;
-import static br.com.contmatic.prova.constants.CpfConstants.PRIMEIRO_DIGITO_VERIFICADOR;
-import static br.com.contmatic.prova.constants.RegexConstants.REGEX_ACEITA_NUMEROS;
-import static br.com.contmatic.prova.constants.CpfConstants.SEGUNDO_DIGITO_VERIFICADOR;
-import static br.com.contmatic.prova.constants.CpfConstants.TAMANHO_CPF;
-import static br.com.contmatic.prova.constants.CpfConstants.CPF_INVALIDO;
-import static br.com.contmatic.prova.constants.CpfConstants.CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL;
-import static br.com.contmatic.prova.constants.CpfConstants.CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.CpfConstantes.CONDICAO_10;
+import static br.com.contmatic.prova.constants.CpfConstantes.CONDICAO_11;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_SEM_DIGITOS;
+import static br.com.contmatic.prova.constants.CpfConstantes.ITERACAO1;
+import static br.com.contmatic.prova.constants.CpfConstantes.ITERACAO2;
+import static br.com.contmatic.prova.constants.CpfConstantes.PESO2;
+import static br.com.contmatic.prova.constants.CpfConstantes.PESO_1;
+import static br.com.contmatic.prova.constants.CpfConstantes.PESO_10;
+import static br.com.contmatic.prova.constants.CpfConstantes.PRIMEIRO_CARACTER;
+import static br.com.contmatic.prova.constants.CpfConstantes.PRIMEIRO_DIGITO_VERIFICADOR;
+import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_NUMEROS;
+import static br.com.contmatic.prova.constants.CpfConstantes.SEGUNDO_DIGITO_VERIFICADOR;
+import static br.com.contmatic.prova.constants.CpfConstantes.TAMANHO_CPF;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_INVALIDO;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarPorRegex;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarSeESequencial;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
@@ -28,7 +29,9 @@ public final class CpfUtil {
 	private CpfUtil() {}
 	
 	public static void validarCpf(String cpf) {
-		validarNulo(cpf,"CPF não pode estar vazio!");
+		validarNulo(cpf,"CPF não pode estar nulo!");
+		
+		validarVazio(cpf, "Não pode estar vazio!");
 		
 		verificarCpfTemSoNumeros(cpf);
 		

@@ -10,7 +10,7 @@ public class Contato {
 	private String celular;
 	private String email;
 
-	public Contato(String celular,String email) {
+	public Contato(String celular, String email) {
 		setCelular(celular);
 		setEmail(email);
 	}
@@ -60,5 +60,6 @@ public class Contato {
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 }

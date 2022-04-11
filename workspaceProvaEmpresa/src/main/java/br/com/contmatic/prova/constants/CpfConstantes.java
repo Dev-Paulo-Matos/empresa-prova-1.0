@@ -1,6 +1,6 @@
 package br.com.contmatic.prova.constants;
 
-public final class CpfConstants {
+public final class CpfConstantes {
 
 	public static final int ITERACAO2 = 10;
 	public static final int ITERACAO1 = 9;
@@ -22,6 +22,6 @@ public final class CpfConstants {
 	public static final String CPF_INVALIDO = "Cpf invalido!";
 	public static final String CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL = "CPF invalido! CPF não pode ser um numero sequencial!";
 	
-	private CpfConstants() {}
+	private CpfConstantes() {}
 	
 }

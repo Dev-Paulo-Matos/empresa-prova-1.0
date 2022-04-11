@@ -1,24 +1,27 @@
 package br.com.contmatic.prova.empresa;
 
-import static br.com.contmatic.prova.constants.DepartamentoConstants.CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.CODIGO_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_COD_TAMANHO_FIXO;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NAO_PODE_TER_UM_NOME_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NOME_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.DEPARTAMENTO_NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.DepartamentoConstants.NOME_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.EmpresaConstants.EMPRESA_NAO_PODE_ESTAR_VAZIA;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.LISTA_DE_FUNCIONARIO_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.LISTA_DE_FUNCIONARIO_NAO_PODE_ESTAR_VAZIA;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.TAMANHO_MAX_LISTA_FUNCIONARIO;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.TAMANHO_MIN_LISTA_FUNCIONARIO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_COD_TAMANHO_FIXO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_NAO_PODE_TER_UM_NOME_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_NOME_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.NOME_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.NOME_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.EmpresaConstantes.EMPRESA_NAO_PODE_ESTAR_VAZIA;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.LISTA_DE_FUNCIONARIO_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.LISTA_DE_FUNCIONARIO_NAO_PODE_ESTAR_VAZIA;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.TAMANHO_MAX_LISTA_FUNCIONARIO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.TAMANHO_MIN_LISTA_FUNCIONARIO;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoList;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
 import java.util.List;
 import java.util.Objects;
@@ -45,9 +48,10 @@ public class Departamento extends Auditoria {
 	}
 
 	public void setNome(String nome) {
-		validarNulo(nome,NOME_NAO_PODE_ESTAR_VAZIO);
-		validarTamanhoString(nome, DEPARTAMENTO_NOME_TAMANHO_MINIMO, DEPARTAMENTO_NOME_TAMANHO_MAXIMO,DEPARTAMENTO_NAO_PODE_TER_UM_NOME_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES);
-		validarCaracteresLetrasEspacosEAcentos(nome,NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
+		validarNulo(nome, NOME_NAO_PODE_ESTAR_NULO);
+		validarVazio(nome, NOME_NAO_PODE_ESTAR_VAZIO);
+		validarTamanhoString(nome, DEPARTAMENTO_NOME_TAMANHO_MINIMO, DEPARTAMENTO_NOME_TAMANHO_MAXIMO, DEPARTAMENTO_NAO_PODE_TER_UM_NOME_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES);
+		validarCaracteresLetrasEspacosEAcentos(nome, NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nome = nome;
 	}
 
@@ -56,9 +60,10 @@ public class Departamento extends Auditoria {
 	}
 
 	public void setCodigo(String codigo) {
-		validarNulo(codigo,CODIGO_NAO_PODE_ESTAR_VAZIO);
+		validarNulo(codigo, CODIGO_NAO_PODE_ESTAR_NULO);
+		validarVazio(codigo, CODIGO_NAO_PODE_ESTAR_VAZIO);
 		validarTamanhoString(codigo, DEPARTAMENTO_COD_TAMANHO_FIXO, DEPARTAMENTO_COD_TAMANHO_FIXO, COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES);
-		validarCaracteresLetrasENumerosEAcentos(codigo,CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
+		validarCaracteresLetrasENumerosEAcentos(codigo, CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.codigo = codigo;
 	}
 
@@ -67,7 +72,7 @@ public class Departamento extends Auditoria {
 	}
 
 	public void setFuncionarios(List<Funcionario> list) {
-		validarNulo(list,LISTA_DE_FUNCIONARIO_NAO_PODE_ESTAR_VAZIA);
+		validarNulo(list, LISTA_DE_FUNCIONARIO_NAO_PODE_ESTAR_VAZIA);
 		validarTamanhoList(list, TAMANHO_MIN_LISTA_FUNCIONARIO, TAMANHO_MAX_LISTA_FUNCIONARIO, LISTA_DE_FUNCIONARIO_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIO);
 		this.funcionarios = list;
 	}
@@ -77,7 +82,7 @@ public class Departamento extends Auditoria {
 	}
 
 	public void setEmpresa(Empresa empresa) {
-		validarNulo(empresa,EMPRESA_NAO_PODE_ESTAR_VAZIA);
+		validarNulo(empresa, EMPRESA_NAO_PODE_ESTAR_VAZIA);
 		this.empresa = empresa;
 	}
 

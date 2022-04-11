@@ -1,7 +1,7 @@
 package br.com.contmatic.prova.util;
 
-import static br.com.contmatic.prova.constants.FuncionarioConstants.IDADE_MINIMA;
-import static br.com.contmatic.prova.constants.FuncionarioConstants.PESSOA_COM_IDADE_INSUFICIENTE;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.IDADE_MINIMA;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.PESSOA_COM_IDADE_INSUFICIENTE;
 import static org.joda.time.DateTime.now;
 import static org.joda.time.Years.yearsBetween;
 
