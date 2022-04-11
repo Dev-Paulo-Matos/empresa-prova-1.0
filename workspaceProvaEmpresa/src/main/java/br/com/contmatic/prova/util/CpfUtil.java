@@ -3,6 +3,8 @@ package br.com.contmatic.prova.util;
 import static br.com.contmatic.prova.constants.CpfConstantes.CONDICAO_10;
 import static br.com.contmatic.prova.constants.CpfConstantes.CONDICAO_11;
 import static br.com.contmatic.prova.constants.CpfConstantes.CPF_SEM_DIGITOS;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.CpfConstantes.ITERACAO1;
 import static br.com.contmatic.prova.constants.CpfConstantes.ITERACAO2;
 import static br.com.contmatic.prova.constants.CpfConstantes.PESO2;
@@ -23,24 +25,17 @@ import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
-
 public final class CpfUtil {
 
 	private CpfUtil() {}
 	
 	public static void validarCpf(String cpf) {
-		validarNulo(cpf,"CPF não pode estar nulo!");
-		
-		validarVazio(cpf, "Não pode estar vazio!");
-		
+		validarNulo(cpf, CPF_NAO_PODE_ESTAR_NULO);
+		validarVazio(cpf, CPF_NAO_PODE_ESTAR_VAZIO);
 		verificarCpfTemSoNumeros(cpf);
-		
 		cpfQuantidadeDeDigitos(cpf);
-		
-		validarSeESequencial(cpf, TAMANHO_CPF,CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL);
-		
-		validarDigitosVerificadores(cpf);
-				
+		validarSeESequencial(cpf, TAMANHO_CPF, CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL);
+		validarDigitosVerificadores(cpf);	
 	}
 	
 	private static void verificarCpfTemSoNumeros(String cpf) {
@@ -55,7 +50,7 @@ public final class CpfUtil {
 	}
 	
 	private static void  validarDigitosVerificadores(String cpf) {
-		String cpfSemDigitos = cpf.substring(PRIMEIRO_CARACTER,CPF_SEM_DIGITOS);
+		String cpfSemDigitos = cpf.substring(PRIMEIRO_CARACTER, CPF_SEM_DIGITOS);
 		
 		String digito1 = gerarDigito(cpfSemDigitos);
 		
@@ -78,9 +73,9 @@ public final class CpfUtil {
 	private static int obterCalculo(String cpf) {
 		int sm;
 		if(cpf.length() == PRIMEIRO_DIGITO_VERIFICADOR) {
-	    	 sm = calcularDigito(cpf,PESO_10,ITERACAO1);
+	    	 sm = calcularDigito(cpf, PESO_10, ITERACAO1);
 	     } else {
-	    	 sm = calcularDigito(cpf,PESO2,ITERACAO2);
+	    	 sm = calcularDigito(cpf, PESO2, ITERACAO2);
 	     }
 		return sm;
 	} 

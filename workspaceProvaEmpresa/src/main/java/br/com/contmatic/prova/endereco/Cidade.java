@@ -38,7 +38,7 @@ public class Cidade {
 	public void setNome(String nome) {
 		validarNulo(nome, NOME_NAO_PODE_ESTAR_NULO);
 		validarVazio(nome, NOME_NAO_PODE_ESTAR_VAZIO);
-		validarCaracteresLetrasEspacosEAcentos(nome,NOME_NAO_PODE_CONTER_NUMEROS_E_NEM_CARACTERES_ESPECIAIS);
+		validarCaracteresLetrasEspacosEAcentos(nome, NOME_NAO_PODE_CONTER_NUMEROS_E_NEM_CARACTERES_ESPECIAIS);
 		validarTamanhoString(nome, NOME_CIDADE_TAMANHO_MINIMO, NOME_CIDADE_TAMANHO_MAXIMO, NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES);
 		this.nome = nome;
 	}

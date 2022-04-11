@@ -181,7 +181,7 @@ public class EmpresaTest {
 	public void test_deve_settar_nome_fantasia_com_espacos_no_comeco_e_fim() {
 		String nomeFantasia = "                    Paulo Machado Fraga matos                   ";
 		empresaBefore.setNomeFantasia(nomeFantasia);
-		assertEquals(nomeFantasia,empresaBefore.getRazaoSocial());
+		assertEquals(nomeFantasia,empresaBefore.getNomeFantasia());
 	}
 	
 	@Test

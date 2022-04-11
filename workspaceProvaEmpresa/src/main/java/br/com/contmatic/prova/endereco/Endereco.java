@@ -61,7 +61,7 @@ public class Endereco {
 	}
 
 	public void setCidade(Cidade cidade) {
-		validarNulo(cidade ,CIDADE_NAO_PODE_ESTAR_NULO);
+		validarNulo(cidade, CIDADE_NAO_PODE_ESTAR_NULO);
 		this.cidade = cidade;
 	}
 

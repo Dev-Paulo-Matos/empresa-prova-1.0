@@ -26,13 +26,9 @@ public final class ContatoValidatorUtil {
 	
 	public static void validarCelular(String celular) {
 		validarNulo(celular, CELULAR_NAO_PODE_ESTAR_NULO);
-		
 		validarVazio(celular, CELULAR_NAO_PODE_ESTAR_VAZIO);
-		
 		validarDigitosNumerico(celular);
-		
 		validarTamanhoString(celular, QUANTIDADE_DE_DIGITOS_CELULAR, QUANTIDADE_DE_DIGITOS_CELULAR, CELULAR_COM_QUANTIDADE_DE_DIGITOS_INVALIDO);
-		
 		validarCelularBrasil(celular);
 		
 	}
@@ -46,8 +42,7 @@ public final class ContatoValidatorUtil {
 
 			if (!(Character.isDigit(c))) {
 				   throw new IllegalStateException(CELULAR_INVALIDO_NAO_PODE_CARACTERES_INVALIDOS);
-			}
-			   
+			}  
 		}
 	}
 	
@@ -62,9 +57,7 @@ public final class ContatoValidatorUtil {
 
 	public static void validarEmail(String email) {
 		validarNulo(email,EMAIL_NAO_PODE_SER_NULO);
-		
 		validarVazio(email, EMAIL_NAO_PODE_ESTAR_VAZIO);
-		
 		validarCaracteresEmail(email);
 	}
 	

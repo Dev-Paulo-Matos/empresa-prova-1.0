@@ -83,6 +83,18 @@ public class UfTest {
 		ufBefore.setNome("PAA");
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_nome_contendo_espacos() {
+		ufBefore.setNome("     ");
+	}
+
+	@Test
+	public void test_deve_settar_nome_contendo_espacos_no_comeco_e_fim() {
+		String nome2 = "  São Paulo   ";
+		ufBefore.setNome(nome2);
+		assertEquals(nome2, ufBefore.getNome());
+	}
+	
 	@Test
 	public void test_deve_settar_sigla_valida() {
 		ufBefore.setSigla(SIGLA);

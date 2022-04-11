@@ -21,6 +21,8 @@ public final class CpfConstantes {
 	public static final String CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS = "CPF não deve conter letras e nem caracteres especiais";
 	public static final String CPF_INVALIDO = "Cpf invalido!";
 	public static final String CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL = "CPF invalido! CPF não pode ser um numero sequencial!";
+	public static final String CPF_NAO_PODE_ESTAR_VAZIO = "Não pode estar vazio!";
+	public static final String CPF_NAO_PODE_ESTAR_NULO = "CPF não pode estar nulo!";
 	
 	private CpfConstantes() {}
 	
