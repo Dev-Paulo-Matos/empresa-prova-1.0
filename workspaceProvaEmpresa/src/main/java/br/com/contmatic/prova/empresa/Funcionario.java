@@ -2,6 +2,7 @@ package br.com.contmatic.prova.empresa;
 
 import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_NULO;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.EmpresaConstantes.EMPRESA_NAO_PODE_SER_NULA;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.ENDERECO_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_ESTAR_NULO;
@@ -10,45 +11,51 @@ import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_P
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_NULA;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.FUNCIONARIO_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_POSSUIR_ESPACOS;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_POSSUIR_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.util.CpfUtil.validarCpf;
-import static br.com.contmatic.prova.util.DataUtil.validarDataNascimento;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
+import java.util.List;
 import java.util.Objects;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
 import br.com.contmatic.prova.contato.Contato;
 import br.com.contmatic.prova.endereco.Endereco;
 
-
 public class Funcionario extends Auditoria {
 
 	private String cpf;
 
-	private String nomeCompleto;
+	private Empresa empresa;
 	
-	private DateTime dataNascimento;
+	private LocalDate dataNascimento;
 
 	private String cargo;
 
-	private Contato contato;
+	private List<Contato> contatos;
 	
 	private Departamento departamento;
 	
 	private Endereco endereco;
 	
-	public Funcionario(String cpf) {
+	private String nomeCompleto;
+	
+	public Funcionario(String cpf,Empresa empresa) {
 		setCpf(cpf);
+		setEmpresa(empresa);
 	}
+	
 	
 	public String getNomeCompleto() {
 		return nomeCompleto;
@@ -57,6 +64,7 @@ public class Funcionario extends Auditoria {
 	public void setNomeCompleto(String nomeCompleto) {
 		validarNulo(nomeCompleto, NOME_NAO_PODE_ESTAR_NULO);
 		validarVazio(nomeCompleto, NOME_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(nomeCompleto, NOME_NAO_PODE_POSSUIR_ESPACOS_INVALIDOS);
 		validarTamanhoString(nomeCompleto, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO, NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES);
 		validarCaracteresLetrasEspacosEAcentos(nomeCompleto, NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nomeCompleto = nomeCompleto;
@@ -71,13 +79,12 @@ public class Funcionario extends Auditoria {
 		this.cpf = cpf;
 	}
 	
-	public DateTime getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(DateTime dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		validarNulo(dataNascimento, DATA_NULA);
-		validarDataNascimento(dataNascimento);
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -88,18 +95,19 @@ public class Funcionario extends Auditoria {
 	public void setCargo(String cargo) {
 		validarNulo(cargo, CARGO_NAO_PODE_ESTAR_NULO);
 		validarVazio(cargo, CARGO_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(cargo, CARGO_NAO_PODE_POSSUIR_ESPACOS);
 		validarTamanhoString(cargo, FUNCIONARIO_NOME_TAMANHO_MINIMO, FUNCIONARIO_NOME_TAMANHO_MAXIMO, CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES);
 		validarCaracteresLetrasEspacosEAcentos(cargo, CARGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.cargo = cargo;
 	}
 	
-	public Contato getContato() {
-		return contato;
+	public List<Contato> getContato() {
+		return contatos;
 	}
 
-	public void setContato(Contato contato) {
+	public void setContato(List<Contato> contato) {
 		validarNulo(contato, CONTATO_NULO);
-		this.contato = contato;
+		this.contatos = contato;
 	}
 
 	public Departamento getDepartamento() {
@@ -120,42 +128,33 @@ public class Funcionario extends Auditoria {
 		this.endereco = endereco;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cpf);
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		validarNulo(empresa, EMPRESA_NAO_PODE_SER_NULA);
+		this.empresa = empresa;
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Funcionario other = (Funcionario) obj;
-		return  Objects.equals(cpf, other.cpf);
+	public int hashCode() {
+		return Objects.hash(cpf, empresa);
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Funcionario [nomeCompleto=");
-		builder.append(nomeCompleto);
-		builder.append(", cpf=");
-		builder.append(cpf);
-		builder.append(", dataNascimento=");
-		builder.append(dataNascimento);
-		builder.append(", cargo=");
-		builder.append(cargo);
-		builder.append(", contato=");
-		builder.append(contato);
-		builder.append(", departamento=");
-		builder.append(departamento);
-		builder.append(", endereco=");
-		builder.append(endereco);
-		builder.append("]");
-		return builder.toString();
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Funcionario other = (Funcionario) obj;
+		return Objects.equals(cpf, other.cpf) && Objects.equals(empresa, other.empresa);
 	}
 	
 }

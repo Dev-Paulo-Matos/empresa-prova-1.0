@@ -7,6 +7,7 @@ public final class EmpresaConstantes {
 	
 	//MENSAGENS
 	
+	public static final String EMPRESA_NAO_PODE_SER_NULA = "Empresa não pode ser nula!";
 	public static final String EMPRESA_NAO_PODE_ESTAR_VAZIA = "Empresa não pode estar vazia";
 	public static final String RAZAO_SOCIAL_NAO_PODE_ESTAR_NULO = "Razão social não pode estar nulo!";
 	public static final String RAZAO_SOCIAL_NAO_PODE_CONTER_CARACTERES_ESPECIAIS = "Razao Social não pode conter caracteres especiais!";

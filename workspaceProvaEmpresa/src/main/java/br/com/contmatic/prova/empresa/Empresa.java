@@ -32,7 +32,6 @@ import java.util.Objects;
 import br.com.contmatic.prova.auditoria.Auditoria;
 import br.com.contmatic.prova.contato.Contato;
 import br.com.contmatic.prova.endereco.Endereco;
-import br.com.contmatic.prova.util.ValidatorUtil;
 
 public class Empresa extends Auditoria {
 
@@ -40,7 +39,7 @@ public class Empresa extends Auditoria {
 	
 	private String razaoSocial;
 	
-	private Contato contato;
+	private List<Contato> contatos;
 	
 	private List<Departamento> departamentos;
 	
@@ -94,19 +93,19 @@ public class Empresa extends Auditoria {
 
 	public void setNomeFantasia(String nomeFantasia) {
 		validarNulo(nomeFantasia, NOME_FANTASIA_NAO_PODE_ESTAR_NULO);
-		ValidatorUtil.validarVazio(nomeFantasia, NOME_FANTASIA_NAO_PODE_ESTAR_VAZIO);
+		validarVazio(nomeFantasia, NOME_FANTASIA_NAO_PODE_ESTAR_VAZIO);
 		validarTamanhoString(nomeFantasia, RAZAO_SOCIAL_NOME_TAMANHO_MINIMO, RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO, NOME_FANTASIA_NAO_PODE_CONTER_MENOS_QUE_5_E_MAIS_QUE_60_CARACTERES);
 		validarCaracteresLetrasENumerosEEspacosEAcentos(nomeFantasia, NOME_FANTASIA_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nomeFantasia = nomeFantasia;
 	}
 
-	public Contato getContato() {
-		return contato;
+	public List<Contato> getContato() {
+		return contatos;
 	}
 
-	public void setContato(Contato contato) {
+	public void setContato(List<Contato> contato) {
 		validarNulo(contato, CONTATO_NAO_PODE_ESTAR_VAZIO);
-		this.contato = contato;
+		this.contatos = contato;
 	}
 	
 	public List<Endereco> getEnderecos() {
@@ -126,8 +125,9 @@ public class Empresa extends Auditoria {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {			
 			return true;
+		}
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
@@ -143,8 +143,8 @@ public class Empresa extends Auditoria {
 		builder.append(cnpj);
 		builder.append(", razaoSocial=");
 		builder.append(razaoSocial);
-		builder.append(", contato=");
-		builder.append(contato);
+		builder.append(", contatos=");
+		builder.append(contatos);
 		builder.append(", departamentos=");
 		builder.append(departamentos);
 		builder.append(", enderecos=");

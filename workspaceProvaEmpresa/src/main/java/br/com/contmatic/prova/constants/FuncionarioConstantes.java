@@ -23,6 +23,9 @@ public final class FuncionarioConstantes {
 	public static final String LISTA_DE_FUNCIONARIO_NAO_PODE_ESTAR_VAZIA = "Lista de funcionario não pode estar vazia";
 	public static final String LISTA_DE_FUNCIONARIO_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIO = "Lista de Funcionario deve possuir de 2 a 100 Funcionario!";
 	public static final String CARGO_NAO_PODE_ESTAR_NULO = "Cargo não pode estar nulo!";
+	public static final String CARGO_NAO_PODE_POSSUIR_ESPACOS = "Cargo não pode possuir espacos";
+	public static final String NOME_NAO_PODE_POSSUIR_ESPACOS_INVALIDOS = "Nome não pode possuir espaços invalidos!";
+
 
 	private FuncionarioConstantes() {}
 

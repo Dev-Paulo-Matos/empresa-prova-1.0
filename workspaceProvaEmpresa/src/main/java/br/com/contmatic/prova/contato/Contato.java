@@ -1,26 +1,27 @@
 package br.com.contmatic.prova.contato;
 
-import static br.com.contmatic.prova.util.ContatoValidatorUtil.validarCelular;
 import static br.com.contmatic.prova.util.ContatoValidatorUtil.validarEmail;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 
 import java.util.Objects;
 
 public class Contato {
 	
-	private String celular;
+	private Celular celular;
+	
 	private String email;
 
-	public Contato(String celular, String email) {
+	public Contato(Celular celular, String email) {
 		setCelular(celular);
 		setEmail(email);
 	}
 	
-	public String getCelular() {
+	public Celular getCelular() {
 		return celular;
 	}
 
-	public void setCelular(String celular) {
-		validarCelular(celular);
+	public void setCelular(Celular celular) {
+		validarNulo(celular, "Celular não pode ser nulo");
 		this.celular = celular;
 	}
 
@@ -40,12 +41,15 @@ public class Contato {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {			
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {			
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {			
 			return false;
+		}
 		Contato other = (Contato) obj;
 		return Objects.equals(celular, other.celular);
 	}

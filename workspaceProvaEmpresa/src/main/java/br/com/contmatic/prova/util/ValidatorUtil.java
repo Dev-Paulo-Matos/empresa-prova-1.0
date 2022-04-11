@@ -21,7 +21,7 @@ public final class ValidatorUtil {
 	private ValidatorUtil() {}
 	
 	public static void validarTamanhoString(String texto, int min, int max, String mensagem) {
-		if (texto.trim().length() < min || texto.trim().length() > max) {
+		if (texto.length() < min || texto.trim().length() > max) {
 			throw new IllegalStateException(mensagem);
 		}
 	}
@@ -57,7 +57,13 @@ public final class ValidatorUtil {
 	}
 	
 	public static void validarVazio(String string, String mensagem) {
-		if(string.isBlank()) {
+		if(string.isEmpty()) {
+			throw new IllegalStateException(mensagem);
+		}
+	}
+	
+	public static void validarEspacos(String string, String mensagem) {
+		if(string.trim().equals(string)) {
 			throw new IllegalStateException(mensagem);
 		}
 	}
@@ -65,7 +71,7 @@ public final class ValidatorUtil {
 	public static void validarPorRegex(String campo, String regex, String mensagem) {
 		validarNulo(regex,REGEX_NULA);
 	    Pattern pattern = compile(regex, CASE_INSENSITIVE);
-	    Matcher matcher = pattern.matcher(campo.trim());
+	    Matcher matcher = pattern.matcher(campo);
 	    boolean matches = matcher.matches();
 	    if (!matches) {
 	        throw new IllegalStateException(mensagem);

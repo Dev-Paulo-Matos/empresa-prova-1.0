@@ -1,8 +1,12 @@
 package br.com.contmatic.prova.util;
 
-import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_SEM_DIGITOS_VERIFICADORES;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_POSSUI_QUANTIDADE_INVALIDA_DE_DIGITOS;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_SEM_DIGITOS_VERIFICADORES;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CONDICAO_0;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CONDICAO_1;
 import static br.com.contmatic.prova.constants.CnpjConstantes.ITERACAO;
@@ -16,10 +20,6 @@ import static br.com.contmatic.prova.constants.CnpjConstantes.PRIMEIRO_CARACTER;
 import static br.com.contmatic.prova.constants.CnpjConstantes.PRIMEIRO_DIGITO_VERIFICADOR_CNPJ;
 import static br.com.contmatic.prova.constants.CnpjConstantes.SEGUNDO_DIGITO_VERIFICADOR_CNPJ;
 import static br.com.contmatic.prova.constants.CnpjConstantes.TAMANHO_CNPJ;
-import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO;
-import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL;
-import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_POSSUI_QUANTIDADE_INVALIDA_DE_DIGITOS;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 import static java.lang.Character.isDigit;
@@ -42,10 +42,8 @@ public final class CnpjUtil {
 	}
 	
 	private static void verificarSeCnpjTemSoNumero(String cnpj) {
-		String cnpjLimpo = cnpj.trim();
-		
-		for (int i = 0; i < cnpjLimpo.length(); i++) {	
-			if (!(isDigit(cnpjLimpo.charAt(i)))) {
+		for (int i = 0; i < cnpj.length(); i++) {	
+			if (!(isDigit(cnpj.charAt(i)))) {
 				throw new IllegalStateException(CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
 			}
 		}
@@ -55,24 +53,19 @@ public final class CnpjUtil {
 		if ((valueOf(cnpjSoNumero.charAt(PRIMEIRO_CARACTER)).repeat(TAMANHO_CNPJ)).equals(cnpjSoNumero)) {
 			throw new IllegalStateException(CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL);
 		}
-		
 	}
 	
 	private static void cnpjQuantidadeDeDigitos(String cnpjSoNumero) {
-		if (cnpjSoNumero.trim().length() != TAMANHO_CNPJ) {
+		if (cnpjSoNumero.length() != TAMANHO_CNPJ) {
 			throw new IllegalStateException(CNPJ_POSSUI_QUANTIDADE_INVALIDA_DE_DIGITOS);
 		}
-		
 	}
 	
 	private static void validarDigitosVerificadores(String cnpj) {
-		
-		String cnpjLimpo = cnpj.trim();
-		
-		String cnpjSemDigitos = cnpjLimpo.substring(PRIMEIRO_CARACTER,CNPJ_SEM_DIGITOS_VERIFICADORES);
+		String cnpjSemDigitos = cnpj.substring(PRIMEIRO_CARACTER,CNPJ_SEM_DIGITOS_VERIFICADORES);
 		char digito1 = gerarDigito(cnpjSemDigitos);
-		char digito2 = gerarDigito(cnpjLimpo + digito1);
-		if(digito1 != cnpjLimpo.charAt(PRIMEIRO_DIGITO_VERIFICADOR_CNPJ) || digito2 != cnpjLimpo.charAt(SEGUNDO_DIGITO_VERIFICADOR_CNPJ)) {
+		char digito2 = gerarDigito(cnpj + digito1);
+		if(digito1 != cnpj.charAt(PRIMEIRO_DIGITO_VERIFICADOR_CNPJ) || digito2 != cnpj.charAt(SEGUNDO_DIGITO_VERIFICADOR_CNPJ)) {
 			throw new IllegalStateException(CNPJ_INVALIDO);
 		}
 	}
@@ -105,27 +98,20 @@ public final class CnpjUtil {
 		if ((r == CONDICAO_0) || (r == CONDICAO_1)) {
 			digito = '0';
 		} else {
-	    	digito = String.valueOf(PESO_11-r).charAt(PRIMEIRO_CARACTER);
+	    	digito = valueOf(PESO_11-r).charAt(PRIMEIRO_CARACTER);
 	    }
 		return digito;
 	}
 
 	private static int calcularDigito(String cnpj,int sm, int iteracao) {
-		int i;
-		int num;
 		int peso = PESO_2;
-		
-		for (i=iteracao; i>=0; i--) {
-			
-		    num = parseInt(valueOf(cnpj.charAt(i)));
-		    
+		for (int i=iteracao; i>=0; i--) {
+		    int num = parseInt(valueOf(cnpj.charAt(i)));
 		    sm = sm + (num * peso);
-		    
 		    peso = peso + PESO_1;
-		    
-		    if (peso == PESO_10)
-		    	
-		       peso = PESO_2;
+		    if (peso == PESO_10) {		    	
+		    	peso = PESO_2;
+		    }
 		}
 		return sm;
 	}

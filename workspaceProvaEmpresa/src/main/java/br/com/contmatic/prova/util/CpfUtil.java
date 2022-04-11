@@ -51,11 +51,8 @@ public final class CpfUtil {
 	
 	private static void  validarDigitosVerificadores(String cpf) {
 		String cpfSemDigitos = cpf.substring(PRIMEIRO_CARACTER, CPF_SEM_DIGITOS);
-		
 		String digito1 = gerarDigito(cpfSemDigitos);
-		
 		String digito2 = gerarDigito(cpfSemDigitos + digito1);
-
 		if(!(digito1.equals(valueOf(cpf.charAt(PRIMEIRO_DIGITO_VERIFICADOR))) && digito2.equals(valueOf(cpf.charAt(SEGUNDO_DIGITO_VERIFICADOR))))) {
 			throw new IllegalStateException(CPF_INVALIDO);
 		}

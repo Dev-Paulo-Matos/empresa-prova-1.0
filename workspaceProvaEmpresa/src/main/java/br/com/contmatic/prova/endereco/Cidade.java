@@ -48,7 +48,7 @@ public class Cidade {
 	}
 
 	public void setCodigoIbge(Integer codigoIbge) {
-		validarNulo(codigoIbge,CODIGO_IBGE_NAO_PODE_ESTAR_NULO);
+		validarNulo(codigoIbge, CODIGO_IBGE_NAO_PODE_ESTAR_NULO);
 		validarNumero(codigoIbge, NUMERO_TAMANHO_MINIMO, NUMERO_TAMANHO_MAXIMO, CODIGO_IBGE_DEVE_POSSUIR_5_DIGITOS);
 		this.codigoIbge = codigoIbge;
 	}

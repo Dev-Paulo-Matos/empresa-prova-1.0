@@ -98,6 +98,16 @@ public class FuncionarioTest {
 		new Funcionario("");
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_espaco() {
+		new Funcionario("       ");
+	}
+	
+	@Test
+	public void test_deve_criar_funcionario_com_cpf_contendo_espaco_comeco_e_fim() {
+		new Funcionario("   41236207874    ");
+	}
+	
 	@Test
 	public void testA_deve_criar_um_funcionario_com_o_nome_valido() {
 		Funcionario funcionario = new Funcionario(CPF);
