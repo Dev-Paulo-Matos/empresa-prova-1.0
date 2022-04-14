@@ -4,8 +4,8 @@ public final class CnpjConstantes {
 	
 	public static final int PESO_1 = 1;
 	public static final int PESO_11 = 11;
-	public static final int CONDICAO_1 = 1;
-	public static final int CONDICAO_0 = 0;
+	public static final int CONDICAO_11 = 1;
+	public static final int CONDICAO_10 = 0;
 	public static final int PESO_10 = 10;
 	public static final int MODULACAO_CALCULAR = 11;
 	public static final int ITERACAO_12 = 12;
@@ -25,7 +25,7 @@ public final class CnpjConstantes {
 	public static final String CNPJ_INVALIDO = "Cnpj invalido!";
 	public static final String CNPJ_NAO_PODE_ESTAR_NULO = "CNPJ não pode estar Nulo!";
 	public static final String CNPJ_NAO_PODE_ESTAR_VAZIO = "CNPJ não pode estar vazio!";
-	
+	public static final String CNPJ_POSSUI_ESPACOS_INVALIDOS = "Cnpj possui espaços invalidos!";
 	private CnpjConstantes() {}
 	
 }

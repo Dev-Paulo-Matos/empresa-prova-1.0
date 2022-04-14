@@ -18,6 +18,8 @@ public final class EmpresaConstantes {
 	public static final String NOME_FANTASIA_NAO_PODE_CONTER_MENOS_QUE_5_E_MAIS_QUE_60_CARACTERES = "Nome Fantasia não pode conter menos que 5 e mais que 60 caracteres";
 	public static final String NOME_FANTASIA_NAO_PODE_CONTER_CARACTERES_ESPECIAIS = "Nome Fantasia não pode conter caracteres especiais!";
 	public static final String RAZAO_SOCIAL_NAO_PODE_ESTAR_VAZIA = "Razão Social não pode estar vazia!";
+	public static final String NOME_FANTASIA_CONTEM_ESPACOS_INVALIDOS = "Nome fantasia contem espacos invalidos!";
+	public static final String RAZAO_SOCIAL_POSSUI_ESPACOS_INVALIDOS = "Razão social possui espacos invalidos!";
 
 	private EmpresaConstantes() {}
 	

@@ -4,10 +4,12 @@ package br.com.contmatic.prova.constants;
 public final class ContatoConstantes {
 	
 	public static final String DDI_BRASIL = "55";	
-	public static final int CONDICAO_EMAIL_TAMANHO = 3;
+	public static final int EMAIL_TAMANHO_MIN = 5;
+	public static final int EMAIL_TAMANHO_MAX = 60;
 	public static final int QUANTIDADE_DE_DIGITOS_CELULAR = 13;
 	public static final int PRIMEIRO_CARACTER = 0;
-	
+	public static final int CONTATO_TAMANHO_MINIMO_LISTA = 1;
+	public static final int CONTATO_TAMANHO_MAXIMO_LISTA = 5;
 	//MENSAGENS
 	
 	public static final String CONTATO_NULO = "Contato invalido!";
@@ -20,8 +22,10 @@ public final class ContatoConstantes {
 	public static final String EMAIL_NAO_PODE_ESTAR_VAZIO = "Email não pode estar vazio!";
 	public static final String CELULAR_NAO_PODE_ESTAR_NULO = "Celular não pode estar nulo!";
 	public static final String CELULAR_NAO_PODE_ESTAR_VAZIO = "Celular não pode estar vazio!";
-
-	
+	public static final String EMAIL_INVALIDO = "Email invalido!";
+	public static final String EMAIL_NAO_PODE_CONTER_ESPACOS = "Email não pode conter espacos!";
+	public static final String A_LISTA_DE_CONTATO_DEVE_POSSUIR_ENTRE_1_A_20_CONTATO = "A lista de contato deve possuir entre 1 a 20 contato!";
+	public static final String EMAIL_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60 = "Email não pode ser menor que 5 caracteres e maior de 60";
 	private ContatoConstantes() {}
 	
 }

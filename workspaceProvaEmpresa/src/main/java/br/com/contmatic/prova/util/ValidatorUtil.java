@@ -7,6 +7,7 @@ import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_LETR
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_LETRAS_E_ESPACOS_E_NUMEROS_E_ACENTOS;
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_LETRAS_E_NUMEROS_E_ACENTOS;
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_NUMEROS;
+import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_EMAIL;
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_NULA;
 import static java.lang.String.valueOf;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
@@ -94,6 +95,10 @@ public final class ValidatorUtil {
 		if(numero > max || numero < min) {
 			throw new IllegalStateException(mensagem);
 		}
+	}
+
+	public static void validarCaracteresEmail(String email, String mensagem) {
+		validarPorRegex(email, REGEX_EMAIL, mensagem);
 	}
 
 }

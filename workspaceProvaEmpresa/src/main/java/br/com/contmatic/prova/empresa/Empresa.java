@@ -1,10 +1,20 @@
 package br.com.contmatic.prova.empresa;
 
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_POSSUI_ESPACOS_INVALIDOS;
+import static br.com.contmatic.prova.constants.CnpjConstantes.TAMANHO_CNPJ;
 import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_TAMANHO_MAXIMO_LISTA;
+import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_TAMANHO_MINIMO_LISTA;
+import static br.com.contmatic.prova.constants.ContatoConstantes.A_LISTA_DE_CONTATO_DEVE_POSSUIR_ENTRE_1_A_20_CONTATO;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.LISTA_DEVE_POSSUIR_DE_2_A_20_DEPARTAMENTOS;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.LISTA_DE_DEPARTAMENTO_NAO_PODE_ESTAR_VAZIA;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.TAMANHO_MAX_LISTA_DEPARTAMENTO;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.TAMANHO_MIN_LISTA_DEPARTAMENTO;
+import static br.com.contmatic.prova.constants.EmpresaConstantes.NOME_FANTASIA_CONTEM_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.EmpresaConstantes.NOME_FANTASIA_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.EmpresaConstantes.NOME_FANTASIA_NAO_PODE_CONTER_MENOS_QUE_5_E_MAIS_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.constants.EmpresaConstantes.NOME_FANTASIA_NAO_PODE_ESTAR_NULO;
@@ -15,13 +25,17 @@ import static br.com.contmatic.prova.constants.EmpresaConstantes.RAZAO_SOCIAL_NA
 import static br.com.contmatic.prova.constants.EmpresaConstantes.RAZAO_SOCIAL_NAO_PODE_ESTAR_VAZIA;
 import static br.com.contmatic.prova.constants.EmpresaConstantes.RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.EmpresaConstantes.RAZAO_SOCIAL_NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.EmpresaConstantes.RAZAO_SOCIAL_POSSUI_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.ENDERECO_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LISTA_DEVE_POSSUIR_DE_1_A_20_ENDERECOS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TAMANHO_MAX_ENDERECO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TAMANHO_MIN_ENDERECO;
 import static br.com.contmatic.prova.util.CnpjUtil.validarCnpj;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresNumeros;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarSeESequencial;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoList;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
@@ -61,6 +75,11 @@ public class Empresa extends Auditoria {
 	}
 
 	public void setCnpj(String cnpj) {
+		validarNulo(cnpj, CNPJ_NAO_PODE_ESTAR_NULO);
+		validarVazio(cnpj, CNPJ_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(cnpj, CNPJ_POSSUI_ESPACOS_INVALIDOS);
+		validarCaracteresNumeros(cnpj, CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
+		validarSeESequencial(cnpj, TAMANHO_CNPJ, CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL);
 		validarCnpj(cnpj);
 		this.cnpj = cnpj;
 	}
@@ -72,7 +91,8 @@ public class Empresa extends Auditoria {
 	public void setRazaoSocial(String razaoSocial) {
 		validarNulo(razaoSocial, RAZAO_SOCIAL_NAO_PODE_ESTAR_NULO);
 		validarVazio(razaoSocial, RAZAO_SOCIAL_NAO_PODE_ESTAR_VAZIA);
-		validarTamanhoString(razaoSocial, RAZAO_SOCIAL_NOME_TAMANHO_MINIMO, RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO,RAZAO_SOCIAL_NAO_PODE_CONTER_MENOS_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES);
+		validarEspacos(razaoSocial, RAZAO_SOCIAL_POSSUI_ESPACOS_INVALIDOS);
+		validarTamanhoString(razaoSocial, RAZAO_SOCIAL_NOME_TAMANHO_MINIMO, RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO, RAZAO_SOCIAL_NAO_PODE_CONTER_MENOS_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES);
 		validarCaracteresLetrasENumerosEEspacosEAcentos(razaoSocial, RAZAO_SOCIAL_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.razaoSocial = razaoSocial;
 	}
@@ -94,18 +114,20 @@ public class Empresa extends Auditoria {
 	public void setNomeFantasia(String nomeFantasia) {
 		validarNulo(nomeFantasia, NOME_FANTASIA_NAO_PODE_ESTAR_NULO);
 		validarVazio(nomeFantasia, NOME_FANTASIA_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(nomeFantasia, NOME_FANTASIA_CONTEM_ESPACOS_INVALIDOS);
 		validarTamanhoString(nomeFantasia, RAZAO_SOCIAL_NOME_TAMANHO_MINIMO, RAZAO_SOCIAL_NOME_TAMANHO_MAXIMO, NOME_FANTASIA_NAO_PODE_CONTER_MENOS_QUE_5_E_MAIS_QUE_60_CARACTERES);
 		validarCaracteresLetrasENumerosEEspacosEAcentos(nomeFantasia, NOME_FANTASIA_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nomeFantasia = nomeFantasia;
 	}
 
-	public List<Contato> getContato() {
+	public List<Contato> getContatos() {
 		return contatos;
 	}
 
-	public void setContato(List<Contato> contato) {
-		validarNulo(contato, CONTATO_NAO_PODE_ESTAR_VAZIO);
-		this.contatos = contato;
+	public void setContatos(List<Contato> contatos) {
+		validarNulo(contatos, CONTATO_NAO_PODE_ESTAR_VAZIO);
+		validarTamanhoList(contatos, CONTATO_TAMANHO_MINIMO_LISTA, CONTATO_TAMANHO_MAXIMO_LISTA, A_LISTA_DE_CONTATO_DEVE_POSSUIR_ENTRE_1_A_20_CONTATO);
+		this.contatos = contatos;
 	}
 	
 	public List<Endereco> getEnderecos() {
@@ -128,10 +150,12 @@ public class Empresa extends Auditoria {
 		if (this == obj) {			
 			return true;
 		}
-		if (obj == null)
+		if (obj == null) {			
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {			
 			return false;
+		}
 		Empresa other = (Empresa) obj;
 		return Objects.equals(cnpj, other.cnpj);
 	}

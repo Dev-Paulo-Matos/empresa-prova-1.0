@@ -23,7 +23,10 @@ public final class DepartamentoConstantes {
 	public static final String CODIGO_NAO_PODE_ESTAR_VAZIO = "Codigo não pode estar vazio!";
 	public static final String CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS = "Codigo não pode conter caracteres especiais!";
 	public static final String LISTA_DE_DEPARTAMENTO_NAO_PODE_ESTAR_VAZIA = "Lista de Departamento não pode estar vazia!";
+	public static final String CODIGO_POSSUI_ESPACOS_INVALIDOS = "Codigo possui espaços invalidos!";
+	public static final String NOME_CONTEM_ESPACOS_INVALIDOS = "Nome contem espaços invalidos!";
 
+	
 	private DepartamentoConstantes() {}
 	
 }

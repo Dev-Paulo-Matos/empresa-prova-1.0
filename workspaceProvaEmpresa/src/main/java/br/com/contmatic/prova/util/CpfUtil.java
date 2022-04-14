@@ -2,26 +2,16 @@ package br.com.contmatic.prova.util;
 
 import static br.com.contmatic.prova.constants.CpfConstantes.CONDICAO_10;
 import static br.com.contmatic.prova.constants.CpfConstantes.CONDICAO_11;
+import static br.com.contmatic.prova.constants.CpfConstantes.CPF_INVALIDO;
 import static br.com.contmatic.prova.constants.CpfConstantes.CPF_SEM_DIGITOS;
-import static br.com.contmatic.prova.constants.CpfConstantes.CPF_NAO_PODE_ESTAR_NULO;
-import static br.com.contmatic.prova.constants.CpfConstantes.CPF_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.CpfConstantes.ITERACAO1;
 import static br.com.contmatic.prova.constants.CpfConstantes.ITERACAO2;
-import static br.com.contmatic.prova.constants.CpfConstantes.PESO2;
 import static br.com.contmatic.prova.constants.CpfConstantes.PESO_1;
 import static br.com.contmatic.prova.constants.CpfConstantes.PESO_10;
+import static br.com.contmatic.prova.constants.CpfConstantes.PESO_11;
 import static br.com.contmatic.prova.constants.CpfConstantes.PRIMEIRO_CARACTER;
 import static br.com.contmatic.prova.constants.CpfConstantes.PRIMEIRO_DIGITO_VERIFICADOR;
-import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_NUMEROS;
 import static br.com.contmatic.prova.constants.CpfConstantes.SEGUNDO_DIGITO_VERIFICADOR;
-import static br.com.contmatic.prova.constants.CpfConstantes.TAMANHO_CPF;
-import static br.com.contmatic.prova.constants.CpfConstantes.CPF_INVALIDO;
-import static br.com.contmatic.prova.constants.CpfConstantes.CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL;
-import static br.com.contmatic.prova.constants.CpfConstantes.CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarPorRegex;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarSeESequencial;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
@@ -30,23 +20,7 @@ public final class CpfUtil {
 	private CpfUtil() {}
 	
 	public static void validarCpf(String cpf) {
-		validarNulo(cpf, CPF_NAO_PODE_ESTAR_NULO);
-		validarVazio(cpf, CPF_NAO_PODE_ESTAR_VAZIO);
-		verificarCpfTemSoNumeros(cpf);
-		cpfQuantidadeDeDigitos(cpf);
-		validarSeESequencial(cpf, TAMANHO_CPF, CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL);
 		validarDigitosVerificadores(cpf);	
-	}
-	
-	private static void verificarCpfTemSoNumeros(String cpf) {
-		validarPorRegex(cpf, REGEX_ACEITA_NUMEROS, CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
-		
-	}
-
-	private static void cpfQuantidadeDeDigitos(String cpf) {
-		if(cpf.length() != TAMANHO_CPF) {
-			throw new IllegalStateException(CPF_INVALIDO);
-		}
 	}
 	
 	private static void  validarDigitosVerificadores(String cpf) {
@@ -56,64 +30,48 @@ public final class CpfUtil {
 		if(!(digito1.equals(valueOf(cpf.charAt(PRIMEIRO_DIGITO_VERIFICADOR))) && digito2.equals(valueOf(cpf.charAt(SEGUNDO_DIGITO_VERIFICADOR))))) {
 			throw new IllegalStateException(CPF_INVALIDO);
 		}
-		
 	}
 	
 	private static String gerarDigito(String cpf) {
-	     int sm;
-	     
-	     sm = obterCalculo(cpf);
-	     
-         return valueOf(digitoFinal(sm)); 
+	     int soma = obterCalculo(cpf);
+         return valueOf(digitoFinal(soma)); 
 	}
 
 	private static int obterCalculo(String cpf) {
-		int sm;
+		int soma;
 		if(cpf.length() == PRIMEIRO_DIGITO_VERIFICADOR) {
-	    	 sm = calcularDigito(cpf, PESO_10, ITERACAO1);
+	    	 soma = calcularDigito(cpf, PESO_10, ITERACAO1);
 	     } else {
-	    	 sm = calcularDigito(cpf, PESO2, ITERACAO2);
+	    	 soma = calcularDigito(cpf, PESO_11, ITERACAO2);
 	     }
-		return sm;
+		return soma;
 	} 
 
-	private static char digitoFinal(int sm) {
+	private static char digitoFinal(int soma) {
 		char digito;
-		
-		int r = CONDICAO_11 - (sm % CONDICAO_11);
-		
-         digito = obterDigito(r);
-         
+		int calculoDigito = CONDICAO_11 - (soma % CONDICAO_11);
+        digito = obterDigito(calculoDigito);
 		return digito;
 	}
 
-	private static char obterDigito(int r) {
+	private static char obterDigito(int calculoDigito) {
 		char digito;
-		
-		if ((r == CONDICAO_10) || (r == CONDICAO_11)) {
+		if ((calculoDigito == CONDICAO_10) || (calculoDigito == CONDICAO_11)) {
               digito = '0';
          } else {
-        	 digito = valueOf(r).charAt(PRIMEIRO_CARACTER);
+        	 digito = valueOf(calculoDigito).charAt(PRIMEIRO_CARACTER);
          }
 		return digito;
 	}
 
 	private static int calcularDigito(String cpf,int peso,int iteracao) {
-		int sm = 0;
-		
-		int i;
-		
-		int num;
-		 
-		 for(i=0; i<iteracao; i++) {
-			 num = parseInt(valueOf(cpf.charAt(i)));
-			 
-		     sm = sm + (num * peso);
-		     
-		     peso = peso - PESO_1;
+		int soma = 0;
+		 for(int i=0; i<iteracao; i++) {
+			 int num = parseInt(valueOf(cpf.charAt(i))); 
+		     soma += (num * peso);
+		     peso -= PESO_1;
 		 }
-		return sm;
+		return soma;
 	}
-	
 }
 	

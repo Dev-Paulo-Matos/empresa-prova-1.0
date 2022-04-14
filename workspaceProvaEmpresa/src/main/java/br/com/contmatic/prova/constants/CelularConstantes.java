@@ -24,6 +24,7 @@ public final class CelularConstantes {
 	public static final String DD_DEVE_CONTER_APENAS_NUMEROS = "DD deve conter apenas numeros!";
 	public static final String TELEFONE_DEVE_POSSUIR_DE_7_A_9_CARACTERES = "Telefone deve possuir de 7 a 9 caracteres";
 	public static final String TELEFONE_DEVE_POSSUIR_APENAS_NUMEROS = "Telefone deve possuir apenas numeros!";
+	public static final String CELULAR_NAO_PODE_SER_NULO = "Celular não pode ser nulo";
 
 	private CelularConstantes() {}
 	

@@ -1,19 +1,29 @@
 package br.com.contmatic.prova.contato;
 
-import static br.com.contmatic.prova.util.ContatoValidatorUtil.validarEmail;
+import static br.com.contmatic.prova.constants.CelularConstantes.CELULAR_NAO_PODE_SER_NULO;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_INVALIDO;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_CONTER_ESPACOS;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_SER_NULO;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_TAMANHO_MAX;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_TAMANHO_MIN;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresEmail;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
 import java.util.Objects;
 
 public class Contato {
-	
+
 	private Celular celular;
 	
 	private String email;
 
-	public Contato(Celular celular, String email) {
+	public Contato(Celular celular) {
 		setCelular(celular);
-		setEmail(email);
 	}
 	
 	public Celular getCelular() {
@@ -21,7 +31,7 @@ public class Contato {
 	}
 
 	public void setCelular(Celular celular) {
-		validarNulo(celular, "Celular não pode ser nulo");
+		validarNulo(celular, CELULAR_NAO_PODE_SER_NULO);
 		this.celular = celular;
 	}
 
@@ -30,7 +40,11 @@ public class Contato {
 	}
 
 	public void setEmail(String email) {
-		validarEmail(email);
+		validarNulo(email, EMAIL_NAO_PODE_SER_NULO);
+		validarVazio(email, EMAIL_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(email, EMAIL_NAO_PODE_CONTER_ESPACOS);
+		validarTamanhoString(email, EMAIL_TAMANHO_MIN, EMAIL_TAMANHO_MAX, EMAIL_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60);
+		validarCaracteresEmail(email, EMAIL_INVALIDO);
 		this.email = email;
 	}
 

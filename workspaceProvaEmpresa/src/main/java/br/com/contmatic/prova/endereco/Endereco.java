@@ -10,6 +10,7 @@ import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_DEVE_CONTE
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_NAO_PODE_POSSUIR_UM_VALOR_SEQUENCIAL;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_POSSUI_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_TAMANHO_FIXO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_ESTAR_NULO;
@@ -21,14 +22,17 @@ import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_NAO_POD
 import static br.com.contmatic.prova.constants.EnderecoConstantes.O_NUMERO_MAIOR_QUE_9999_E_MENOR_QUE_1;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.RUA_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.RUA_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_DO_LOGRADOURO_PODE_CONTER_APENAS_LETRAS_E_ACENTOS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_MAX;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_MIN;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_20_CARACTERES;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_POSSUI_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEEspacosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresNumeros;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNumero;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarSeESequencial;
@@ -36,6 +40,8 @@ import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
 import java.util.Objects;
+
+import br.com.contmatic.prova.util.ValidatorUtil;
 
 public class Endereco {
 
@@ -72,6 +78,7 @@ public class Endereco {
 	public void setCep(String cep) {
 		validarNulo(cep, CEP_NAO_PODE_ESTAR_NULO);
 		validarVazio(cep, CEP_NAO_PODE_ESTAR_VAZIO);
+		ValidatorUtil.validarEspacos(cep, CEP_POSSUI_ESPACOS_INVALIDOS);
 		validarCaracteresNumeros(cep, CEP_DEVE_CONTER_APENAS_NUMEROS);
 		validarTamanhoString(cep, CEP_TAMANHO_FIXO, CEP_TAMANHO_FIXO, CEP_CONTEM_O_NUMERO_DE_DIGITOS_INVALIDO);
 		validarSeESequencial(cep, CEP_TAMANHO_FIXO, CEP_NAO_PODE_POSSUIR_UM_VALOR_SEQUENCIAL);
@@ -117,7 +124,9 @@ public class Endereco {
 	}
 
 	public void setTipoLogradouro(String tipoLogradouro) {
-		validarNulo(tipoLogradouro, TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_VAZIO);
+		validarNulo(tipoLogradouro, TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_NULO);
+		validarVazio(tipoLogradouro, TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(tipoLogradouro, TIPO_LOGRADOURO_POSSUI_ESPACOS_INVALIDOS);
 		validarCaracteresLetrasEAcentos(tipoLogradouro, TIPO_DO_LOGRADOURO_PODE_CONTER_APENAS_LETRAS_E_ACENTOS);
 		validarTamanhoString(tipoLogradouro, TIPO_LOGRADOURO_MIN, TIPO_LOGRADOURO_MAX, TIPO_LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_20_CARACTERES);
 		this.tipoLogradouro = tipoLogradouro;
@@ -130,12 +139,15 @@ public class Endereco {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {			
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {			
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {			
 			return false;
+		}
 		Endereco other = (Endereco) obj;
 		return Objects.equals(cep, other.cep) && Objects.equals(numero, other.numero);
 	}

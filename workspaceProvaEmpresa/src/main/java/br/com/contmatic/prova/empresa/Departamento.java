@@ -3,6 +3,8 @@ package br.com.contmatic.prova.empresa;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.NOME_CONTEM_ESPACOS_INVALIDOS;
+import static br.com.contmatic.prova.constants.DepartamentoConstantes.CODIGO_POSSUI_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_COD_TAMANHO_FIXO;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.DEPARTAMENTO_NAO_PODE_TER_UM_NOME_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
@@ -18,6 +20,7 @@ import static br.com.contmatic.prova.constants.FuncionarioConstantes.TAMANHO_MAX
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.TAMANHO_MIN_LISTA_FUNCIONARIO;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoList;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
@@ -50,6 +53,7 @@ public class Departamento extends Auditoria {
 	public void setNome(String nome) {
 		validarNulo(nome, NOME_NAO_PODE_ESTAR_NULO);
 		validarVazio(nome, NOME_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(nome, NOME_CONTEM_ESPACOS_INVALIDOS);
 		validarTamanhoString(nome, DEPARTAMENTO_NOME_TAMANHO_MINIMO, DEPARTAMENTO_NOME_TAMANHO_MAXIMO, DEPARTAMENTO_NAO_PODE_TER_UM_NOME_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES);
 		validarCaracteresLetrasEspacosEAcentos(nome, NOME_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nome = nome;
@@ -62,6 +66,7 @@ public class Departamento extends Auditoria {
 	public void setCodigo(String codigo) {
 		validarNulo(codigo, CODIGO_NAO_PODE_ESTAR_NULO);
 		validarVazio(codigo, CODIGO_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(codigo, CODIGO_POSSUI_ESPACOS_INVALIDOS);
 		validarTamanhoString(codigo, DEPARTAMENTO_COD_TAMANHO_FIXO, DEPARTAMENTO_COD_TAMANHO_FIXO, COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES);
 		validarCaracteresLetrasENumerosEAcentos(codigo, CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.codigo = codigo;
@@ -88,19 +93,22 @@ public class Departamento extends Auditoria {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		return Objects.hash(codigo, empresa);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {			
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {			
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {			
 			return false;
+		}
 		Departamento other = (Departamento) obj;
-		return Objects.equals(codigo, other.codigo);
+		return Objects.equals(codigo, other.codigo) && Objects.equals(empresa, other.empresa);
 	}
 
 	@Override

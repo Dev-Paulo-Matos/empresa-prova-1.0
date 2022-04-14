@@ -38,7 +38,11 @@ public final class EnderecoConstantes {
 	public static final String O_NUMERO_MAIOR_QUE_9999_E_MENOR_QUE_1 = "O Numero não pode ser maior que 9999 e menor que 1";
 	public static final String CEP_NAO_PODE_ESTAR_VAZIO = "Cep não pode estar Vazio";
 	public static final String BAIRRO_NAO_PODE_ESTAR_VAZIO = "Bairro não pode estar vazio";
+	public static final String CEP_POSSUI_ESPACOS_INVALIDOS = "Cep possui espaços invalidos!";
+	public static final String TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_NULO = "Tipo logradouro não pode estar nulo!";
+	public static final String TIPO_LOGRADOURO_POSSUI_ESPACOS_INVALIDOS = "Tipo logradouro possui espaços invalidos!";
 
+	
 	private EnderecoConstantes() {}
 
 }
