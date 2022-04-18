@@ -9,6 +9,7 @@ import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_LETR
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_ACEITA_NUMEROS;
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_EMAIL;
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_NULA;
+import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_VALIDA_ESPACOS;
 import static java.lang.String.valueOf;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.regex.Pattern.compile;
@@ -64,9 +65,7 @@ public final class ValidatorUtil {
 	}
 	
 	public static void validarEspacos(String string, String mensagem) {
-		if(string.trim().equals(string)) {
-			throw new IllegalStateException(mensagem);
-		}
+		validarPorRegex(string, REGEX_VALIDA_ESPACOS, mensagem);
 	}
 	
 	public static void validarPorRegex(String campo, String regex, String mensagem) {

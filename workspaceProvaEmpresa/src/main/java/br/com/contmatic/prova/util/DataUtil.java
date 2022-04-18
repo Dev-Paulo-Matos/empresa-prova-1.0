@@ -22,10 +22,9 @@ public final class DataUtil {
 	}
 
 	public static void validarDataMenorDezoito(LocalDate data, String mensagem) {
-		if(data.getYear() < IDADE_MINIMA) {
+		if((LocalDate.now().getYear() - IDADE_MINIMA) < data.getYear()) {
 			throw new IllegalStateException(mensagem);
 		}
-		
 	}
 
 }

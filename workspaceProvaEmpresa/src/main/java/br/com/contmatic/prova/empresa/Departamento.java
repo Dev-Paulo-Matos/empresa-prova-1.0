@@ -41,9 +41,9 @@ public class Departamento extends Auditoria {
 	
 	private Empresa empresa;
 	
-	public Departamento(String nome, String codigo) {
-		setNome(nome);
+	public Departamento(String codigo, Empresa empresa) {
 		setCodigo(codigo);
+		setEmpresa(empresa);
 	}
 
 	public String getNome() {

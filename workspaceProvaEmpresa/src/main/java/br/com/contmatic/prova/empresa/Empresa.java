@@ -65,11 +65,6 @@ public class Empresa extends Auditoria {
 		setCnpj(cnpj);
 	}
 	
-	public Empresa(String cnpj, String razaoSocial) {
-		setCnpj(cnpj);
-		setRazaoSocial(razaoSocial);
-	}
-	
 	public String getCnpj() {
 		return cnpj;
 	}

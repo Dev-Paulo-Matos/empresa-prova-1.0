@@ -4,7 +4,7 @@ import static br.com.contmatic.prova.constants.AuditoriaConstantes.DATA_ALTERACA
 import static br.com.contmatic.prova.constants.RegexConstantes.REGEX_VALIDAR_IP;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarPorRegex;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 public final class AuditoriaUtils {
 	
@@ -14,7 +14,7 @@ public final class AuditoriaUtils {
 		validarPorRegex(ip,REGEX_VALIDAR_IP,mensagem);
 	}
 	
-	public static void validarDataAlteracaoMaiorQueDataCriacao(DateTime dataCriacao, DateTime dataAlteracao) {
+	public static void validarDataAlteracaoMaiorQueDataCriacao(LocalDate dataCriacao, LocalDate dataAlteracao) {
 		if(!dataCriacao.isBefore(dataAlteracao)) {
 			throw new IllegalStateException( DATA_ALTERACAO_NAO_PODE_SER_MENOR_QUE_DATA_CRIACAO);
 		}

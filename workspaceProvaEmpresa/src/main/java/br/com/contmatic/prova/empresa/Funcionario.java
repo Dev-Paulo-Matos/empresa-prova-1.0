@@ -57,7 +57,7 @@ public class Funcionario extends Auditoria {
 
 	private Empresa empresa;
 	
-	private LocalDate dataNascimento;
+	private String nomeCompleto;
 
 	private String cargo;
 
@@ -67,9 +67,9 @@ public class Funcionario extends Auditoria {
 	
 	private Endereco endereco;
 	
-	private String nomeCompleto;
+	private LocalDate dataNascimento;
 	
-	public Funcionario(String cpf,Empresa empresa) {
+	public Funcionario(String cpf, Empresa empresa) {
 		setCpf(cpf);
 		setEmpresa(empresa);
 	}
@@ -87,6 +87,15 @@ public class Funcionario extends Auditoria {
 		validarSeESequencial(cpf, CPF_TAMANHO_FIXO, CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL);
 		validarCpf(cpf);
 		this.cpf = cpf;
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		validarNulo(empresa, EMPRESA_NAO_PODE_SER_NULA);
+		this.empresa = empresa;
 	}
 	
 	public String getNomeCompleto() {
@@ -127,11 +136,11 @@ public class Funcionario extends Auditoria {
 		this.cargo = cargo;
 	}
 	
-	public List<Contato> getContato() {
+	public List<Contato> getContatos() {
 		return contatos;
 	}
 
-	public void setContato(List<Contato> contatos) {
+	public void setContatos(List<Contato> contatos) {
 		validarNulo(contatos, CONTATO_NULO);
 		validarTamanhoList(contatos, CONTATO_TAMANHO_MINIMO_LISTA, CONTATO_TAMANHO_MAXIMO_LISTA, A_LISTA_DE_CONTATO_DEVE_POSSUIR_ENTRE_1_A_20_CONTATO);
 		this.contatos = contatos;
@@ -153,15 +162,6 @@ public class Funcionario extends Auditoria {
 	public void setEndereco(Endereco endereco) {
 		validarNulo(endereco, ENDERECO_NAO_PODE_ESTAR_NULO);
 		this.endereco = endereco;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		validarNulo(empresa, EMPRESA_NAO_PODE_SER_NULA);
-		this.empresa = empresa;
 	}
 	
 	@Override
