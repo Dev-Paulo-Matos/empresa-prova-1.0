@@ -15,6 +15,12 @@ public final class DataUtil {
 		}
 	}
 	
+	public static void validarDataPassadoAuditoria(LocalDate data, String mensagem) {
+		if(data.isBefore(now())) {
+			throw new IllegalStateException(mensagem);
+		}
+	}
+	
 	public static void validarDataFuturo(LocalDate data, String mensagem) {
 		if(now().isBefore(data)) {
 			throw new IllegalStateException(mensagem);

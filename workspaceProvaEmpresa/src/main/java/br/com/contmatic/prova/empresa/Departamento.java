@@ -46,6 +46,28 @@ public class Departamento extends Auditoria {
 		setEmpresa(empresa);
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		validarNulo(codigo, CODIGO_NAO_PODE_ESTAR_NULO);
+		validarVazio(codigo, CODIGO_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(codigo, CODIGO_POSSUI_ESPACOS_INVALIDOS);
+		validarTamanhoString(codigo, DEPARTAMENTO_COD_TAMANHO_FIXO, DEPARTAMENTO_COD_TAMANHO_FIXO, COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES);
+		validarCaracteresLetrasENumerosEAcentos(codigo, CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
+		this.codigo = codigo;
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		validarNulo(empresa, EMPRESA_NAO_PODE_ESTAR_VAZIA);
+		this.empresa = empresa;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -59,19 +81,6 @@ public class Departamento extends Auditoria {
 		this.nome = nome;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		validarNulo(codigo, CODIGO_NAO_PODE_ESTAR_NULO);
-		validarVazio(codigo, CODIGO_NAO_PODE_ESTAR_VAZIO);
-		validarEspacos(codigo, CODIGO_POSSUI_ESPACOS_INVALIDOS);
-		validarTamanhoString(codigo, DEPARTAMENTO_COD_TAMANHO_FIXO, DEPARTAMENTO_COD_TAMANHO_FIXO, COD_DEPARTAMENTO_DEVE_POSSUIR_5_CARACTERES);
-		validarCaracteresLetrasENumerosEAcentos(codigo, CODIGO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
-		this.codigo = codigo;
-	}
-
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
@@ -80,15 +89,6 @@ public class Departamento extends Auditoria {
 		validarNulo(list, LISTA_DE_FUNCIONARIO_NAO_PODE_ESTAR_VAZIA);
 		validarTamanhoList(list, TAMANHO_MIN_LISTA_FUNCIONARIO, TAMANHO_MAX_LISTA_FUNCIONARIO, LISTA_DE_FUNCIONARIO_DEVE_POSSUIR_DE_2_A_100_FUNCIONARIO);
 		this.funcionarios = list;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		validarNulo(empresa, EMPRESA_NAO_PODE_ESTAR_VAZIA);
-		this.empresa = empresa;
 	}
 
 	@Override

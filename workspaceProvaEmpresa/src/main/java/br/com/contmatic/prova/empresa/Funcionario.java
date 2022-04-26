@@ -20,6 +20,7 @@ import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_P
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.CARGO_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_DE_NASCIMENTO_DO_FUNCIONARIO_NAO_PODE_SER_MAIS_ANTIGA_QUE_90_ANOS;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_DE_NASCIMENTO_DO_FUNCIONARIO_NAO_PODE_SER_UMA_DATA_FUTURA;
+import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_DE_NASCIMENTO_NAO_PODE_ESTAR_MENOR_QUE_18;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_NULA;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.FUNCIONARIO_NOME_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.FUNCIONARIO_NOME_TAMANHO_MINIMO;
@@ -28,7 +29,6 @@ import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PO
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_POSSUIR_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.FuncionarioConstantes.NOME_NAO_PODE_SER_MENOR_QUE_5_E_NEM_MAIOR_QUE_60_CARACTERES;
-import static br.com.contmatic.prova.constants.FuncionarioConstantes.DATA_DE_NASCIMENTO_NAO_PODE_ESTAR_MENOR_QUE_18;
 import static br.com.contmatic.prova.util.CpfUtil.validarCpf;
 import static br.com.contmatic.prova.util.DataUtil.validarDataFuturo;
 import static br.com.contmatic.prova.util.DataUtil.validarDataMenorDezoito;
@@ -36,6 +36,7 @@ import static br.com.contmatic.prova.util.DataUtil.validarDataPassado;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresNumeros;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacosNumeros;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarSeESequencial;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoList;
@@ -81,7 +82,7 @@ public class Funcionario extends Auditoria {
 	public void setCpf(String cpf) {
 		validarNulo(cpf, CPF_NAO_PODE_ESTAR_NULO);
 		validarVazio(cpf, CPF_NAO_PODE_ESTAR_VAZIO);
-		validarEspacos(cpf, CPF_NAO_PODE_CONTER_ESPACOS);
+		validarEspacosNumeros(cpf, CPF_NAO_PODE_CONTER_ESPACOS);
 		validarTamanhoString(cpf, CPF_TAMANHO_FIXO, CPF_TAMANHO_FIXO, CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL);
 		validarCaracteresNumeros(cpf, CPF_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
 		validarSeESequencial(cpf, CPF_TAMANHO_FIXO, CPF_INVALIDO_NAO_PODE_SER_NUMERO_SEQUENCIAL);
@@ -182,6 +183,29 @@ public class Funcionario extends Auditoria {
 		}
 		Funcionario other = (Funcionario) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(empresa, other.empresa);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Funcionario [cpf=");
+		builder.append(cpf);
+		builder.append(", empresa=");
+		builder.append(empresa);
+		builder.append(", nomeCompleto=");
+		builder.append(nomeCompleto);
+		builder.append(", cargo=");
+		builder.append(cargo);
+		builder.append(", contatos=");
+		builder.append(contatos);
+		builder.append(", departamento=");
+		builder.append(departamento);
+		builder.append(", endereco=");
+		builder.append(endereco);
+		builder.append(", dataNascimento=");
+		builder.append(dataNascimento);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }

@@ -1,10 +1,11 @@
 package br.com.contmatic.prova.endereco;
 
 import static br.com.contmatic.prova.constants.CidadeConstantes.CIDADE_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.BAIRRO_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.BAIRRO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.BAIRRO_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.BAIRRO_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.EnderecoConstantes.BAIRRO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_60_CARACTERES;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.BAIRRO_NAO_PODE_SER_MENOR_QUE_4_E_MAIOR_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_CONTEM_O_NUMERO_DE_DIGITOS_INVALIDO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_DEVE_CONTER_APENAS_NUMEROS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.CEP_NAO_PODE_ESTAR_NULO;
@@ -16,6 +17,7 @@ import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_60_CARACTERES;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_POSSUI_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_MAIOR_QUE_9999;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_MENOR_QUE_1;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_NAO_PODE_ESTAR_VAZIO;
@@ -41,8 +43,6 @@ import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
 import java.util.Objects;
 
-import br.com.contmatic.prova.util.ValidatorUtil;
-
 public class Endereco {
 
 	private String cep;
@@ -62,15 +62,6 @@ public class Endereco {
 		setNumero(numero);
 	}
 
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		validarNulo(cidade, CIDADE_NAO_PODE_ESTAR_NULO);
-		this.cidade = cidade;
-	}
-
 	public String getCep() {
 		return cep;
 	}
@@ -78,7 +69,7 @@ public class Endereco {
 	public void setCep(String cep) {
 		validarNulo(cep, CEP_NAO_PODE_ESTAR_NULO);
 		validarVazio(cep, CEP_NAO_PODE_ESTAR_VAZIO);
-		ValidatorUtil.validarEspacos(cep, CEP_POSSUI_ESPACOS_INVALIDOS);
+		validarEspacos(cep, CEP_POSSUI_ESPACOS_INVALIDOS);
 		validarCaracteresNumeros(cep, CEP_DEVE_CONTER_APENAS_NUMEROS);
 		validarTamanhoString(cep, CEP_TAMANHO_FIXO, CEP_TAMANHO_FIXO, CEP_CONTEM_O_NUMERO_DE_DIGITOS_INVALIDO);
 		validarSeESequencial(cep, CEP_TAMANHO_FIXO, CEP_NAO_PODE_POSSUIR_UM_VALOR_SEQUENCIAL);
@@ -102,6 +93,7 @@ public class Endereco {
 	public void setLogradouro(String logradouro) {
 		validarNulo(logradouro, LOGRADOURO_NAO_PODE_ESTAR_NULO);
 		validarVazio(logradouro, LOGRADOURO_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(logradouro, LOGRADOURO_POSSUI_ESPACOS_INVALIDOS);
 		validarCaracteresLetrasENumerosEEspacosEAcentos(logradouro, LOGRADOURO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		validarTamanhoString(logradouro, RUA_TAMANHO_MINIMO, RUA_TAMANHO_MAXIMO, LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_60_CARACTERES);
 		this.logradouro = logradouro;
@@ -114,8 +106,9 @@ public class Endereco {
 	public void setBairro(String bairro) {
 		validarNulo(bairro, BAIRRO_NAO_PODE_ESTAR_NULO);
 		validarVazio(bairro, BAIRRO_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(bairro, BAIRRO_ESPACOS_INVALIDOS);
 		validarCaracteresLetrasENumerosEEspacosEAcentos(bairro, BAIRRO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
-		validarTamanhoString(bairro, RUA_TAMANHO_MINIMO, RUA_TAMANHO_MAXIMO, BAIRRO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_60_CARACTERES);
+		validarTamanhoString(bairro, RUA_TAMANHO_MINIMO, RUA_TAMANHO_MAXIMO, BAIRRO_NAO_PODE_SER_MENOR_QUE_4_E_MAIOR_QUE_60_CARACTERES);
 		this.bairro = bairro;
 	}
 
@@ -132,6 +125,15 @@ public class Endereco {
 		this.tipoLogradouro = tipoLogradouro;
 	}
 
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		validarNulo(cidade, CIDADE_NAO_PODE_ESTAR_NULO);
+		this.cidade = cidade;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(cep, numero);

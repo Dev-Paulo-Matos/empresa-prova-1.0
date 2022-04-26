@@ -2,6 +2,7 @@ package br.com.contmatic.empresa.empresa;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,21 @@ public class FuncionarioTest {
 		new Funcionario(" 41236207874 ", empresaBefore);
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_espacos_no_comeco() {
+		new Funcionario(" 41236207874", empresaBefore);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_espacos_no_fim() {
+		new Funcionario("41236207874 ", empresaBefore);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_criar_funcionario_com_cpf_contendo_espacos_no_meio() {
+		new Funcionario("41236 207874", empresaBefore);
+	}
+	
 	@Test
 	public void test_deve_criar_funcionario_com_empresa_valida() {
 		assertEquals(empresaBefore, funcionarioBefore.getEmpresa());
@@ -120,7 +136,7 @@ public class FuncionarioTest {
 	
 	@Test
 	public void test_deve_settar_funcionario_com_cpf_valido() {
-		String cpf = "70160397065";
+		String cpf = "81276531010";
 		funcionarioBefore.setCpf(cpf);
 		assertEquals(cpf, funcionarioBefore.getCpf());
 	}
@@ -395,6 +411,43 @@ public class FuncionarioTest {
 	
 	@Test
 	public void test_deve_retornar_igualdade_ao_comparar_o_proprio_funcionario() {
-		assertEquals(funcionarioBefore, funcionarioBefore);
+		Funcionario f1 = funcionarioBefore;
+		assertEquals(f1, funcionarioBefore);
+	}
+	
+	@Test
+	public void test_nao_deve_retornar_igualdade_ao_comparar_objetos_de_classes_diferentes() {
+		assertNotEquals(funcionarioBefore, new Object());
+	}
+	
+	@Test
+	public void test_nao_deve_retornar_igualdade_ao_comparar_funcionarios_de_mesma_empresa() {
+		Funcionario f1 = new Funcionario("92138047091",empresaBefore);
+		assertNotEquals(funcionarioBefore, f1);
+	}
+	
+	@Test
+	public void test_nao_deve_retornar_igualdade_ao_comparar_o_mesmo_funcionario_de_empresas_diferentes() {
+		Funcionario f1 = new Funcionario(CPF_VALIDO, new Empresa("33821427000100"));
+		assertNotEquals(funcionarioBefore, f1);
+	}
+	
+	@Test
+	public void test_deve_e_retornar_to_string_corretamente() {
+		funcionarioBefore.setCargo(CARGO);
+		funcionarioBefore.setNomeCompleto(NOME);
+		contatosBefore.add(contatoBefore);
+		funcionarioBefore.setContatos(contatosBefore);
+		funcionarioBefore.setEndereco(enderecoBefore);
+		funcionarioBefore.setDataNascimento(IDADE_18);
+		funcionarioBefore.setDepartamento(departamentoBefore);
+		assertTrue(funcionarioBefore.toString().contains(CNPJ_VALIDO));
+		assertTrue(funcionarioBefore.toString().contains(NOME));
+		assertTrue(funcionarioBefore.toString().contains(CARGO));
+		assertTrue(funcionarioBefore.toString().contains(empresaBefore.toString()));
+		assertTrue(funcionarioBefore.toString().contains(contatoBefore.toString()));
+		assertTrue(funcionarioBefore.toString().contains(departamentoBefore.toString()));
+		assertTrue(funcionarioBefore.toString().contains(enderecoBefore.toString()));
+		assertTrue(funcionarioBefore.toString().contains(IDADE_18.toString()));
 	}
 }

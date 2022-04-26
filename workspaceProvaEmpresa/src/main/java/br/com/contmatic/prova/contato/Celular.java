@@ -102,5 +102,19 @@ public class Celular {
 		return Objects.equals(dd, other.dd) && Objects.equals(ddi, other.ddi)
 				&& Objects.equals(telefone, other.telefone);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Celular = [ddi=");
+		builder.append(ddi);
+		builder.append(", dd=");
+		builder.append(dd);
+		builder.append(", telefone=");
+		builder.append(telefone);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	
 }

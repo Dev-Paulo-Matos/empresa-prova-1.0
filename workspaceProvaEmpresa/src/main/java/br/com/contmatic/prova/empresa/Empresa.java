@@ -4,12 +4,13 @@ import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_INVALIDO_CNPJ
 import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.CnpjConstantes.	CNPJ_NAO_PODE_TER_TAMANHO_DIFERENTE_DE_14;
 import static br.com.contmatic.prova.constants.CnpjConstantes.CNPJ_POSSUI_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.CnpjConstantes.TAMANHO_CNPJ;
+import static br.com.contmatic.prova.constants.ContatoConstantes.A_LISTA_DE_CONTATO_DEVE_POSSUIR_ENTRE_1_A_20_CONTATO;
 import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_TAMANHO_MAXIMO_LISTA;
 import static br.com.contmatic.prova.constants.ContatoConstantes.CONTATO_TAMANHO_MINIMO_LISTA;
-import static br.com.contmatic.prova.constants.ContatoConstantes.A_LISTA_DE_CONTATO_DEVE_POSSUIR_ENTRE_1_A_20_CONTATO;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.LISTA_DEVE_POSSUIR_DE_2_A_20_DEPARTAMENTOS;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.LISTA_DE_DEPARTAMENTO_NAO_PODE_ESTAR_VAZIA;
 import static br.com.contmatic.prova.constants.DepartamentoConstantes.TAMANHO_MAX_LISTA_DEPARTAMENTO;
@@ -73,6 +74,7 @@ public class Empresa extends Auditoria {
 		validarNulo(cnpj, CNPJ_NAO_PODE_ESTAR_NULO);
 		validarVazio(cnpj, CNPJ_NAO_PODE_ESTAR_VAZIO);
 		validarEspacos(cnpj, CNPJ_POSSUI_ESPACOS_INVALIDOS);
+		validarTamanhoString(cnpj, TAMANHO_CNPJ, TAMANHO_CNPJ,CNPJ_NAO_PODE_TER_TAMANHO_DIFERENTE_DE_14);
 		validarCaracteresNumeros(cnpj, CNPJ_NAO_DEVE_CONTER_LETRAS_E_NEM_CARACTERES_ESPECIAIS);
 		validarSeESequencial(cnpj, TAMANHO_CNPJ, CNPJ_INVALIDO_CNPJ_NAO_PODE_SER_UM_NUMERO_SEQUENCIAL);
 		validarCnpj(cnpj);
@@ -92,16 +94,6 @@ public class Empresa extends Auditoria {
 		this.razaoSocial = razaoSocial;
 	}
 	
-	public List<Departamento> getDepartamentos() {
-		return departamentos;
-	}
-
-	public void setDepartamentos(List<Departamento> departamentos) {
-		validarNulo(departamentos, LISTA_DE_DEPARTAMENTO_NAO_PODE_ESTAR_VAZIA);
-		validarTamanhoList(departamentos, TAMANHO_MIN_LISTA_DEPARTAMENTO, TAMANHO_MAX_LISTA_DEPARTAMENTO, LISTA_DEVE_POSSUIR_DE_2_A_20_DEPARTAMENTOS);
-		this.departamentos = departamentos;
-}
-
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
@@ -114,6 +106,16 @@ public class Empresa extends Auditoria {
 		validarCaracteresLetrasENumerosEEspacosEAcentos(nomeFantasia, NOME_FANTASIA_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		this.nomeFantasia = nomeFantasia;
 	}
+	
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+
+	public void setDepartamentos(List<Departamento> departamentos) {
+		validarNulo(departamentos, LISTA_DE_DEPARTAMENTO_NAO_PODE_ESTAR_VAZIA);
+		validarTamanhoList(departamentos, TAMANHO_MIN_LISTA_DEPARTAMENTO, TAMANHO_MAX_LISTA_DEPARTAMENTO, LISTA_DEVE_POSSUIR_DE_2_A_20_DEPARTAMENTOS);
+		this.departamentos = departamentos;
+}
 
 	public List<Contato> getContatos() {
 		return contatos;

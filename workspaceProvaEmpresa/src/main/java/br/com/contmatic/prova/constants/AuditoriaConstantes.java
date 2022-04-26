@@ -9,11 +9,11 @@ public final class AuditoriaConstantes {
 	public static final String IP_USUARIO_CRIACAO_NAO_ESTA_VALIDO = "IpUsuarioCriacao não está valido!";
 	public static final String IP_USUARIO_CRIACAO_NAO_PODE_ESTAR_VAZIO = "ipUsuarioCriacao não pode estar vazio";
 	public static final String IP_USUARIO_CRIACAO_NAO_PODE_ESTAR_NULO = "ipUsuarioCriacao não pode estar nulo";
-	public static final String NOME_DO_USUARIO_ALTERACAO_NAO_PODE_POSSUIR_CARACTERES_ESPECIAIS = "Nome do Usuario alteração não pode possuir caracteres especiais!";
+	public static final String NOME_DO_USUARIO_ALTERACAO_NAO_PODE_POSSUIR_CARACTERES_ESPECIAIS = "Nome do Usuario alteração não pode possuir digitos e caracteres especiais!";
 	public static final String USUARIO_DE_ALTERACAO_NAO_PODE_ESTAR_VAZIO = "Usuario de alteração não pode estar vazio!";
 	public static final String USUARIO_DE_ALTERACAO_NAO_PODE_SER_NULO = "Usuario de alteração não pode ser nulo!";
 	public static final String NOME_USUARIO_ULTIMA_ALTERACAO_NAO_PODE_SER_MAIOR_QUE_60_CARACTERES = "Nome usuario ultima alteração não pode ser maior que 60 caracteres!";
-	public static final String NOME_DO_USUARIO_CRIACAO_NAO_PODE_POSSUIR_CARACTERES_ESPECIAIS = "Nome do Usuario criação não pode possuir caracteres especiais!";
+	public static final String NOME_DO_USUARIO_CRIACAO_NAO_PODE_POSSUIR_CARACTERES_ESPECIAIS = "Nome do Usuario criação não pode possuir digitos e caracteres especiais!";
 	public static final String NOME_USUARIO_ULTIMA_CRIACAO_NAO_PODE_SER_MAIOR_QUE_60_CARACTERES = "Nome usuario ultima criação não pode ser maior que 60 caracteres!";
 	public static final String USUARIO_DE_CRIACAO_NAO_PODE_ESTAR_VAZIO = "Usuario de Criação não pode estar vazio!";
 	public static final String USUARIO_DE_CRIACAO_NAO_PODE_SER_NULO = "Usuario de Criação não pode ser nulo!";

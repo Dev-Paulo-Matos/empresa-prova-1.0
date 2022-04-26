@@ -10,7 +10,8 @@ public final class RegexConstantes {
 	public static final String REGEX_ACEITA_NUMEROS = "([0-9]+)";
 	public static final String REGEX_EMAIL = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
 	public static final String REGEX_VALIDAR_IP = "^((1?\\d{1,2}|2([0-4]\\d|5[0-5]))\\.){3}(1?\\d{1,2}|2([0-4]\\d|5[0-5]))$|^$";
-	public static final String REGEX_VALIDA_ESPACOS = "([^\\s]{1,}[\\s]?[^\\s])+";
+	public static final String REGEX_VALIDA_ESPACOS = "([^\\s]{1,}[\\s]{0,1})+";
+	public static final String REGEX_VALIDA_ESPACOS_NUMEROS = "([^\\s]+)";
 	//MENSAGENS
 	
 	public static final String REGEX_NULA = "Regex não pode ser nula!";

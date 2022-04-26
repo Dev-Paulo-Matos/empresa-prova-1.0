@@ -6,12 +6,14 @@ import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_CIDADE_TAMA
 import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_CIDADE_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES;
 import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_NAO_PODE_CONTER_NUMEROS_E_NEM_CARACTERES_ESPECIAIS;
-import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_NAO_PODE_ESTAR_VAZIO;
+import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_NAO_PODE_ESTAR_COM_ESPACOS_INVALIDOS;
 import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_NAO_PODE_ESTAR_NULO;
+import static br.com.contmatic.prova.constants.CidadeConstantes.NOME_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.CidadeConstantes.NUMERO_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.CidadeConstantes.NUMERO_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constants.CidadeConstantes.UF_NAO_PODE_ESTAR_NULO;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNumero;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
@@ -38,6 +40,7 @@ public class Cidade {
 	public void setNome(String nome) {
 		validarNulo(nome, NOME_NAO_PODE_ESTAR_NULO);
 		validarVazio(nome, NOME_NAO_PODE_ESTAR_VAZIO);
+		validarEspacos(nome, NOME_NAO_PODE_ESTAR_COM_ESPACOS_INVALIDOS);
 		validarCaracteresLetrasEspacosEAcentos(nome, NOME_NAO_PODE_CONTER_NUMEROS_E_NEM_CARACTERES_ESPECIAIS);
 		validarTamanhoString(nome, NOME_CIDADE_TAMANHO_MINIMO, NOME_CIDADE_TAMANHO_MAXIMO, NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES);
 		this.nome = nome;

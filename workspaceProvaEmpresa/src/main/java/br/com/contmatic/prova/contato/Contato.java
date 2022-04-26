@@ -4,7 +4,7 @@ import static br.com.contmatic.prova.constants.CelularConstantes.CELULAR_NAO_POD
 import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_INVALIDO;
 import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_CONTER_ESPACOS;
 import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60;
+import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_SER_MENOR_QUE_8_E_MAIOR_QUE_60;
 import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_NAO_PODE_SER_NULO;
 import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_TAMANHO_MAX;
 import static br.com.contmatic.prova.constants.ContatoConstantes.EMAIL_TAMANHO_MIN;
@@ -43,7 +43,7 @@ public class Contato {
 		validarNulo(email, EMAIL_NAO_PODE_SER_NULO);
 		validarVazio(email, EMAIL_NAO_PODE_ESTAR_VAZIO);
 		validarEspacos(email, EMAIL_NAO_PODE_CONTER_ESPACOS);
-		validarTamanhoString(email, EMAIL_TAMANHO_MIN, EMAIL_TAMANHO_MAX, EMAIL_NAO_PODE_SER_MENOR_QUE_5_E_MAIOR_QUE_60);
+		validarTamanhoString(email, EMAIL_TAMANHO_MIN, EMAIL_TAMANHO_MAX, EMAIL_NAO_PODE_SER_MENOR_QUE_8_E_MAIOR_QUE_60);
 		validarCaracteresEmail(email, EMAIL_INVALIDO);
 		this.email = email;
 	}
@@ -71,7 +71,7 @@ public class Contato {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Contato [celular=");
+		builder.append("Contato [");
 		builder.append(celular);
 		builder.append(", email=");
 		builder.append(email);

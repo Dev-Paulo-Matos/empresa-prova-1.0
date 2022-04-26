@@ -4,7 +4,7 @@ public final class CelularConstantes {
 	
 	public static final int NUMERO_MAXIMO_DDI = 3;
 	public static final int NUMERO_MINIMO_DDI = 1;
-	public static final int DD_TAMANHO_MAXIMO = 999;
+	public static final int DD_TAMANHO_MAXIMO = 3;
 	public static final int DD_TAMANHO_MINIMO = 1;
 	public static final int TELEFONE_TAMANHO_MAXIMO = 9;
 	public static final int TELEFONE_TAMAMANHO_MINIMO = 7;
