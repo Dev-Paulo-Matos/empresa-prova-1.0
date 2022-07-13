@@ -15,7 +15,7 @@ import static br.com.contmatic.prova.constants.CidadeConstantes.UF_NAO_PODE_ESTA
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEspacosEAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarNumero;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarIntervaloMinMax;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
 
@@ -23,78 +23,79 @@ import java.util.Objects;
 
 public class Cidade {
 
-	private Integer codigoIbge;
-	
-	private String nome;
-	
-	private Uf uf;
-	
-	public Cidade(Integer codigoIbge) {
-		setCodigoIbge(codigoIbge);
-	}
+    private Integer codigoIbge;
 
-	public String getNome() {
-		return nome;
-	}
+    private String nome;
 
-	public void setNome(String nome) {
-		validarNulo(nome, NOME_NAO_PODE_ESTAR_NULO);
-		validarVazio(nome, NOME_NAO_PODE_ESTAR_VAZIO);
-		validarEspacos(nome, NOME_NAO_PODE_ESTAR_COM_ESPACOS_INVALIDOS);
-		validarCaracteresLetrasEspacosEAcentos(nome, NOME_NAO_PODE_CONTER_NUMEROS_E_NEM_CARACTERES_ESPECIAIS);
-		validarTamanhoString(nome, NOME_CIDADE_TAMANHO_MINIMO, NOME_CIDADE_TAMANHO_MAXIMO, NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES);
-		this.nome = nome;
-	}
+    private Uf uf;
 
-	public Integer getCodigoIbge() {
-		return codigoIbge;
-	}
+    public Cidade(Integer codigoIbge) {
+        setCodigoIbge(codigoIbge);
+    }
 
-	public void setCodigoIbge(Integer codigoIbge) {
-		validarNulo(codigoIbge, CODIGO_IBGE_NAO_PODE_ESTAR_NULO);
-		validarNumero(codigoIbge, NUMERO_TAMANHO_MINIMO, NUMERO_TAMANHO_MAXIMO, CODIGO_IBGE_DEVE_POSSUIR_5_DIGITOS);
-		this.codigoIbge = codigoIbge;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public Uf getUf() {
-		return uf;
-	}
+    public void setNome(String nome) {
+        validarNulo(nome, NOME_NAO_PODE_ESTAR_NULO);
+        validarVazio(nome, NOME_NAO_PODE_ESTAR_VAZIO);
+        validarEspacos(nome, NOME_NAO_PODE_ESTAR_COM_ESPACOS_INVALIDOS);
+        validarCaracteresLetrasEspacosEAcentos(nome, NOME_NAO_PODE_CONTER_NUMEROS_E_NEM_CARACTERES_ESPECIAIS);
+        validarTamanhoString(nome, NOME_CIDADE_TAMANHO_MINIMO, NOME_CIDADE_TAMANHO_MAXIMO, NOME_DEVE_POSSUIR_DE_3_A_60_CARACTERES);
+        this.nome = nome;
+    }
 
-	public void setUf(Uf uf) {
-		validarNulo(uf,UF_NAO_PODE_ESTAR_NULO);
-		this.uf = uf;
-	}
+    public Integer getCodigoIbge() {
+        return codigoIbge;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(codigoIbge);
-	}
+    public void setCodigoIbge(Integer codigoIbge) {
+        validarNulo(codigoIbge, CODIGO_IBGE_NAO_PODE_ESTAR_NULO);
+        validarIntervaloMinMax(codigoIbge, NUMERO_TAMANHO_MINIMO, NUMERO_TAMANHO_MAXIMO, CODIGO_IBGE_DEVE_POSSUIR_5_DIGITOS);
+        this.codigoIbge = codigoIbge;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {			
-			return true;
-		}
-		if (obj == null) {			
-			return false;
-		}
-		if (getClass() != obj.getClass()) {			
-			return false;
-		}
-		Cidade other = (Cidade) obj;
-		return Objects.equals(codigoIbge, other.codigoIbge);
-	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Cidade [nome=");
-		builder.append(nome);
-		builder.append(", codigoIbge=");
-		builder.append(codigoIbge);
-		builder.append(", uf=");
-		builder.append(uf);
-		builder.append("]");
-		return builder.toString();
-	}
+    public Uf getUf() {
+        return uf;
+    }
+
+    public void setUf(Uf uf) {
+        validarNulo(uf, UF_NAO_PODE_ESTAR_NULO);
+        this.uf = uf;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoIbge);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Cidade other = (Cidade) obj;
+        return Objects.equals(codigoIbge, other.codigoIbge);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Cidade [nome=");
+        builder.append(nome);
+        builder.append(", codigoIbge=");
+        builder.append(codigoIbge);
+        builder.append(", uf=");
+        builder.append(uf);
+        builder.append("]");
+        builder.append(super.toString());
+        return builder.toString();
+    }
 }

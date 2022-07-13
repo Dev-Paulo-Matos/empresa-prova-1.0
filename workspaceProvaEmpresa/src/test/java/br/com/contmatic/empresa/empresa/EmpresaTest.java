@@ -30,9 +30,6 @@ public class EmpresaTest {
 	private List<Contato> contatosBefore;
 	private List<Departamento> departamentosBefore;
 	private List<Endereco> enderecosBefore;
-	private List<Contato> contatosCompletoBefore;
-	private List<Departamento> departamentosCompletoBefore;
-	private List<Endereco> enderecosCompletoBefore;
 	
 	@Before
 	public void deve_criar_antes_de_todos_os_testes() {
@@ -45,15 +42,7 @@ public class EmpresaTest {
 		contatosBefore = new ArrayList<Contato>();
 		departamentosBefore = new ArrayList<Departamento>();
 		enderecosBefore = new ArrayList<Endereco>();
-		contatosCompletoBefore = new ArrayList<Contato>();
-		enderecosCompletoBefore = new ArrayList<Endereco>();
-		departamentosCompletoBefore = new ArrayList<Departamento>();
-		contatosCompletoBefore.add(contatoBefore);
-		contatosCompletoBefore.add(contatoBefore);
-		enderecosCompletoBefore.add(enderecoBefore);
-		enderecosCompletoBefore.add(enderecoBefore);
-		departamentosCompletoBefore.add(departamentoBefore1);
-		departamentosCompletoBefore.add(departamentoBefore2);
+
 	}
 	
 	@Test
@@ -186,7 +175,7 @@ public class EmpresaTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_empresa_com_cnpj_contendo_caracteres_especiais() {
-		empresaBefore.setCnpj("461652A7!00010");
+		empresaBefore.setCnpj("4616527#!00010");
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -284,7 +273,6 @@ public class EmpresaTest {
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_nome_fantasia_contendo_espacos_no_comeco() {
 		empresaBefore.setNomeFantasia("  Nome fantasia invalido");
-
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -443,17 +431,23 @@ public class EmpresaTest {
 	
 	@Test
 	public void test_deve_settar_e_retornar_to_string_corretamente() {
+		contatosBefore.add(contatoBefore);
+		contatosBefore.add(contatoBefore);
+		enderecosBefore.add(enderecoBefore);
+		enderecosBefore.add(enderecoBefore);
+		departamentosBefore.add(departamentoBefore1);
+		departamentosBefore.add(departamentoBefore2);
 		empresaBefore = new Empresa(CNPJ_VALIDA);
 		empresaBefore.setRazaoSocial(RAZAO_SOCIAL_VALIDA);
 		empresaBefore.setNomeFantasia(NOME_FANTASIA_VALIDO);
-		empresaBefore.setContatos(contatosCompletoBefore);
-		empresaBefore.setEnderecos(enderecosCompletoBefore);
-		empresaBefore.setDepartamentos(departamentosCompletoBefore);
+		empresaBefore.setContatos(contatosBefore);
+		empresaBefore.setEnderecos(enderecosBefore);
+		empresaBefore.setDepartamentos(departamentosBefore);
 		assertTrue(empresaBefore.toString().contains(CNPJ_VALIDA));
 		assertTrue(empresaBefore.toString().contains(NOME_FANTASIA_VALIDO));
 		assertTrue(empresaBefore.toString().contains(RAZAO_SOCIAL_VALIDA));
-		assertTrue(empresaBefore.toString().contains(enderecosCompletoBefore.toString()));
-		assertTrue(empresaBefore.toString().contains(contatosCompletoBefore.toString()));
-		assertTrue(empresaBefore.toString().contains(departamentosCompletoBefore.toString()));
+		assertTrue(empresaBefore.toString().contains(enderecosBefore.toString()));
+		assertTrue(empresaBefore.toString().contains(contatosBefore.toString()));
+		assertTrue(empresaBefore.toString().contains(departamentosBefore.toString()));
 	}
 }

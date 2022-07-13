@@ -11,7 +11,7 @@ public final class EnderecoConstantes {
 	public static final int TIPO_LOGRADOURO_MAX = 20;
 	public static final int TAMANHO_MAX_ENDERECO = 20;
 	public static final int TAMANHO_MIN_ENDERECO = 1;
-	public static final int NUMERO_MAIOR_QUE_9999 = 9999;
+	public static final int NUMERO_MAIOR_QUE_999999 = 999999;
 	public static final int NUMERO_MENOR_QUE_1 = 1;
 	
 	//MENSAGENS
@@ -35,7 +35,7 @@ public final class EnderecoConstantes {
 	public static final String TIPO_DO_LOGRADOURO_PODE_CONTER_APENAS_LETRAS_E_ACENTOS = "Tipo do Logradouro pode conter apenas letras e acentos!";
 	public static final String TIPO_LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_20_CARACTERES = "Tipo logradouro não pode ser menor que 3 e maior que 60 caracteres!";
 	public static final String ENDERECO_NAO_PODE_ESTAR_NULO = "Endereco não pode estar nulo!";
-	public static final String O_NUMERO_MAIOR_QUE_9999_E_MENOR_QUE_1 = "O Numero não pode ser maior que 9999 e menor que 1";
+	public static final String O_NUMERO_MAIOR_QUE_999999_E_MENOR_QUE_1 = "O Numero não pode ser maior que 999999 e menor que 1";
 	public static final String CEP_NAO_PODE_ESTAR_VAZIO = "Cep não pode estar Vazio";
 	public static final String BAIRRO_NAO_PODE_ESTAR_VAZIO = "Bairro não pode estar vazio";
 	public static final String CEP_POSSUI_ESPACOS_INVALIDOS = "Cep possui espaços invalidos!";

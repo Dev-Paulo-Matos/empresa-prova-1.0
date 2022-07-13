@@ -18,10 +18,10 @@ import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_ESTAR_VAZIO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_60_CARACTERES;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.LOGRADOURO_POSSUI_ESPACOS_INVALIDOS;
-import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_MAIOR_QUE_9999;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_MAIOR_QUE_999999;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_MENOR_QUE_1;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.NUMERO_NAO_PODE_ESTAR_VAZIO;
-import static br.com.contmatic.prova.constants.EnderecoConstantes.O_NUMERO_MAIOR_QUE_9999_E_MENOR_QUE_1;
+import static br.com.contmatic.prova.constants.EnderecoConstantes.O_NUMERO_MAIOR_QUE_999999_E_MENOR_QUE_1;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.RUA_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.RUA_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_NULO;
@@ -31,12 +31,12 @@ import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOUR
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_MIN;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_20_CARACTERES;
 import static br.com.contmatic.prova.constants.EnderecoConstantes.TIPO_LOGRADOURO_POSSUI_ESPACOS_INVALIDOS;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasEAcentos;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasENumerosEEspacosEAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasAcentos;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresLetrasNumerosEspacosAcentos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarCaracteresNumeros;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarEspacos;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarNulo;
-import static br.com.contmatic.prova.util.ValidatorUtil.validarNumero;
+import static br.com.contmatic.prova.util.ValidatorUtil.validarIntervaloMinMax;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarSeESequencial;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarTamanhoString;
 import static br.com.contmatic.prova.util.ValidatorUtil.validarVazio;
@@ -82,7 +82,7 @@ public class Endereco {
 
 	public void setNumero(Integer numero) {
 		validarNulo(numero, NUMERO_NAO_PODE_ESTAR_VAZIO);
-		validarNumero(numero, NUMERO_MENOR_QUE_1, NUMERO_MAIOR_QUE_9999, O_NUMERO_MAIOR_QUE_9999_E_MENOR_QUE_1);
+		validarIntervaloMinMax(numero, NUMERO_MENOR_QUE_1, NUMERO_MAIOR_QUE_999999, O_NUMERO_MAIOR_QUE_999999_E_MENOR_QUE_1);
 		this.numero = numero;
 	}
 
@@ -94,7 +94,7 @@ public class Endereco {
 		validarNulo(logradouro, LOGRADOURO_NAO_PODE_ESTAR_NULO);
 		validarVazio(logradouro, LOGRADOURO_NAO_PODE_ESTAR_VAZIO);
 		validarEspacos(logradouro, LOGRADOURO_POSSUI_ESPACOS_INVALIDOS);
-		validarCaracteresLetrasENumerosEEspacosEAcentos(logradouro, LOGRADOURO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
+		validarCaracteresLetrasNumerosEspacosAcentos(logradouro, LOGRADOURO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		validarTamanhoString(logradouro, RUA_TAMANHO_MINIMO, RUA_TAMANHO_MAXIMO, LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_60_CARACTERES);
 		this.logradouro = logradouro;
 	}
@@ -107,7 +107,7 @@ public class Endereco {
 		validarNulo(bairro, BAIRRO_NAO_PODE_ESTAR_NULO);
 		validarVazio(bairro, BAIRRO_NAO_PODE_ESTAR_VAZIO);
 		validarEspacos(bairro, BAIRRO_ESPACOS_INVALIDOS);
-		validarCaracteresLetrasENumerosEEspacosEAcentos(bairro, BAIRRO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
+		validarCaracteresLetrasNumerosEspacosAcentos(bairro, BAIRRO_NAO_PODE_CONTER_CARACTERES_ESPECIAIS);
 		validarTamanhoString(bairro, RUA_TAMANHO_MINIMO, RUA_TAMANHO_MAXIMO, BAIRRO_NAO_PODE_SER_MENOR_QUE_4_E_MAIOR_QUE_60_CARACTERES);
 		this.bairro = bairro;
 	}
@@ -120,7 +120,7 @@ public class Endereco {
 		validarNulo(tipoLogradouro, TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_NULO);
 		validarVazio(tipoLogradouro, TIPO_DO_LOGRADOURO_NAO_PODE_ESTAR_VAZIO);
 		validarEspacos(tipoLogradouro, TIPO_LOGRADOURO_POSSUI_ESPACOS_INVALIDOS);
-		validarCaracteresLetrasEAcentos(tipoLogradouro, TIPO_DO_LOGRADOURO_PODE_CONTER_APENAS_LETRAS_E_ACENTOS);
+		validarCaracteresLetrasAcentos(tipoLogradouro, TIPO_DO_LOGRADOURO_PODE_CONTER_APENAS_LETRAS_E_ACENTOS);
 		validarTamanhoString(tipoLogradouro, TIPO_LOGRADOURO_MIN, TIPO_LOGRADOURO_MAX, TIPO_LOGRADOURO_NAO_PODE_SER_MENOR_QUE_3_E_MAIOR_QUE_20_CARACTERES);
 		this.tipoLogradouro = tipoLogradouro;
 	}
@@ -170,6 +170,7 @@ public class Endereco {
 		builder.append(", tipoLogradouro=");
 		builder.append(tipoLogradouro);
 		builder.append("]");
+		builder.append(super.toString());
 		return builder.toString();
 	}
 }

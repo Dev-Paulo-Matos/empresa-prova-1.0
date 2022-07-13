@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import br.com.contmatic.prova.endereco.Endereco;
 
 public class FuncionarioTest {
 
+	private static final boolean ATIVO = true;
 	private static final String DEPARTAMENTO_CODIGO = "23123";
 	private static final String CARGO = "Faxineiro I";
 	private static final LocalDate IDADE_18 = LocalDate.now().plusYears(-18);
@@ -28,6 +30,7 @@ public class FuncionarioTest {
 	private static final String NOME = "Paulo Machado Fraga Matos";
 	private static final String CNPJ_VALIDO = "33613835000176";
 	private static final String CPF_VALIDO = "72900930030";
+	private final BigDecimal salario = new BigDecimal("2000.00");
 	private Funcionario funcionarioBefore;
 	private Empresa empresaBefore;
 	private Endereco enderecoBefore;
@@ -368,6 +371,25 @@ public class FuncionarioTest {
 	// Departamento ^^
 	
 	@Test
+	public void test_deve_inativar_funcionario() {
+		boolean ativo = false;
+		funcionarioBefore.setAtivo(ativo);
+		assertEquals(ativo, funcionarioBefore.getAtivo());
+	}
+	
+	@Test
+	public void test_deve_ativar_funcionario() {
+		boolean ativo = true;
+		funcionarioBefore.setAtivo(ativo);
+		assertEquals(ativo, funcionarioBefore.getAtivo());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_nao_deve_inativar_funcionario_recebendo_valor_nulo() {
+		funcionarioBefore.setAtivo(null);
+	}
+	
+	@Test
 	public void test_deve_settar_contatos_valido() {
 		contatosBefore.add(contatoBefore);
 		funcionarioBefore.setContatos(contatosBefore);
@@ -421,7 +443,7 @@ public class FuncionarioTest {
 	}
 	
 	@Test
-	public void test_nao_deve_retornar_igualdade_ao_comparar_funcionarios_de_mesma_empresa() {
+	public void test_nao_deve_retornar_igualdade_ao_comparar_funcionarios_diferentes_de_mesma_empresa() {
 		Funcionario f1 = new Funcionario("92138047091",empresaBefore);
 		assertNotEquals(funcionarioBefore, f1);
 	}
@@ -433,6 +455,28 @@ public class FuncionarioTest {
 	}
 	
 	@Test
+	public void test_deve_settar_salario_valido() {
+	    String salario = "2000.00";
+	    funcionarioBefore.setSalario(new BigDecimal(salario));
+	    assertTrue(funcionarioBefore.getSalario().toString().contains(salario));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_nao_deve_settar_salario_nulo() {
+	    funcionarioBefore.setSalario(null);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void test_nao_deve_settar_salario_maior_que_o_salario_maximo() {
+	    funcionarioBefore.setSalario(new BigDecimal("4500.00"));
+	}
+	
+   @Test(expected = IllegalStateException.class)
+    public void test_nao_deve_settar_salario_maior_que_o_salario_minimo() {
+        funcionarioBefore.setSalario(new BigDecimal("1500.00"));
+    }
+	
+	@Test
 	public void test_deve_e_retornar_to_string_corretamente() {
 		funcionarioBefore.setCargo(CARGO);
 		funcionarioBefore.setNomeCompleto(NOME);
@@ -441,6 +485,8 @@ public class FuncionarioTest {
 		funcionarioBefore.setEndereco(enderecoBefore);
 		funcionarioBefore.setDataNascimento(IDADE_18);
 		funcionarioBefore.setDepartamento(departamentoBefore);
+		funcionarioBefore.setAtivo(ATIVO);
+		funcionarioBefore.setSalario(salario);
 		assertTrue(funcionarioBefore.toString().contains(CNPJ_VALIDO));
 		assertTrue(funcionarioBefore.toString().contains(NOME));
 		assertTrue(funcionarioBefore.toString().contains(CARGO));
@@ -449,5 +495,7 @@ public class FuncionarioTest {
 		assertTrue(funcionarioBefore.toString().contains(departamentoBefore.toString()));
 		assertTrue(funcionarioBefore.toString().contains(enderecoBefore.toString()));
 		assertTrue(funcionarioBefore.toString().contains(IDADE_18.toString()));
+		assertTrue(funcionarioBefore.toString().contains(String.valueOf(ATIVO)));
+		assertTrue(funcionarioBefore.toString().contains(salario.toString()));
 	}
 }

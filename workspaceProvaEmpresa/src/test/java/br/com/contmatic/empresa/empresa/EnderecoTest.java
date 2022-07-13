@@ -151,8 +151,8 @@ public class EnderecoTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_criar_endereco_com_numero_maior_que_9999() {
-		new Endereco(CEP_ENDERECO, 10000);
+	public void test_nao_deve_criar_endereco_com_numero_maior_que_99999() {
+		new Endereco(CEP_ENDERECO, 1000000);
 	}
 	
 	// SET
@@ -175,8 +175,8 @@ public class EnderecoTest {
 	}
 	
 	@Test(expected = IllegalStateException.class)
-	public void test_nao_deve_settar_endereco_com_numero_maior_que_9999() {
-		enderecoBefore.setNumero(10000);
+	public void test_nao_deve_settar_endereco_com_numero_maior_que_999999() {
+		enderecoBefore.setNumero(1000000);
 	}
 	
 	//

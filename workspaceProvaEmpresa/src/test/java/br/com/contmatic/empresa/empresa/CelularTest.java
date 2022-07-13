@@ -55,7 +55,7 @@ public class CelularTest {
 	@Test
 	public void test_deve_criar_celular_com_ddd_valido() {
 		Celular c1 = new Celular(DDI, DDD, TELEFONE);
-		assertEquals(DDD, c1.getDd());
+		assertEquals(DDD, c1.getDdd());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -153,33 +153,33 @@ public class CelularTest {
 	@Test
 	public void test_deve_settar_celular_com_ddd_valido() {
 		String ddd = "32";
-		celularBefore.setDd(ddd);
-		assertEquals(ddd, celularBefore.getDd());
+		celularBefore.setDdd(ddd);
+		assertEquals(ddd, celularBefore.getDdd());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void test_nao_deve_settar_celular_com_ddd_nulo() {
-		celularBefore.setDd(null);
+		celularBefore.setDdd(null);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_celular_com_ddd_contendo_letras() {
-		celularBefore.setDd("AA");
+		celularBefore.setDdd("AA");
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_celular_com_ddd_contendo_mais_que_4_caracteres() {
-		celularBefore.setDd("1234");
+		celularBefore.setDdd("1234");
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_celular_com_ddd_vazio() {
-		celularBefore.setDd("");
+		celularBefore.setDdd("");
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void test_nao_deve_settar_celular_com_ddd_contendo_caracteres_especiais() {
-		celularBefore.setDd("!@");
+		celularBefore.setDdd("!@");
 	}
 	
 	//TELEFONE

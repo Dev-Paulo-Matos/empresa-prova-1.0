@@ -27,6 +27,7 @@ public final class AuditoriaConstantes {
 	public static final String IP_USUARIO_CRIACAO_NAO_PODE_CONTER_ESPACOS = "ipUsuarioCriacao não pode conter espaços";
 	public static final String NOME_USUARIO_CRIACAO_NAO_PODE_CONTER_ESPACOS = "nomeUsuarioCriacao não pode conter espaços";
 	public static final String NOME_USUARIO_ULTIMA_ALTERACAO_NAO_PODE_CONTER_ESPACOS = "nomeUsuarioUltimaAlteracao não pode conter espaços!";
+    public static final String DATA_ALTERACAO_NAO_PODE_SER_ANTERIOR_A_DATA_CRIACAO = "DataAlteração não pode ser anterior a data criação!";
 	public static final int NOME_MAXIMO_USUARIO_CRIACAO = 60;
 	public static final int NOME_MINIMO_USUARIO_CRIACAO = 5;
 	

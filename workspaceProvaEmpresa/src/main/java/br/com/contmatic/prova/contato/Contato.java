@@ -18,66 +18,66 @@ import java.util.Objects;
 
 public class Contato {
 
-	private Celular celular;
-	
-	private String email;
+    private Celular celular;
 
-	public Contato(Celular celular) {
-		setCelular(celular);
-	}
-	
-	public Celular getCelular() {
-		return celular;
-	}
+    private String email;
 
-	public void setCelular(Celular celular) {
-		validarNulo(celular, CELULAR_NAO_PODE_SER_NULO);
-		this.celular = celular;
-	}
+    public Contato(Celular celular) {
+        setCelular(celular);
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public Celular getCelular() {
+        return celular;
+    }
 
-	public void setEmail(String email) {
-		validarNulo(email, EMAIL_NAO_PODE_SER_NULO);
-		validarVazio(email, EMAIL_NAO_PODE_ESTAR_VAZIO);
-		validarEspacos(email, EMAIL_NAO_PODE_CONTER_ESPACOS);
-		validarTamanhoString(email, EMAIL_TAMANHO_MIN, EMAIL_TAMANHO_MAX, EMAIL_NAO_PODE_SER_MENOR_QUE_8_E_MAIOR_QUE_60);
-		validarCaracteresEmail(email, EMAIL_INVALIDO);
-		this.email = email;
-	}
+    public void setCelular(Celular celular) {
+        validarNulo(celular, CELULAR_NAO_PODE_SER_NULO);
+        this.celular = celular;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(celular);
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {			
-			return true;
-		}
-		if (obj == null) {			
-			return false;
-		}
-		if (getClass() != obj.getClass()) {			
-			return false;
-		}
-		Contato other = (Contato) obj;
-		return Objects.equals(celular, other.celular);
-	}
+    public void setEmail(String email) {
+        validarNulo(email, EMAIL_NAO_PODE_SER_NULO);
+        validarVazio(email, EMAIL_NAO_PODE_ESTAR_VAZIO);
+        validarEspacos(email, EMAIL_NAO_PODE_CONTER_ESPACOS);
+        validarTamanhoString(email, EMAIL_TAMANHO_MIN, EMAIL_TAMANHO_MAX, EMAIL_NAO_PODE_SER_MENOR_QUE_8_E_MAIOR_QUE_60);
+        validarCaracteresEmail(email, EMAIL_INVALIDO);
+        this.email = email;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Contato [");
-		builder.append(celular);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append("]");
-		return builder.toString();
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(celular);
+    }
 
-	
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Contato other = (Contato) obj;
+        return Objects.equals(celular, other.celular);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Contato [");
+        builder.append(celular);
+        builder.append(", email=");
+        builder.append(email);
+        builder.append("]");
+        builder.append(super.toString());
+        return builder.toString();
+    }
+
 }
